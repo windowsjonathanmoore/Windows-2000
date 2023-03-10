@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Simple Embedding Demo</TITLE>
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+
+</HEAD>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+
+<BODY BGCOLOR="#ffffff">
+<CENTER>
+
+<OBJECT ID="MediaPlayer1" width=160 height=162 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#ersion=6,0,02,902"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+    <PARAM NAME="FileName" VALUE="mms://netshow.microsoft.com/ms/sbnasfs/wmt/turtle28.asf">
+</OBJECT>
+
+</BODY>
+</HTML>

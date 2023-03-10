@@ -1,0 +1,77 @@
+# Microsoft Developer Studio Generated Dependency File, included by Framer.mak
+
+.\framer.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	
+
+.\framer.rc : \
+	".\resource.h"\
+	
+
+.\iadvsink.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	
+
+.\iclisite.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	
+
+.\idocsite.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	
+
+.\iipsite.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	
+
+.\site.cpp : \
+	"..\..\..\..\..\include\prerelease\basetsd.h"\
+	"..\..\..\..\..\include\prerelease\guiddef.h"\
+	"..\..\..\..\..\include\prerelease\propidl.h"\
+	"..\..\..\..\..\include\prerelease\stralign.h"\
+	"..\..\..\..\..\include\prerelease\tvout.h"\
+	"..\..\..\..\..\include\prerelease\winefs.h"\
+	".\framer.h"\
+	".\resource.h"\
+	".\site.h"\
+	

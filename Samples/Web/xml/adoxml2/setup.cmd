@@ -1,0 +1,1 @@
+cscript setup.js ADOXML2 ADOXML2_Local

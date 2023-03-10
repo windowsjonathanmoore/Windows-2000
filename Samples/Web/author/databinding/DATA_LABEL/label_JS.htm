@@ -1,0 +1,125 @@
+
+<HTML>
+<HEAD>
+<TITLE>The LABEL Tag</TITLE>
+<META NAME="FILENAME" CONTENT="label_JS.HTM">
+
+
+<SCRIPT language="JavaScript">
+
+function forward() {
+
+//This function increments the data bound record after checking to confirm 
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition != StockList.recordset.RecordCount) {
+	StockList.recordset.MoveNext();
+	}
+	else {
+	alert("Already at last element");
+	}
+}
+
+function reverse() {
+
+//This function decrements the data bound record after checking to confirm 
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition != 1) {
+	StockList.recordset.MovePrevious();
+	}
+	else {
+	alert("Already at first element");
+	}
+}
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>The LABEL Tag</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The content of the LABEL tag can be data bound. Clicking on the content results in the associated controls obtaining the focus. Below is an example of labels bound to the current record of a data source. Clicking on the arrow buttons will move the current record. This results in the label displaying the data from the
+current record.
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<CENTER>
+<LABEL for=button1 datasrc=#StockList datafld=Symbol> Normal label </LABEL>
+<INPUT type="checkbox" id=button1> 
+<HR width=100>
+<INPUT type="button" value="  <  " onClick="reverse();">
+<INPUT type="button" value="  >  " onClick="forward();">
+<HR width=100>
+</CENTER>
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The data the label binds may contain HTML. Using the DATAFORMATAS attribute, the
+HTML can be displayed for the label. Clicking anywhere on the HTML will result in the associated control obtaining the focus.
+</FONT>
+
+<P>
+
+<OBJECT id="StockList" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" width=0 height=0>
+  <PARAM name="UseHeader" value="True">
+  <PARAM name="DataURL" value="quotes.txt">
+</OBJECT>
+
+<CENTER>
+<LABEL for=button2 datasrc=#StockList datafld=Symbol_fmt dataformatas="html"></LABEL>
+<INPUT type="checkbox" id=button2>
+</CENTER>
+
+<P>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>Data bound labels cannot be used within repeated tables.</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <A HREF="quotes.txt">quotes.txt</A> to see the data file 
+used by this page.
+</FONT>
+
+<P>
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

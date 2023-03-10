@@ -1,0 +1,395 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.8867.0 (36beac78).
+//
+// d:\depot\main\source\sdk\redist\psdk\samples\dataqueues\dqchatc\debug\MSEIGDQ.tli
+//
+// Wrapper implementations for Win32 type library C:\\Program Files\\Host Integration Server\\system\\MSEIGDQ.DLL
+// compiler-generated file created 01/22/01 at 01:17:06 - DO NOT EDIT!
+
+#pragma once
+
+//
+// dispinterface _IEIGDataQueueCtlEvents wrapper method implementations
+//
+
+inline HRESULT _IEIGDataQueueCtlEvents::ConnectionStateChange ( eigConnectionStateEnum constate ) {
+    HRESULT _result;
+    _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_ERROR, (void*)&_result, 
+        L"\x0003", constate);
+    return _result;
+}
+
+inline HRESULT _IEIGDataQueueCtlEvents::ReportError ( long hr, _bstr_t Text ) {
+    HRESULT _result;
+    _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_ERROR, (void*)&_result, 
+        L"\x0003\x0008", hr, (BSTR)Text);
+    return _result;
+}
+
+//
+// interface IEIGDataQueueItem wrapper method implementations
+//
+
+inline _bstr_t IEIGDataQueueItem::GetExtUser ( ) {
+    BSTR _result;
+    HRESULT _hr = get_ExtUser(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutExtUser ( _bstr_t pVal ) {
+    HRESULT _hr = put_ExtUser(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueItem::GetExtJobName ( ) {
+    BSTR _result;
+    HRESULT _hr = get_ExtJobName(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutExtJobName ( _bstr_t pVal ) {
+    HRESULT _hr = put_ExtJobName(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueItem::GetExtJobNumber ( ) {
+    BSTR _result;
+    HRESULT _hr = get_ExtJobNumber(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutExtJobNumber ( _bstr_t pVal ) {
+    HRESULT _hr = put_ExtJobNumber(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueItem::GetInactiveRec ( ) {
+    BSTR _result;
+    HRESULT _hr = get_InactiveRec(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutInactiveRec ( _bstr_t pVal ) {
+    HRESULT _hr = put_InactiveRec(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _variant_t IEIGDataQueueItem::GetKeyVal ( ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = get_KeyVal(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutKeyVal ( const _variant_t & pVal ) {
+    HRESULT _hr = put_KeyVal(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline eigQItemTypeEnum IEIGDataQueueItem::GetQItemType ( ) {
+    eigQItemTypeEnum _result;
+    HRESULT _hr = get_QItemType(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueItem::PutQItemType ( eigQItemTypeEnum pVal ) {
+    HRESULT _hr = put_QItemType(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _variant_t IEIGDataQueueItem::GetRecord ( ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = get_Record(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutRecord ( const _variant_t & pVal ) {
+    HRESULT _hr = put_Record(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueItem::GetRecordAttrib ( ) {
+    BSTR _result;
+    HRESULT _hr = get_RecordAttrib(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutRecordAttrib ( _bstr_t pVal ) {
+    HRESULT _hr = put_RecordAttrib(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline short IEIGDataQueueItem::GetRecCount ( ) {
+    short _result;
+    HRESULT _hr = get_RecCount(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueItem::PutRecCount ( short pVal ) {
+    HRESULT _hr = put_RecCount(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline short IEIGDataQueueItem::GetRecNumber ( ) {
+    short _result;
+    HRESULT _hr = get_RecNumber(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueItem::PutRecNumber ( short pVal ) {
+    HRESULT _hr = put_RecNumber(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline eigAnswerYesNoEnum IEIGDataQueueItem::GetReplyRequested ( ) {
+    eigAnswerYesNoEnum _result;
+    HRESULT _hr = get_ReplyRequested(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueItem::PutReplyRequested ( eigAnswerYesNoEnum pVal ) {
+    HRESULT _hr = put_ReplyRequested(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueItem::GetUserProf ( ) {
+    BSTR _result;
+    HRESULT _hr = get_UserProf(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueItem::PutUserProf ( _bstr_t pVal ) {
+    HRESULT _hr = put_UserProf(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline short IEIGDataQueueItem::GetRecLength ( ) {
+    short _result;
+    HRESULT _hr = get_RecLength(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueItem::PutRecLength ( short pVal ) {
+    HRESULT _hr = put_RecLength(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+//
+// interface IEIGDataQueue wrapper method implementations
+//
+
+inline _bstr_t IEIGDataQueue::GetQueueName ( ) {
+    BSTR _result;
+    HRESULT _hr = get_QueueName(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline HRESULT IEIGDataQueue::AddQueueItem ( struct IEIGDataQueueItem * QueueItem, eigAnswerYesNoEnum fBlock ) {
+    HRESULT _hr = raw_AddQueueItem(QueueItem, fBlock);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IEIGDataQueue::SetAttrib ( eigAttributeEnum Attribute, const _variant_t & Value ) {
+    HRESULT _hr = raw_SetAttrib(Attribute, Value);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IEIGDataQueue::ClearAll ( eigAnswerYesNoEnum Overwrite ) {
+    HRESULT _hr = raw_ClearAll(Overwrite);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IEIGDataQueue::CreateQueue ( short MaxMsgLength, eigQAuthorityEnum QAuthority, eigQClassEnum QueueClass, eigAnswerYesNoEnum AddSenderInfo, short CCSID, short InitialSize, VARIANT_BOOL queueLoc, eigRecordLenClsEnum recordLenCls, _bstr_t Title, eigAnswerYesNoEnum AllowDupKeys, short MakeKeyLen ) {
+    HRESULT _hr = raw_CreateQueue(MaxMsgLength, QAuthority, QueueClass, AddSenderInfo, CCSID, InitialSize, queueLoc, recordLenCls, Title, AllowDupKeys, MakeKeyLen);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IEIGDataQueue::DeleteQueue ( eigAnswerYesNoEnum OverwriteData ) {
+    HRESULT _hr = raw_DeleteQueue(OverwriteData);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline IEIGDataQueueItemPtr IEIGDataQueue::GetQueueItem ( eigQItemTypeEnum QueueType, eigAnswerYesNoEnum BlockComplete, eigAnswerYesNoEnum PeekQItem, eigAnswerYesNoEnum ProvideExtInfo, short TimeOut, eigAnswerYesNoEnum UserProfile, eigAnswerYesNoEnum SenderInfo, const _variant_t & SearchKey, eigSearchKeyEnum SearchOrder ) {
+    struct IEIGDataQueueItem * _result;
+    HRESULT _hr = raw_GetQueueItem(QueueType, BlockComplete, PeekQItem, ProvideExtInfo, TimeOut, UserProfile, SenderInfo, SearchKey, SearchOrder, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IEIGDataQueueItemPtr(_result, false);
+}
+
+inline HRESULT IEIGDataQueue::StopQueue ( ) {
+    HRESULT _hr = raw_StopQueue();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline _variant_t IEIGDataQueue::QueryAttribute ( eigAttributeEnum Attribute ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = raw_QueryAttribute(Attribute, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+inline HRESULT IEIGDataQueue::CancelQueue ( short CancelReqCount, eigQItemTypeEnum CancelReqType, const _variant_t & KeyValue ) {
+    HRESULT _hr = raw_CancelQueue(CancelReqCount, CancelReqType, KeyValue);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+//
+// interface IEIGDataQueueCtl wrapper method implementations
+//
+
+inline _bstr_t IEIGDataQueueCtl::GetUserID ( ) {
+    BSTR _result;
+    HRESULT _hr = get_UserID(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueCtl::PutUserID ( _bstr_t pVal ) {
+    HRESULT _hr = put_UserID(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueCtl::GetPassword ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Password(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueCtl::PutPassword ( _bstr_t pVal ) {
+    HRESULT _hr = put_Password(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline short IEIGDataQueueCtl::GetPCCodePage ( ) {
+    short _result;
+    HRESULT _hr = get_PCCodePage(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueCtl::PutPCCodePage ( short pVal ) {
+    HRESULT _hr = put_PCCodePage(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline short IEIGDataQueueCtl::GetCCSID ( ) {
+    short _result;
+    HRESULT _hr = get_CCSID(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IEIGDataQueueCtl::PutCCSID ( short pVal ) {
+    HRESULT _hr = put_CCSID(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline eigConnectionStateEnum IEIGDataQueueCtl::GetConnectionState ( ) {
+    eigConnectionStateEnum _result;
+    HRESULT _hr = get_ConnectionState(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline _bstr_t IEIGDataQueueCtl::GetLocalLU ( ) {
+    BSTR _result;
+    HRESULT _hr = get_LocalLU(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueCtl::PutLocalLU ( _bstr_t pVal ) {
+    HRESULT _hr = put_LocalLU(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueCtl::GetRemoteLU ( ) {
+    BSTR _result;
+    HRESULT _hr = get_RemoteLU(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueCtl::PutRemoteLU ( _bstr_t pVal ) {
+    HRESULT _hr = put_RemoteLU(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline _bstr_t IEIGDataQueueCtl::GetModeName ( ) {
+    BSTR _result;
+    HRESULT _hr = get_ModeName(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IEIGDataQueueCtl::PutModeName ( _bstr_t pVal ) {
+    HRESULT _hr = put_ModeName(pVal);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline HRESULT IEIGDataQueueCtl::Connect ( ) {
+    HRESULT _hr = raw_Connect();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IEIGDataQueueCtl::Disconnect ( ) {
+    HRESULT _hr = raw_Disconnect();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline IEIGDataQueuePtr IEIGDataQueueCtl::CreateQueueContainer ( _bstr_t BSTRQueueName ) {
+    struct IEIGDataQueue * _result;
+    HRESULT _hr = raw_CreateQueueContainer(BSTRQueueName, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IEIGDataQueuePtr(_result, false);
+}
+
+//
+// dispinterface _IEIGDataQueueEvents wrapper method implementations
+//
+
+inline HRESULT _IEIGDataQueueEvents::RequestReceived ( eigQItemTypeEnum QItemAvilable ) {
+    HRESULT _result;
+    _com_dispatch_method(this, 0x1, DISPATCH_METHOD, VT_ERROR, (void*)&_result, 
+        L"\x0003", QItemAvilable);
+    return _result;
+}
+
+inline HRESULT _IEIGDataQueueEvents::SendComplete ( long ErrorCode, _bstr_t Text, eigQItemTypeEnum QueueItem ) {
+    HRESULT _result;
+    _com_dispatch_method(this, 0x2, DISPATCH_METHOD, VT_ERROR, (void*)&_result, 
+        L"\x0003\x0008\x0003", ErrorCode, (BSTR)Text, QueueItem);
+    return _result;
+}
+
+inline HRESULT _IEIGDataQueueEvents::ReportError ( long hr, _bstr_t Text ) {
+    HRESULT _result;
+    _com_dispatch_method(this, 0x3, DISPATCH_METHOD, VT_ERROR, (void*)&_result, 
+        L"\x0003\x0008", hr, (BSTR)Text);
+    return _result;
+}

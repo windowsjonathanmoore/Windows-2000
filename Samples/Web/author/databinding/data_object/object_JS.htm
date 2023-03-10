@@ -1,0 +1,172 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  The OBJECT Tag</TITLE>
+<META NAME="FILENAME" CONTENT="object_JS.HTM">
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function gettext()
+{
+	t = label0.Caption;
+	tryme.value = t;
+}
+
+function settext()
+{
+	var t;
+	label0.Caption = tryme.value;
+}
+
+function forward() {
+
+//This function increments the data bound record after checking to confirm 
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition != StockList.recordset.RecordCount) {
+	StockList.recordset.MoveNext();
+	}
+	else {
+	alert("Already at last element");
+	}
+}
+
+function reverse() {
+
+//This function decrements the data bound record after checking to confirm  
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition != 1) {
+	StockList.recordset.MovePrevious();
+	}
+	else {
+	alert("Already at first element");
+	}
+}
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+
+<BODY topmargin=20 leftmargin=40 bgcolor="#ffffff" link="#000066" vlink="#666666" text="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>The OBJECT Tag</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Properties of an object (ActiveX&trade; controls) can be bound using data binding. 
+The property corresponding to the NAME attribute on the PARAM tag is
+bound.  The controls <B>need not implement</B> the OLE bindable typeinfo flag
+for the property to be bound.
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+An example of an ActiveX control with a property bound to the current record of the
+data set is shown below. Click on the arrow buttons to change the current
+record. Notice that the value displayed in the control changes to match the
+value in the current record.
+</FONT>
+
+<P>
+<CENTER>
+
+<OBJECT ID="label0" CLASSID="clsid:40F07A91-8E6F-11D0-8A0A-00A0C90C9B67" CODEBASE="mcsilabl.cab#version 1,0,0,45" TYPE="application/x-oleobject" WIDTH=150 HEIGHT=60>
+  <PARAM NAME="Angle" VALUE="0">
+  <PARAM NAME="Alignment" VALUE="4">
+  <PARAM NAME="BackStyle" VALUE="1">
+  <PARAM NAME="Text" datasrc="#StockList" datafld="Symbol">
+  <PARAM NAME="Font" VALUE="Times New Roman">
+  <PARAM NAME="ForeColor" VALUE="#f000f0">
+  <PARAM NAME="BackColor" VALUE="8421440">
+  <PARAM NAME="BorderStyle" VALUE="4">
+</OBJECT>
+
+<P>
+<HR width=100>
+<INPUT type="button" value="  <  " onClick="reverse();">
+<INPUT type="button" value="  >  " onClick="forward();">
+<HR width=100>
+
+</CENTER>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>Objects can also be used inside a repeated table. Here's an example:</FONT>
+<P>
+
+<OBJECT id="StockList" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" width=0 height=0>
+  <PARAM name="UseHeader" value="True">
+  <PARAM name="DataURL" value="quotes.txt">
+</OBJECT>
+
+<CENTER>
+
+<TABLE datasrc="#StockList" border=1>
+  <TBODY>
+    <TR>
+      <TD align=center>
+        <OBJECT ID="label0" CODEBASE="mcsilabl.cab" CLASSID="clsid:40F07A91-8E6F-11D0-8A0A-00A0C90C9B67" TYPE="application/x-oleobject" WIDTH=150 HEIGHT=60>
+	  <PARAM NAME="Angle" VALUE="0">
+	  <PARAM NAME="Alignment" VALUE="4">
+	  <PARAM NAME="BackStyle" VALUE="1">
+	  <PARAM NAME="Text" datafld="Symbol">
+	  <PARAM NAME="Font" VALUE="Times New Roman">
+	  <PARAM NAME="ForeColor" VALUE="#f000f0">
+	  <PARAM NAME="BackColor" VALUE="8421440">
+  	  <PARAM NAME="BorderStyle" VALUE="4">
+	</OBJECT>
+      </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+</CENTER>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Finally, it's possible to bind the default property of an object. This is
+dependent upon the ActiveX control implementation. If the control has the
+DefaultBind typeinfo flag set on one of its properties, binding can be specified
+on the OBJECT tag itself (rather than on the PARAM). When this syntax is used
+and no property is marked DefaultBind, an attempt is made to bind the default
+property of the control (dispID 0). If this fails, the binding fails. Examples are left to the reader.
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <a href="quotes.txt">quotes.txt</a> to see the data file used by this page.
+</FONT>
+
+<P>
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

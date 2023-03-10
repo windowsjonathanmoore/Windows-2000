@@ -1,0 +1,532 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.8867.0 (36beac78).
+//
+// d:\depot\main\source\sdk\redist\psdk\samples\dataqueues\dqchatc\debug\MSEIGDQ.tlh
+//
+// C++ source equivalent of Win32 type library C:\\Program Files\\Host Integration Server\\system\\MSEIGDQ.DLL
+// compiler-generated file created 01/22/01 at 01:17:06 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+namespace DATAQUEUELib {
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("0fc478a1-f77d-11d2-a6b6-0080c71b8071"))
+/* dispinterface */ _IEIGDataQueueCtlEvents;
+typedef enum __MIDL_IEIGDataQueueCtl_0002 eigConnectionStateEnum;
+struct __declspec(uuid("1a5e55a2-f77d-11d2-a6b6-0080c71b8071"))
+/* dual interface */ IEIGDataQueueItem;
+typedef enum __MIDL_IEIGDataQueueItem_0003 eigQItemTypeEnum;
+typedef enum __MIDL___MIDL_itf_DataQueue_0000_0001 eigAnswerYesNoEnum;
+struct __declspec(uuid("0fc478a2-f77d-11d2-a6b6-0080c71b8071"))
+/* dual interface */ IEIGDataQueue;
+typedef enum __MIDL_IEIGDataQueueItem_0006 eigAttributeEnum;
+typedef enum __MIDL_IEIGDataQueueItem_0002 eigQAuthorityEnum;
+typedef enum __MIDL_IEIGDataQueueItem_0001 eigQClassEnum;
+typedef enum __MIDL_IEIGDataQueueItem_0005 eigRecordLenClsEnum;
+typedef enum __MIDL_IEIGDataQueueItem_0004 eigSearchKeyEnum;
+struct __declspec(uuid("24117551-f77d-11d2-a6b6-0080c71b8071"))
+/* dispinterface */ _IEIGDataQueueItemEvents;
+struct /* coclass */ EIGDataQueueItem;
+struct /* coclass */ EIGDataQueueCtl;
+struct __declspec(uuid("f82d83a0-f77c-11d2-a6b6-0080c71b8071"))
+/* dual interface */ IEIGDataQueueCtl;
+struct __declspec(uuid("1a5e55a1-f77d-11d2-a6b6-0080c71b8071"))
+/* dispinterface */ _IEIGDataQueueEvents;
+struct /* coclass */ EIGDataQueue;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(_IEIGDataQueueCtlEvents, __uuidof(IDispatch));
+_COM_SMARTPTR_TYPEDEF(IEIGDataQueueItem, __uuidof(IEIGDataQueueItem));
+_COM_SMARTPTR_TYPEDEF(IEIGDataQueue, __uuidof(IEIGDataQueue));
+_COM_SMARTPTR_TYPEDEF(_IEIGDataQueueItemEvents, __uuidof(IDispatch));
+_COM_SMARTPTR_TYPEDEF(IEIGDataQueueCtl, __uuidof(IEIGDataQueueCtl));
+_COM_SMARTPTR_TYPEDEF(_IEIGDataQueueEvents, __uuidof(IDispatch));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("0fc478a1-f77d-11d2-a6b6-0080c71b8071"))
+_IEIGDataQueueCtlEvents : IDispatch
+{
+    //
+    // Wrapper methods for error-handling
+    //
+
+    // Methods:
+    HRESULT ConnectionStateChange (
+        eigConnectionStateEnum constate );
+    HRESULT ReportError (
+        long hr,
+        _bstr_t Text );
+};
+
+enum __MIDL_IEIGDataQueueCtl_0002
+{
+    eigConnStateUnspecified = -1,
+    eigConnStateIdle = 0,
+    eigConnStateConnecting = 1,
+    eigConnStateConnected = 2,
+    eigConnStateDisconnecting = 3
+};
+
+struct __declspec(uuid("1a5e55a2-f77d-11d2-a6b6-0080c71b8071"))
+IEIGDataQueueItem : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetExtUser,put=PutExtUser))
+    _bstr_t ExtUser;
+    __declspec(property(get=GetExtJobName,put=PutExtJobName))
+    _bstr_t ExtJobName;
+    __declspec(property(get=GetExtJobNumber,put=PutExtJobNumber))
+    _bstr_t ExtJobNumber;
+    __declspec(property(get=GetInactiveRec,put=PutInactiveRec))
+    _bstr_t InactiveRec;
+    __declspec(property(get=GetKeyVal,put=PutKeyVal))
+    _variant_t KeyVal;
+    __declspec(property(get=GetQItemType,put=PutQItemType))
+    eigQItemTypeEnum QItemType;
+    __declspec(property(get=GetRecord,put=PutRecord))
+    _variant_t Record;
+    __declspec(property(get=GetRecordAttrib,put=PutRecordAttrib))
+    _bstr_t RecordAttrib;
+    __declspec(property(get=GetRecCount,put=PutRecCount))
+    short RecCount;
+    __declspec(property(get=GetRecNumber,put=PutRecNumber))
+    short RecNumber;
+    __declspec(property(get=GetReplyRequested,put=PutReplyRequested))
+    eigAnswerYesNoEnum ReplyRequested;
+    __declspec(property(get=GetUserProf,put=PutUserProf))
+    _bstr_t UserProf;
+    __declspec(property(get=GetRecLength,put=PutRecLength))
+    short RecLength;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    _bstr_t GetExtUser ( );
+    void PutExtUser (
+        _bstr_t pVal );
+    _bstr_t GetExtJobName ( );
+    void PutExtJobName (
+        _bstr_t pVal );
+    _bstr_t GetExtJobNumber ( );
+    void PutExtJobNumber (
+        _bstr_t pVal );
+    _bstr_t GetInactiveRec ( );
+    void PutInactiveRec (
+        _bstr_t pVal );
+    _variant_t GetKeyVal ( );
+    void PutKeyVal (
+        const _variant_t & pVal );
+    eigQItemTypeEnum GetQItemType ( );
+    void PutQItemType (
+        eigQItemTypeEnum pVal );
+    _variant_t GetRecord ( );
+    void PutRecord (
+        const _variant_t & pVal );
+    _bstr_t GetRecordAttrib ( );
+    void PutRecordAttrib (
+        _bstr_t pVal );
+    short GetRecCount ( );
+    void PutRecCount (
+        short pVal );
+    short GetRecNumber ( );
+    void PutRecNumber (
+        short pVal );
+    eigAnswerYesNoEnum GetReplyRequested ( );
+    void PutReplyRequested (
+        eigAnswerYesNoEnum pVal );
+    _bstr_t GetUserProf ( );
+    void PutUserProf (
+        _bstr_t pVal );
+    short GetRecLength ( );
+    void PutRecLength (
+        short pVal );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_ExtUser (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_ExtUser (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_ExtJobName (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_ExtJobName (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_ExtJobNumber (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_ExtJobNumber (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_InactiveRec (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_InactiveRec (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_KeyVal (
+        VARIANT * pVal ) = 0;
+    virtual HRESULT __stdcall put_KeyVal (
+        VARIANT pVal ) = 0;
+    virtual HRESULT __stdcall get_QItemType (
+        eigQItemTypeEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_QItemType (
+        eigQItemTypeEnum pVal ) = 0;
+    virtual HRESULT __stdcall get_Record (
+        VARIANT * pVal ) = 0;
+    virtual HRESULT __stdcall put_Record (
+        VARIANT pVal ) = 0;
+    virtual HRESULT __stdcall get_RecordAttrib (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_RecordAttrib (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_RecCount (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_RecCount (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_RecNumber (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_RecNumber (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_ReplyRequested (
+        eigAnswerYesNoEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_ReplyRequested (
+        eigAnswerYesNoEnum pVal ) = 0;
+    virtual HRESULT __stdcall get_UserProf (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_UserProf (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_RecLength (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_RecLength (
+        short pVal ) = 0;
+};
+
+enum __MIDL_IEIGDataQueueItem_0003
+{
+    eigKQItem = 0,
+    eigQItem = 1
+};
+
+enum __MIDL___MIDL_itf_DataQueue_0000_0001
+{
+    eigAnswerYes = 0,
+    eigAnswerNo = 1
+};
+
+struct __declspec(uuid("0fc478a2-f77d-11d2-a6b6-0080c71b8071"))
+IEIGDataQueue : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetQueueName))
+    _bstr_t QueueName;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    _bstr_t GetQueueName ( );
+    HRESULT AddQueueItem (
+        struct IEIGDataQueueItem * QueueItem,
+        eigAnswerYesNoEnum fBlock );
+    HRESULT SetAttrib (
+        eigAttributeEnum Attribute,
+        const _variant_t & Value );
+    HRESULT ClearAll (
+        eigAnswerYesNoEnum Overwrite );
+    HRESULT CreateQueue (
+        short MaxMsgLength,
+        eigQAuthorityEnum QAuthority,
+        eigQClassEnum QueueClass,
+        eigAnswerYesNoEnum AddSenderInfo,
+        short CCSID,
+        short InitialSize,
+        VARIANT_BOOL queueLoc,
+        eigRecordLenClsEnum recordLenCls,
+        _bstr_t Title,
+        eigAnswerYesNoEnum AllowDupKeys,
+        short MakeKeyLen );
+    HRESULT DeleteQueue (
+        eigAnswerYesNoEnum OverwriteData );
+    IEIGDataQueueItemPtr GetQueueItem (
+        eigQItemTypeEnum QueueType,
+        eigAnswerYesNoEnum BlockComplete,
+        eigAnswerYesNoEnum PeekQItem,
+        eigAnswerYesNoEnum ProvideExtInfo,
+        short TimeOut,
+        eigAnswerYesNoEnum UserProfile,
+        eigAnswerYesNoEnum SenderInfo,
+        const _variant_t & SearchKey,
+        eigSearchKeyEnum SearchOrder );
+    HRESULT StopQueue ( );
+    _variant_t QueryAttribute (
+        eigAttributeEnum Attribute );
+    HRESULT CancelQueue (
+        short CancelReqCount,
+        eigQItemTypeEnum CancelReqType,
+        const _variant_t & KeyValue = vtMissing );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_QueueName (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall raw_AddQueueItem (
+        struct IEIGDataQueueItem * QueueItem,
+        eigAnswerYesNoEnum fBlock ) = 0;
+    virtual HRESULT __stdcall raw_SetAttrib (
+        eigAttributeEnum Attribute,
+        VARIANT Value ) = 0;
+    virtual HRESULT __stdcall raw_ClearAll (
+        eigAnswerYesNoEnum Overwrite ) = 0;
+    virtual HRESULT __stdcall raw_CreateQueue (
+        short MaxMsgLength,
+        eigQAuthorityEnum QAuthority,
+        eigQClassEnum QueueClass,
+        eigAnswerYesNoEnum AddSenderInfo,
+        short CCSID,
+        short InitialSize,
+        VARIANT_BOOL queueLoc,
+        eigRecordLenClsEnum recordLenCls,
+        BSTR Title,
+        eigAnswerYesNoEnum AllowDupKeys,
+        short MakeKeyLen ) = 0;
+    virtual HRESULT __stdcall raw_DeleteQueue (
+        eigAnswerYesNoEnum OverwriteData ) = 0;
+    virtual HRESULT __stdcall raw_GetQueueItem (
+        eigQItemTypeEnum QueueType,
+        eigAnswerYesNoEnum BlockComplete,
+        eigAnswerYesNoEnum PeekQItem,
+        eigAnswerYesNoEnum ProvideExtInfo,
+        short TimeOut,
+        eigAnswerYesNoEnum UserProfile,
+        eigAnswerYesNoEnum SenderInfo,
+        VARIANT SearchKey,
+        eigSearchKeyEnum SearchOrder,
+        struct IEIGDataQueueItem * * eigQueueItem ) = 0;
+    virtual HRESULT __stdcall raw_StopQueue ( ) = 0;
+    virtual HRESULT __stdcall raw_QueryAttribute (
+        eigAttributeEnum Attribute,
+        VARIANT * pValue ) = 0;
+    virtual HRESULT __stdcall raw_CancelQueue (
+        short CancelReqCount,
+        eigQItemTypeEnum CancelReqType,
+        VARIANT KeyValue = vtMissing ) = 0;
+};
+
+enum __MIDL_IEIGDataQueueItem_0006
+{
+    eigAttributeUnspecified = -1,
+    eigAttributeCCSID = 0,
+    eigAttributeDirName = 1,
+    eigAttributeDataClass = 2,
+    eigAttributeKeyDef = 3,
+    eigAttributeDupKeys = 4,
+    eigAttributeMgmtCls = 5,
+    eigAttributeQueCls = 6,
+    eigAttributeSize = 7,
+    eigAttributeQLoc = 8,
+    eigAttributeSenderInfo = 9,
+    eigAttributeMaxMsgLen = 10,
+    eigAttributeRecLenClass = 11,
+    eigAttributeStgClass = 12,
+    eigAttributeTitle = 13
+};
+
+enum __MIDL_IEIGDataQueueItem_0002
+{
+    eigQAuthUnspecified = -1,
+    eigQAuthDefault = 0,
+    eigQAuthAll = 1,
+    eigQAuthExclude = 2,
+    eigQAuthChange = 3,
+    eigQAuthUse = 4,
+    eigQAuthLibCreate = 5
+};
+
+enum __MIDL_IEIGDataQueueItem_0001
+{
+    eigQClassUnspecified = -1,
+    eigQClassFIFO = 0,
+    eigQClassLIFO = 1,
+    eigQClassKeyed = 2
+};
+
+enum __MIDL_IEIGDataQueueItem_0005
+{
+    eigRecordLenUnspecified = -1,
+    eigRecordLenFixed = 0,
+    eigRecordLenInitVarLen = 1,
+    eigRecordLenVarLen = 2
+};
+
+enum __MIDL_IEIGDataQueueItem_0004
+{
+    eigSearchKeyUnspecified = -1,
+    eigSearchKeyEqual = 0,
+    eigSearchKeyGreaterThan = 1,
+    eigSearchKeyLessThan = 2,
+    eigSearchKeyGreaterEqual = 3,
+    eigSearchKeyLessEqual = 4
+};
+
+struct __declspec(uuid("24117551-f77d-11d2-a6b6-0080c71b8071"))
+_IEIGDataQueueItemEvents : IDispatch
+{};
+
+struct __declspec(uuid("24117550-f77d-11d2-a6b6-0080c71b8071"))
+EIGDataQueueItem;
+    // [ default ] interface IEIGDataQueueItem
+    // [ default, source ] dispinterface _IEIGDataQueueItemEvents
+
+struct __declspec(uuid("0fc478a0-f77d-11d2-a6b6-0080c71b8071"))
+EIGDataQueueCtl;
+    // [ default ] interface IEIGDataQueueCtl
+    // [ default, source ] dispinterface _IEIGDataQueueCtlEvents
+
+struct __declspec(uuid("f82d83a0-f77c-11d2-a6b6-0080c71b8071"))
+IEIGDataQueueCtl : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetUserID,put=PutUserID))
+    _bstr_t UserID;
+    __declspec(property(get=GetPassword,put=PutPassword))
+    _bstr_t Password;
+    __declspec(property(get=GetPCCodePage,put=PutPCCodePage))
+    short PCCodePage;
+    __declspec(property(get=GetCCSID,put=PutCCSID))
+    short CCSID;
+    __declspec(property(get=GetConnectionState))
+    eigConnectionStateEnum ConnectionState;
+    __declspec(property(get=GetLocalLU,put=PutLocalLU))
+    _bstr_t LocalLU;
+    __declspec(property(get=GetRemoteLU,put=PutRemoteLU))
+    _bstr_t RemoteLU;
+    __declspec(property(get=GetModeName,put=PutModeName))
+    _bstr_t ModeName;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    _bstr_t GetUserID ( );
+    void PutUserID (
+        _bstr_t pVal );
+    _bstr_t GetPassword ( );
+    void PutPassword (
+        _bstr_t pVal );
+    short GetPCCodePage ( );
+    void PutPCCodePage (
+        short pVal );
+    short GetCCSID ( );
+    void PutCCSID (
+        short pVal );
+    eigConnectionStateEnum GetConnectionState ( );
+    _bstr_t GetLocalLU ( );
+    void PutLocalLU (
+        _bstr_t pVal );
+    _bstr_t GetRemoteLU ( );
+    void PutRemoteLU (
+        _bstr_t pVal );
+    _bstr_t GetModeName ( );
+    void PutModeName (
+        _bstr_t pVal );
+    HRESULT Connect ( );
+    HRESULT Disconnect ( );
+    IEIGDataQueuePtr CreateQueueContainer (
+        _bstr_t BSTRQueueName );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_UserID (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_UserID (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_Password (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Password (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_PCCodePage (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_PCCodePage (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_CCSID (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_CCSID (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_ConnectionState (
+        eigConnectionStateEnum * pVal ) = 0;
+    virtual HRESULT __stdcall get_LocalLU (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_LocalLU (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_RemoteLU (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_RemoteLU (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_ModeName (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_ModeName (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall raw_Connect ( ) = 0;
+    virtual HRESULT __stdcall raw_Disconnect ( ) = 0;
+    virtual HRESULT __stdcall raw_CreateQueueContainer (
+        BSTR BSTRQueueName,
+        struct IEIGDataQueue * * eigQueue ) = 0;
+};
+
+struct __declspec(uuid("1a5e55a1-f77d-11d2-a6b6-0080c71b8071"))
+_IEIGDataQueueEvents : IDispatch
+{
+    //
+    // Wrapper methods for error-handling
+    //
+
+    // Methods:
+    HRESULT RequestReceived (
+        eigQItemTypeEnum QItemAvilable );
+    HRESULT SendComplete (
+        long ErrorCode,
+        _bstr_t Text,
+        eigQItemTypeEnum QueueItem );
+    HRESULT ReportError (
+        long hr,
+        _bstr_t Text );
+};
+
+struct __declspec(uuid("1a5e55a0-f77d-11d2-a6b6-0080c71b8071"))
+EIGDataQueue;
+    // [ default ] interface IEIGDataQueue
+    // [ default, source ] dispinterface _IEIGDataQueueEvents
+
+//
+// Wrapper method implementations
+//
+
+#include "MSEIGDQ.tli"
+
+} // namespace DATAQUEUELib
+
+#pragma pack(pop)

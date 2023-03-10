@@ -1,0 +1,32 @@
+/* Copyright (c) Microsoft Corporation.  All rights reserved.                */ 
+
+#include <windows.h>
+
+/*****************************************************************************/
+/* This section defines the version info to be built into this binary        */
+/*****************************************************************************/
+
+#include <winver.h>
+#include <version.h>
+
+/*****************************************************************************/
+/* Define SNA_VER_FILE_TYPE to be the appropriate type for this binary       */
+/*****************************************************************************/
+
+#define SNA_VER_FILE_TYPE     VFT_APP
+
+/*****************************************************************************/
+/* Define SNA_VER_FILE_SUBTYPE to be the appropriate type for this binary    */
+/*****************************************************************************/
+
+#define SNA_VER_FILE_SUBTYPE  VFT2_UNKNOWN
+
+/*****************************************************************************/
+/* Define variables for name and description of binary                       */
+/*****************************************************************************/
+
+#define SNA_VER_INTERNALNAME  "MQSRRECV\0"
+#define SNA_VER_FILEDESC      "Receive messages with MQS API\0"
+#define SNA_VER_ORIGINALNAME  "MQSRRECV.EXE\0"
+
+#include "..\..\snaver.rc"

@@ -1,0 +1,19 @@
+;-----------------------------------------------------------------------------
+;
+; File:        msdfmap.def
+;
+; Copyright:   Copyright (c) 1991-1999 Microsoft Corporation
+;
+; Contents:    Declares the module parameters.
+;
+; Comments:
+;
+;-----------------------------------------------------------------------------
+
+LIBRARY      "msdfmap_vc.DLL"
+
+EXPORTS
+	DllCanUnloadNow     @1 PRIVATE
+	DllGetClassObject   @2 PRIVATE
+	DllRegisterServer   @3 PRIVATE
+	DllUnregisterServer	@4 PRIVATE

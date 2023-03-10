@@ -1,0 +1,43 @@
+# Microsoft Developer Studio Generated Dependency File, included by MFCIEEvtSpy.mak
+
+.\IEEvents.cpp : \
+	".\IEEvents.h"\
+	".\MFCIEEvtSpy.h"\
+	".\MFCIEEvtSpyDlg.h"\
+	".\Resource.h"\
+	".\StdAfx.h"\
+	".\webbrowser2.h"\
+	
+
+.\MFCIEEvtSpy.cpp : \
+	".\IEEvents.h"\
+	".\MFCIEEvtSpy.h"\
+	".\MFCIEEvtSpyDlg.h"\
+	".\Resource.h"\
+	".\StdAfx.h"\
+	".\webbrowser2.h"\
+	
+
+.\MFCIEEvtSpy.rc : \
+	".\res\MFCIEEvtSpy.ico"\
+	".\res\MFCIEEvtSpy.rc2"\
+	".\Resource.h"\
+	
+
+.\MFCIEEvtSpyDlg.cpp : \
+	".\IEEvents.h"\
+	".\MFCIEEvtSpy.h"\
+	".\MFCIEEvtSpyDlg.h"\
+	".\Resource.h"\
+	".\StdAfx.h"\
+	".\webbrowser2.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	
+
+.\webbrowser2.cpp : \
+	".\StdAfx.h"\
+	".\webbrowser2.h"\
+	

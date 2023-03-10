@@ -1,0 +1,120 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. SL2SAMPL.  
+                                                                        
+       ENVIRONMENT DIVISION. 
+                                                                       
+       DATA DIVISION.       
+                                                                      
+       WORKING-STORAGE SECTION.                                      
+       01  IN-LEN                      PIC S9(4) COMP.              
+       01  OUT-LEN                     PIC S9(4) COMP.             
+                                                                  
+       01  INPUT-AREA.                                           
+      *   .
+      *   .
+      *   INPUT DATA DESCRIPTION ENTRIES THAT WERE GENERATED
+      *   FROM THE COMTI COMPONENT BUILDER
+      *   .
+      *   .
+                                                                        
+       01  OUTPUT-AREA.                                                 
+      *   .
+      *   .
+      *   OUTPUT DATA DESCRIPTION ENTRIES THAT WERE GENERATED
+      *   FROM THE COMTI COMPONENT BUILDER
+      *   .
+      *   .
+                                                                        
+       01 SYNC-LEVEL                   PIC S9(4) COMP VALUE 0.
+       01 SEND-RESP                    PIC S9(4) COMP VALUE 0. 
+       01 CONV-STATE                   PIC S9(9) COMP VALUE 0. 
+       01 CMD-RESP                     PIC S9(4) COMP VALUE 0. 
+                                                                        
+       LINKAGE SECTION.                                                 
+                                                                        
+       PROCEDURE DIVISION.                                              
+                                                                        
+      ******************************
+      ** CHECK FOR SYNC LEVEL 2
+      ******************************
+           EXEC CICS EXTRACT PROCESS                                    
+                     SYNCLEVEL(SYNC-LEVEL)                              
+                     RESP(CMD-RESP)                                     
+                     END-EXEC.                                          
+                                                                        
+      ******************************
+      ** GET THE INPUTS
+      ******************************
+           MOVE LENGTH OF INPUT-AREA TO IN-LEN.                         
+           EXEC CICS RECEIVE                                            
+                     INTO(INPUT-AREA)                                   
+                     LENGTH(IN-LEN)                                     
+                     RESP(CMD-RESP)                                     
+                     STATE(CONV-STATE)                                  
+                     END-EXEC.                                          
+                     
+      *   .
+      *   .
+      *   BUSINESS LOGIC
+      *   .
+      *   .
+
+           PERFORM NORMAL-TX-SEND-RECV                          
+           PERFORM NORMAL-TX-SYNCPOINT                         
+                                                              
+           EXEC CICS RETURN END-EXEC.
+           GOBACK.
+                                                                        
+      ********************************************************          
+      ** DO A NORMAL TRANSACTION SEND OF THE OUTPUT DATA,
+      ** THEN ISSUE A RECEIVE WAIT TO GET THE SYNCPOINT
+      ** INDICATION FROM COMTI.
+      ********************************************************          
+       NORMAL-TX-SEND-RECV.                                             
+           IF SYNC-LEVEL NOT = 2                                        
+              EXEC CICS ABEND ABCODE('NSL2') END-EXEC                   
+           END-IF.                                                      
+                                                                        
+           MOVE LENGTH OF OUTPUT-AREA TO OUT-LEN.                         
+           EXEC CICS SEND                                               
+                     FROM(OUTPUT-AREA)                                  
+                     LENGTH(OUT-LEN)                                    
+                     INVITE                                             
+                     WAIT                                               
+                     RESP(SEND-RESP)                                    
+                     STATE(CONV-STATE)                                  
+                     END-EXEC.                                          
+                                                                        
+           IF SEND-RESP NOT = DFHRESP(NORMAL)                           
+              EXEC CICS ABEND ABCODE('BSND') END-EXEC                   
+           END-IF.                                                      
+         .
+         .
+         .
+           EXEC CICS RECEIVE                                            
+                     INTO(INPUT-AREA)                                   
+                     LENGTH(IN-LEN)                                     
+                     RESP(CMD-RESP)                                     
+                     STATE(CONV-STATE)                                  
+                     END-EXEC.                                          
+                                                                        
+      ********************************************************             
+      ** CHECK THE EIB FIELDS TO DETERMINE WHAT ACTION COMTI
+      ** HAS REQUESTED, THEN ISSUE EITHER A SYNCPOINT OR     
+      ** ROLLBACK.
+      ********************************************************            
+       NORMAL-TX-SYNCPOINT.                                             
+           IF EIBSYNC = X'FF'                                           
+              EXEC CICS SYNCPOINT END-EXEC                              
+              EXEC CICS RECEIVE                                         
+                        RESP(CMD-RESP)                                  
+                        STATE(CONV-STATE)                               
+                        END-EXEC                                        
+           ELSE                                                         
+              IF EIBSYNRB = X'FF'                                       
+                 EXEC CICS SYNCPOINT ROLLBACK END-EXEC                  
+              ELSE                                                      
+                 EXEC CICS ABEND ABCODE('UNKN') END-EXEC                
+              END-IF                                                    
+           END-IF.                                                      
+                                                                        

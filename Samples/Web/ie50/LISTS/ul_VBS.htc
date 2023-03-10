@@ -1,0 +1,34 @@
+
+<SCRIPT TYPE="text/vbscript" LANGUAGE="VBScript">
+
+attachEvent "onclick", getRef("event_onclick")
+attachEvent "onmouseover", getRef("event_onmouseover")
+attachEvent "onmouseout", getRef("event_onmouseout")
+
+sub event_onmouseover()
+   style.cursor = "hand"
+   style.color = "red"
+end sub
+
+sub event_onmouseout()
+   style.cursor = ""
+   style.color = "black"
+end sub
+
+sub event_onclick()
+
+   dim i
+   dim style
+  
+   for i = 0 to children.length - 1
+   
+       set style = children(i).style
+       if (style.display = "none") then
+           style.display = ""
+       else
+           style.display = "none"
+       end if
+   next
+end sub
+
+</SCRIPT>

@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Visibility Versus Display</TITLE>
+<META NAME="FILENAME" CONTENT="visibility_VBS.HTM">
+
+
+<STYLE>
+  .bigChange {color:blue; font-weight:bolder; font-size:175%; letter-spacing:4px;  text-transform: uppercase; background:yellow}
+  .start {color:yellow; background:navy}
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+
+<SCRIPT LANGUAGE="VBScript">
+  sub highlightButton(s) 
+    if ("INPUT" = window.event.srcElement.tagName) then
+      window.event.srcElement.className = s
+    end if
+  end sub
+
+  sub makevisible()
+    if document.all.v.style.visibility = "hidden" then
+	document.all.v.style.visibility = ""
+    else 
+	document.all.v.style.visibility = "hidden"
+    end if
+  end sub 
+
+  sub makedisplayed()
+    if document.all.d.style.display = "none" then
+      document.all.d.style.display = ""
+    else
+      document.all.d.style.display = "none"
+    end if
+  end sub
+
+</SCRIPT>
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+<H2>Visibility Versus Display</H2>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A HREF="#" ONCLICK="self.close()"><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A HREF="#" ONCLICK="self.close()">Close This Sample</A>
+</FONT>
+<HR>
+
+<P>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<B>Click on the blue text below. Notice the difference between visibility and display.</B>
+<P>
+
+
+  <TABLE><TR><TH>Visibility</TH><TH>Display</TD></TR>
+  <TBODY VALIGN=TOP>
+    <TR><TD width=50%><P style="color:blue" onclick="makevisible()">Click here to see more data:</P>
+         <P id=v style="visibility:hidden">This is <EM>sample data</EM> that is being displayed. The space for this content is already taken up, even though the content is invisible.</P>
+         <P>This is more information that follows the hidden data.</P>
+        </TD>
+        <TD width=50%><P style="color:blue" onclick="makedisplayed()" title="A tooltip can even be added to very element using the title attribute!">Click here to see more data:</P>
+         <P id=d style="display:none">This is <EM>sample data</EM> that is being displayed. The space for this content is not taken up until the content is displayed.
+            Notice how the line following this data automatically moves down.</P>
+         <P>This is more information that follows the hidden data.</P><P>
+        </TD>
+   </TR>
+  </TBODY>
+ </TABLE>
+  <P>There are two properties in CSS to hide and show data: the display and visibility attributes. The visibility attribute allows content to be hidden, with the content still taking up space in the flow. The display attribute 
+     allows the content to be removed from the flow, allowing creation of dynamic and interactive content such as outlines. Of course both are supported by Dynamic HTML in Internet Explorer 4.0. The example below demonstrates the difference between dynamically 
+     changing the visibility and changing the display of CSS properties.
+<P> 
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>
+

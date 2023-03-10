@@ -1,0 +1,156 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Current Record Binding</TITLE>
+<META NAME="FILENAME" CONTENT="currec_VBS.HTM">
+
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META name="GENERATOR" content="Microsoft FrontPage 2.0">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+<H2>Current Record Binding</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click the buttons below to move the current record forward and
+backward.
+</FONT>
+<P>
+
+<OBJECT id="quotelist" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" border="0" width="0" height="0">
+  <PARAM name="DataURL" value="quotes.txt">
+  <PARAM name="UseHeader" value="True">
+</OBJECT>
+
+<TABLE ALIGN=center CELLSPACING=3 CELLPADDING=3>
+  <TR>
+    <TD ALIGN=right><INPUT TYPE=button ID=backward VALUE="   <   "></TD>
+    <TD ALIGN=left><INPUT TYPE=button ID=forward VALUE="   >   "></TD>
+  </TR>
+</TABLE>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<TABLE ALIGN=center CELLSPACING=0 CELLPADDING=0>
+  <TR>
+    <TD ALIGN=right VALIGN=top><LABEL FOR=symbol>Symbol: </LABEL></TD>
+    <TD ALIGN=left VALIGN=top WIDTH="10"></TD>
+    <TD ALIGN=left VALIGN=top><INPUT id=symbol DATASRC=#quotelist DATAFLD="Symbol" ></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=right VALIGN=top><LABEL FOR=quote>Quote: </LABEL></TD>
+    <TD ALIGN=left VALIGN=top WIDTH="10"></TD>
+    <TD ALIGN=left VALIGN=top><INPUT id=quote DATASRC=#quotelist DATAFLD="Quote"></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=right VALIGN=top><LABEL FOR=change>Change: </LABEL></TD>
+    <TD ALIGN=left VALIGN=top WIDTH="10"></TD>
+    <TD ALIGN=left VALIGN=top><INPUT id=change DATASRC=#quotelist DATAFLD="Change"></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=right VALIGN=top><LABEL FOR=volume>Volume: </LABEL></TD>
+    <TD ALIGN=left VALIGN=top WIDTH="10"></TD>
+    <TD ALIGN=left VALIGN=top><INPUT id=volume DATASRC=#quotelist DATAFLD="Volume"></TD>
+  </TR>
+</TABLE>
+</FONT>
+
+<SCRIPT LANGUAGE="VBScript">
+
+sub forward_onclick() 
+
+'This function increments the data bound record after checking to confirm 
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further. 
+
+  if (quotelist.recordset.AbsolutePosition <> quotelist.recordset.RecordCount) then
+    quotelist.recordset.MoveNext()
+    else
+    alert("Already at last element")
+  end if
+end sub
+
+
+sub backward_onclick() 
+
+'This function decrements the data bound record after checking to confirm  
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further.  
+
+  if (quotelist.recordset.AbsolutePosition <> 1) then
+    quotelist.recordset.MovePrevious()
+  else
+    alert("Already at first element")
+  end if
+end sub
+
+</SCRIPT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<B>Description</B><BR>
+Current record binding is a key feature of the data binding
+functionality included in Dynamic HTML. Current record binding
+allows a page author to merge data with HTML elements on the
+client. The data is supplied by a data source object included in
+the page. Individual HTML elements reference the data source
+object using the DATASRC and DATAFLD attributes. DATASRC is set
+to '#' plus the ID of the data source object. DATAFLD is set to the
+name of the column name that holds the data. (DATASRC and DATAFLD
+are W3C-proposed extensions to HTML.)
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The feature is named &quot;current record binding&quot; because the data
+displayed in the bound elements is from the columns of the
+current record of the data source. When the page author, through
+script or another element on the page, changes the position of
+the current record, the data from the new, current record is
+displayed in the elements. This is very much like the data
+binding supported in Microsoft Visual Basic, but it does not
+require controls -- you can bind directly to HTML elements.
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The key advantage to current record binding is that the data
+display is done on the client. A round trip to the server is not
+necessary to obtain the next record of the data set, you don't
+have to maintain the client state on the server or hidden in the
+client page, and you don't have to write a CGI script. With the 
+enhanced user experience and increased speed of browsing, it's easy to see the direct benefits of current record
+binding.
+</FONT>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="black">
+&copy; <A href="/misc/cpyright.htm" target="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

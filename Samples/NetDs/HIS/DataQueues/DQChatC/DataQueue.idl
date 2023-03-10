@@ -1,0 +1,311 @@
+// DataQueue.idl : IDL source for DataQueue.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DataQueue.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+#include "olectl.h"
+	
+// Forward declaration
+interface IEIGDataQueueItem;
+interface IEIGDataQueue;
+
+	typedef [uuid(8723CBE2-D0D2-11d2-811F-0080C71B8071)]
+	enum {
+		eigAnswerYes = 0,
+		eigAnswerNo = 1
+	} eigAnswerYesNoEnum;
+
+
+	[
+		object,
+		uuid(F82D83A0-F77C-11D2-A6B6-0080C71B8071),
+		dual,
+		helpstring("IEIGDataQueueCtl Interface"),
+		pointer_default(unique)
+	]
+	interface IEIGDataQueueCtl : IDispatch
+	{
+		//typedef [uuid(8723CBE0-D0D2-11d2-811F-0080C71B8071)]
+		//enum {
+			//eigConnTypeUnspecified = -1,
+			//eigConnTypeAPPC = 0,
+			//eigConnTypeTCPIP = 1
+		//} eigConnectionTypeEnum;
+			
+		typedef [uuid(8723CBE1-D0D2-11d2-811F-0080C71B8071)]
+		enum {
+			eigConnStateUnspecified = -1,
+			eigConnStateIdle = 0,
+			eigConnStateConnecting = 1,
+			eigConnStateConnected = 2,
+			eigConnStateDisconnecting = 3
+		} eigConnectionStateEnum;
+
+	    //const int DISPID_CONNECTION_TYPE		= 1;
+	    const int DISPID_USERID					= 2;
+	    const int DISPID_PASSWORD				= 3;
+		const int DISPID_LOCAL_CODEPAGE			= 4;
+		const int DISPID_HOST_CCSID				= 5;
+		const int DISPID_CONNECTION_STATE		= 6;
+
+		// APPC only
+	    const int DISPID_LOCAL_LU				= 7;
+	    const int DISPID_REMOTE_LU				= 8;
+	    const int DISPID_MODE					= 9;
+
+		// TCPIP only
+	    //const int DISPID_IP_ADDRESS			= 10;
+	    //const int DISPID_IP_PORT				= 11;
+
+		// Events
+		const int DISPON_CONNECTIONSTATECHANGE	= 1;
+		const int DISPON_REPORT_ERROR			= 2;
+
+		// Methods
+		const int DISPID_CONNECT				= 12;
+		const int DISPID_DISCONNECT				= 13;
+		const int DISPID_CREATEQUEUECONTAINER	= 14;
+
+		// Begin connection properties
+		//[propget, id(DISPID_CONNECTION_TYPE), helpstring("The type of connection used by this connection instance"), bindable, requestedit] HRESULT ConnectionType([out, retval] eigConnectionTypeEnum *pVal);
+		//[propput, id(DISPID_CONNECTION_TYPE), helpstring("The type of connection used by this connection instance"), bindable, requestedit] HRESULT ConnectionType([in] eigConnectionTypeEnum newVal);
+		[propget, id(DISPID_USERID), helpstring("Host system user ID"), bindable, requestedit] HRESULT UserID([out, retval] BSTR *pVal);
+		[propput, id(DISPID_USERID), helpstring("Host system user ID"), bindable, requestedit] HRESULT UserID([in] BSTR newVal);
+		[propget, id(DISPID_PASSWORD), helpstring("Host system user password"), bindable, requestedit] HRESULT Password([out, retval] BSTR *pVal);
+		[propput, id(DISPID_PASSWORD), helpstring("Host system user password"), bindable, requestedit] HRESULT Password([in] BSTR newVal);
+		[propget, id(DISPID_LOCAL_CODEPAGE), helpstring("Local code page"), bindable, requestedit] HRESULT PCCodePage([out, retval] short *pVal);
+		[propput, id(DISPID_LOCAL_CODEPAGE), helpstring("Local code page"), bindable, requestedit] HRESULT PCCodePage([in] short newVal);
+		[propget, id(DISPID_HOST_CCSID), helpstring("Host CCSID"), bindable, requestedit] HRESULT CCSID([out, retval] short *pVal);
+		[propput, id(DISPID_HOST_CCSID), helpstring("Host CCSID"), bindable, requestedit] HRESULT CCSID([in] short newVal);
+		[propget, id(DISPID_CONNECTION_STATE), helpstring("The current connection state"), bindable, requestedit] HRESULT ConnectionState([out, retval] eigConnectionStateEnum *pVal);
+		[propget, id(DISPID_LOCAL_LU), helpstring("Local LU"), bindable, requestedit] HRESULT LocalLU([out, retval] BSTR *pVal);
+		[propput, id(DISPID_LOCAL_LU), helpstring("Local LU"), bindable, requestedit] HRESULT LocalLU([in] BSTR newVal);
+		[propget, id(DISPID_REMOTE_LU), helpstring("Remote LU"), bindable, requestedit] HRESULT RemoteLU([out, retval] BSTR *pVal);
+		[propput, id(DISPID_REMOTE_LU), helpstring("Remote LU"), bindable, requestedit] HRESULT RemoteLU([in] BSTR newVal);
+		[propget, id(DISPID_MODE), helpstring("Mode"), bindable, requestedit] HRESULT ModeName([out, retval] BSTR *pVal);
+		[propput, id(DISPID_MODE), helpstring("Mode"), bindable, requestedit] HRESULT ModeName([in] BSTR newVal);
+		//[propget, id(DISPID_IP_ADDRESS), helpstring("TCP/IP machine address"), bindable, requestedit] HRESULT NetAddr([out, retval] BSTR *pVal);
+		//[propput, id(DISPID_IP_ADDRESS), helpstring("TCP/IP machine address"), bindable, requestedit] HRESULT NetAddr([in] BSTR newVal);
+		//[propget, id(DISPID_IP_PORT), helpstring("TCP/IP port"), bindable, requestedit] HRESULT NetPort([out, retval] BSTR *pVal);
+		//[propput, id(DISPID_IP_PORT), helpstring("TCP/IP port"), bindable, requestedit] HRESULT NetPort([in] BSTR newVal);
+
+		[id(DISPID_CONNECT), helpstring("Establish a connection to the host system")] HRESULT Connect();
+		[id(DISPID_DISCONNECT), helpstring("Terminate a connection to the host system")] HRESULT Disconnect();
+		[id(DISPID_CREATEQUEUECONTAINER), helpstring("Create a data queue item")] HRESULT CreateQueueContainer([in, optional, defaultvalue("")] BSTR BSTRQueueName, [out, retval] IEIGDataQueue **eigQueue);
+	};
+
+[
+	uuid(D1AA5DE0-F77C-11D2-A6B6-0080C71B8071),
+	version(1.0),
+	helpstring("Microsoft EIG Data Queue, Version 1.0")
+]
+library DATAQUEUELib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(0FC478A1-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("_IEIGDataQueueCtlEvents Interface")
+	]
+	dispinterface _IEIGDataQueueCtlEvents
+	{
+		properties:
+		methods:
+		[id(DISPON_CONNECTIONSTATECHANGE), helpstring("The state of the connection has changed")] HRESULT ConnectionStateChange([in] eigConnectionStateEnum constate);
+		[id(DISPON_REPORT_ERROR), helpstring("Fired when an error condition needs to be reported during non-blocking functions")] HRESULT ReportError([in] long hr, [in] BSTR Text);
+	};
+	[
+		object,
+		uuid(1A5E55A2-F77D-11D2-A6B6-0080C71B8071),
+		dual,
+		helpstring("IEIGDataQueueItem Interface"),
+		pointer_default(unique)
+	]
+	interface IEIGDataQueueItem : IDispatch
+	{
+		typedef [uuid(8A6045D0-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigQClassUnspecified = -1,
+			eigQClassFIFO = 0,
+			eigQClassLIFO = 1,
+			eigQClassKeyed = 2
+		} eigQClassEnum;
+
+		typedef [uuid(8A6045D1-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigQAuthUnspecified = -1,
+			eigQAuthDefault = 0,
+			eigQAuthAll = 1,
+			eigQAuthExclude = 2,
+			eigQAuthChange = 3,
+			eigQAuthUse = 4,
+			eigQAuthLibCreate = 5
+		} eigQAuthorityEnum;
+
+		typedef [uuid(8A6045D2-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigKQItem = 0,
+			eigQItem = 1
+		} eigQItemTypeEnum;
+
+		typedef [uuid(8A6045D3-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigSearchKeyUnspecified = -1,
+			eigSearchKeyEqual = 0,
+			eigSearchKeyGreaterThan = 1,
+			eigSearchKeyLessThan = 2,
+			eigSearchKeyGreaterEqual = 3,
+			eigSearchKeyLessEqual = 4
+		} eigSearchKeyEnum;
+
+		typedef [uuid(8A6045D4-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigRecordLenUnspecified = -1	,
+			eigRecordLenFixed = 0,
+			eigRecordLenInitVarLen = 1,
+			eigRecordLenVarLen = 2
+		} eigRecordLenClsEnum;
+
+		typedef [uuid(8A6045D5-D5AF-11d2-812A-0080C71B8071)]
+		enum {
+			eigAttributeUnspecified = -1,
+			eigAttributeCCSID = 0,
+			eigAttributeDirName = 1,
+			eigAttributeDataClass = 2,
+			eigAttributeKeyDef = 3,
+			eigAttributeDupKeys = 4,
+			eigAttributeMgmtCls = 5,
+			eigAttributeQueCls = 6,
+			eigAttributeSize = 7,
+			eigAttributeQLoc = 8,
+			eigAttributeSenderInfo = 9,
+			eigAttributeMaxMsgLen = 10,
+			eigAttributeRecLenClass = 11,
+			eigAttributeStgClass = 12,
+			eigAttributeTitle = 13
+		} eigAttributeEnum;
+
+		[propget, id(1), helpstring("External job user name"), bindable, requestedit] HRESULT ExtUser([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("External job user name"), bindable, requestedit] HRESULT ExtUser([in] BSTR newVal);
+		[propget, id(2), helpstring("External job name"), bindable, requestedit] HRESULT ExtJobName([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("External job name"), bindable, requestedit] HRESULT ExtJobName([in] BSTR newVal);
+		[propget, id(3), helpstring("External job number"), bindable, requestedit] HRESULT ExtJobNumber([out, retval] BSTR *pVal);
+		[propput, id(3), helpstring("External job number"), bindable, requestedit] HRESULT ExtJobNumber([in] BSTR newVal);
+		[propget, id(4), helpstring("Inactive record"), bindable, requestedit] HRESULT InactiveRec([out, retval] BSTR *pVal);
+		[propput, id(4), helpstring("Inactive record"), bindable, requestedit] HRESULT InactiveRec([in] BSTR newVal);
+		[propget, id(5), helpstring("Key value"), bindable, requestedit] HRESULT KeyVal([out, retval] VARIANT *pVal);
+		[propput, id(5), helpstring("Key value"), bindable, requestedit] HRESULT KeyVal([in] VARIANT newVal);
+		[propget, id(6), helpstring("Type of queue this item is for"), bindable, requestedit] HRESULT QItemType([out, retval] eigQItemTypeEnum *pVal);
+		[propput, id(6), helpstring("Type of queue this item is for"), bindable, requestedit] HRESULT QItemType([in] eigQItemTypeEnum newVal);
+		[propget, id(7), helpstring("Queue record"), bindable, requestedit] HRESULT Record([out, retval] VARIANT *pVal);
+		[propput, id(7), helpstring("Queue record"), bindable, requestedit] HRESULT Record([in] VARIANT newVal);
+		[propget, id(8), helpstring("Record attrib"), bindable, requestedit] HRESULT RecordAttrib([out, retval] BSTR *pVal);
+		[propput, id(8), helpstring("Record attrib"), bindable, requestedit] HRESULT RecordAttrib([in] BSTR newVal);
+		[propget, id(9), helpstring("Record count"), bindable, requestedit] HRESULT RecCount([out, retval] short *pVal);
+		[propput, id(9), helpstring("Record count"), bindable, requestedit] HRESULT RecCount([in] short newVal);
+		[propget, id(10), helpstring("Record number"), bindable, requestedit] HRESULT RecNumber([out, retval] short *pVal);
+		[propput, id(10), helpstring("Record number"), bindable, requestedit] HRESULT RecNumber([in] short newVal);
+		[propget, id(11), helpstring("Request that a reply to your message is sent"), bindable, requestedit] HRESULT ReplyRequested([out, retval] eigAnswerYesNoEnum *pVal);
+		[propput, id(11), helpstring("Request that a reply to your message is sent"), bindable, requestedit] HRESULT ReplyRequested([in] eigAnswerYesNoEnum newVal);
+		[propget, id(12), helpstring("User profile"), bindable, requestedit] HRESULT UserProf([out, retval] BSTR *pVal);
+		[propput, id(12), helpstring("User profile"), bindable, requestedit] HRESULT UserProf([in] BSTR newVal);
+		[propget, id(13), helpstring("Record length"), bindable, requestedit] HRESULT RecLength([out, retval] short *pVal);
+		[propput, id(13), helpstring("Record length"), bindable, requestedit] HRESULT RecLength([in] short newVal);
+	};
+	[
+		object,
+		uuid(0FC478A2-F77D-11D2-A6B6-0080C71B8071),
+		dual,
+		helpstring("IEIGDataQueue Interface"),
+		pointer_default(unique)
+	]
+	interface IEIGDataQueue : IDispatch
+	{
+		// Events
+		const int DISPON_RECEIVE_REQ			= 1;
+		const int DISPON_SEND_COMPLETE			= 2;
+		const int DISPON_REPORT_ERROR2			= 3;
+
+		// Data Queue specific
+		// methods
+		const int DISP_ADD_QUEUE_ITEM			= 1;
+		const int DISP_SET_ATTRIB				= 2;
+		const int DISP_CLEARALL					= 3;
+		const int DISP_CREATE_QUEUE				= 4;
+		const int DISP_DELETE_QUEUE				= 5;
+		const int DISP_GET_QUEUE_ITEM			= 6;
+		const int DISP_STOP_QUEUE				= 7;
+		const int DISP_QUERY_ATTRIB				= 8;
+		const int DISP_CANCEL					= 9;
+
+
+		// properties
+		const int DISP_QUEUENAME				= 10;
+
+		[propget, id(DISP_QUEUENAME), helpstring("The name of the Queue this object is associated with"), bindable, requestedit] HRESULT QueueName([out, retval] BSTR *pVal);
+		[id(DISP_ADD_QUEUE_ITEM), helpstring("Add a new item to the current Queue")] HRESULT AddQueueItem([in] IEIGDataQueueItem *QueueItem, [in, defaultvalue(eigAnswerNo)] eigAnswerYesNoEnum fBlock);
+		[id(DISP_SET_ATTRIB), helpstring("Set the value of one of the queue attributes")] HRESULT SetAttrib([in] eigAttributeEnum Attribute, [in] VARIANT Value);
+		[id(DISP_CLEARALL), helpstring("Remove all items from the queue")] HRESULT ClearAll([in, defaultvalue(eigAnswerYes)] eigAnswerYesNoEnum Overwrite);
+		[id(DISP_CREATE_QUEUE), helpstring("Create a new queue")] HRESULT CreateQueue([in] short MaxMsgLength, [in, defaultvalue(eigQAuthDefault)] eigQAuthorityEnum QAuthority, [in, defaultvalue(eigQClassFIFO)]eigQClassEnum QueueClass, [in, optional, defaultvalue(eigAnswerNo)] eigAnswerYesNoEnum AddSenderInfo, [in, optional] short CCSID, [in, optional] short InitialSize, [in, optional] VARIANT_BOOL queueLoc, [in, optional, defaultvalue(eigRecordLenFixed)] eigRecordLenClsEnum recordLenCls, [in, optional, defaultvalue("")] BSTR Title, [in, optional, defaultvalue(eigAnswerNo)] eigAnswerYesNoEnum AllowDupKeys, [in, optional] short MakeKeyLen);
+		[id(DISP_DELETE_QUEUE), helpstring("Delete an existing queue")] HRESULT DeleteQueue([in, defaultvalue(eigAnswerYes)] eigAnswerYesNoEnum OverwriteData);
+		[id(DISP_GET_QUEUE_ITEM), helpstring("Retreive an item from the associated queue")] HRESULT GetQueueItem([in, defaultvalue(eigQItem)]eigQItemTypeEnum QueueType, [in, defaultvalue(eigAnswerNo)] eigAnswerYesNoEnum BlockComplete, [in, defaultvalue(eigAnswerNo)] eigAnswerYesNoEnum PeekQItem, [in, defaultvalue(eigAnswerNo)]eigAnswerYesNoEnum ProvideExtInfo, [in, defaultvalue(0)] short TimeOut, [in, defaultvalue(eigAnswerNo)]eigAnswerYesNoEnum UserProfile, [in, defaultvalue(eigAnswerNo)]eigAnswerYesNoEnum SenderInfo, [in, defaultvalue("")] VARIANT SearchKey, [in, defaultvalue(eigSearchKeyEqual)]eigSearchKeyEnum SearchOrder, [out, retval] IEIGDataQueueItem **eigQueueItem);
+		[id(DISP_STOP_QUEUE), helpstring("Stop the queue from responding to client requests")] HRESULT StopQueue();
+		[id(DISP_QUERY_ATTRIB), helpstring("Query the queue for the current value of one of its attributes")] HRESULT QueryAttribute([in] eigAttributeEnum Attribute, [out, retval] VARIANT *pValue);
+		[id(DISP_CANCEL), helpstring("Cancel a request to receive an item from a queue")] HRESULT CancelQueue([in, optional, defaultvalue(1)]short CancelReqCount, [in, optional, defaultvalue(eigQItem)] eigQItemTypeEnum CancelReqType, [in, optional] VARIANT KeyValue);
+	};
+	[
+		uuid(24117551-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("_IEIGDataQueueItemEvents Interface")
+	]
+	dispinterface _IEIGDataQueueItemEvents
+	{
+		properties:
+		methods:
+	};
+
+	[
+		uuid(24117550-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("EIGDataQueueItem Class")
+	]
+	coclass EIGDataQueueItem
+	{
+		[default] interface IEIGDataQueueItem;
+		[default, source] dispinterface _IEIGDataQueueItemEvents;
+	};
+
+	[
+		uuid(0FC478A0-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("EIGDataQueueCtl Class")
+	]
+	coclass EIGDataQueueCtl
+	{
+		[default] interface IEIGDataQueueCtl;
+		[default, source] dispinterface _IEIGDataQueueCtlEvents;
+	};
+	[
+		uuid(1A5E55A1-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("_IEIGDataQueueEvents Interface")
+	]
+	dispinterface _IEIGDataQueueEvents
+	{
+		properties:
+		methods:
+		[id(DISPON_RECEIVE_REQ), helpstring("method RequestReceived")] HRESULT RequestReceived([in]eigQItemTypeEnum QItemAvilable);
+		[id(DISPON_SEND_COMPLETE), helpstring("method SendComplete")] HRESULT SendComplete([in] long ErrorCode, [in] BSTR Text, [in] eigQItemTypeEnum QueueItem);
+		[id(DISPON_REPORT_ERROR2), helpstring("Fired when an error condition needs to be reported during non-blocking functions")] HRESULT ReportError([in] long hr, [in] BSTR Text);
+	};
+
+	[
+		uuid(1A5E55A0-F77D-11D2-A6B6-0080C71B8071),
+		helpstring("EIGDataQueue Class")
+	]
+	coclass EIGDataQueue
+	{
+		[default] interface IEIGDataQueue;
+		[default, source] dispinterface _IEIGDataQueueEvents;
+	};
+};

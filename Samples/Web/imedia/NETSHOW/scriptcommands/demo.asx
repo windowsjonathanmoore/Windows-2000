@@ -1,0 +1,9 @@
+<ASX version = "3.0">
+<TITLE>External Captioning Demo</TITLE>
+
+    <Entry>
+	<TITLE>Script Commands</TITLE>
+        <Ref href = "mms://netshow.microsoft.com/ms/sbnasfs/wmt/shamuB.asf" />
+    </Entry>
+</ASX>
+

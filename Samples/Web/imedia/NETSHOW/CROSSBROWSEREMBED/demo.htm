@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Cross-Brower Embedding Demo</TITLE>
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Cross-Browser Embedding</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT>
+<HR>
+
+<CENTER>
+<!-- BEGIN GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+<OBJECT ID="MediaPlayer1" width=160 height=162 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=Version=6,0,02,0902"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="FileName" VALUE="mms://netshow.microsoft.com/ms/sbnasfs/wmt/turtle28.asf">
+  <PARAM NAME="AutoStart" VALUE="false">
+  <EMBED type="application/x-mplayer2" 
+	pluginspage = "http://www.microsoft.com/Windows/MediaPlayer/"
+	SRC="mms://netshow.microsoft.com/ms/sbnasfs/wmt/turtle28.asf"
+	name="MediaPlayer1"
+	width=160
+	height=162
+	autostart=false>
+   </EMBED>
+</OBJECT>
+<BR>
+<A HREF="turtle28.asx">Open In stand-alone player.</A>
+
+<!-- END GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+&nbsp;Click on the Play button to start the Show.
+</CENTER>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

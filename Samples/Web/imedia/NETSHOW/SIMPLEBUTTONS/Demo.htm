@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Simple Buttons</TITLE>
+
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Simple Buttons</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<CENTER>
+<!-- BEGIN GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+<OBJECT ID="MediaPlayer1" width=160 height=135 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase=
+	"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="FileName" VALUE="wmt.asx">
+  <PARAM NAME="ShowControls" VALUE="False">
+  <PARAM NAME="ShowStatusBar" VALUE="True">
+  <EMBED type="application/x-mplayer2" 
+	pluginspage = "http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/"
+	SRC="wmt.asx"
+	name="MediaPlayer1"
+	width=160
+	height=135
+	ShowStatusBar=true
+	ShowControls=false>
+  </EMBED>
+</OBJECT>
+<!-- END GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+
+<FORM NAME="myButtons">
+   <INPUT NAME="btnPlay" TYPE="Button" VALUE="Play" onclick="document.MediaPlayer1.Play();">
+   <INPUT NAME="btnPause" TYPE="Button" VALUE="Pause" onclick="document.MediaPlayer1.Pause();">
+   <INPUT NAME="btnStop" TYPE="Button" VALUE="Stop" onclick="document.MediaPlayer1.Stop();">
+
+</FORM>
+
+</CENTER>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>

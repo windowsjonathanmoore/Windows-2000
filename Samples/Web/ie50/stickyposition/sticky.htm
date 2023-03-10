@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>Positioning with Dynamic Expressions</TITLE>
+
+<STYLE>
+   DIV { position: absolute; width: 80px; height: 80px; font-family: arial; font-size: 18pt; font-weight: bold }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR=#ffffff TEXT=#000000>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<DIV id=Blue style="left:expression(document.body.clientLeft + 10); 
+                    top: expression(document.body.clientTop + 10); 
+                    background: blue">
+<CENTER>Top Left</CENTER>
+</DIV>
+
+<DIV id=Yellow style="left: expression(document.body.clientWidth - 90); 
+                      top: expression(document.body.clientHeight - document.body.style.border - 90); 
+                      background: yellow">
+<CENTER>Bottom Right</CENTER>
+</DIV>
+
+<DIV id=Red style="left: expression(document.body.clientLeft + 10); 
+		   top:expression(document.body.clientHeight - document.body.style.border - 90); 
+                   background: red">
+<CENTER>Bottom Left </CENTER>
+</DIV>
+
+<DIV id=Green style="left: expression(document.body.clientWidth - 90); 
+                     top:expression(document.body.clientTop + 10); 
+                     background: green">
+<CENTER>Top Right</CENTER>
+</DIV>
+
+<DIV id=Purple style="left: expression((document.body.clientWidth - 80)/2); 
+		      top:expression((document.body.clientHeight - 80)/2); 
+                      background: purple">
+<CENTER>Center</CENTER>
+</DIV>
+
+</BODY>
+</HTML>

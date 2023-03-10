@@ -1,0 +1,17 @@
+; THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+; ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+; TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+; PARTICULAR PURPOSE.
+;
+; Copyright (C) 1997-1999.  Microsoft Corporation.  All rights reserved.
+;
+; SCardCom.def : Declares the module parameters.
+;
+
+LIBRARY      "SCardCom.DLL"
+
+EXPORTS
+        DllCanUnloadNow         @1 PRIVATE
+        DllGetClassObject       @2 PRIVATE
+        DllRegisterServer       @3 PRIVATE
+        DllUnregisterServer     @4 PRIVATE

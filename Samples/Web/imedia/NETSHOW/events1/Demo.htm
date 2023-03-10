@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Event Handling</TITLE>
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+</HEAD>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<BODY BGCOLOR="#ffffff" onload="loader()">
+<CENTER>
+<OBJECT ID="MediaPlayer1" width=160 height=182 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase=
+	"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="AutoStart" VALUE="False">
+  <PARAM NAME="FileName" VALUE="events1.asx">
+  <PARAM NAME="ShowControls" VALUE="True">
+  <PARAM NAME="ShowStatusBar" VALUE="False">
+</OBJECT>
+
+<FORM NAME="myForm">
+	<INPUT TYPE="text" NAME="text1">
+	<INPUT TYPE="text" NAME="text2">
+</FORM>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function loader(){
+	// The Media Player will begin playing before the onload event, so 
+	// we've turned AutoPlay off.  Since the event handling will only begin
+	// once the page has loaded, we need to make sure that the player doesn't
+	// start until then.
+	MediaPlayer1.Play(); 
+}
+
+function doBuffering(start){
+	// This code could have resided in the "buffering" event handler, but
+	// we've simple redirected it here.
+
+	if (start == true) // The file is currently buffering.
+	{
+		myForm.text1.value = "Buffering..."
+	} else {
+		myForm.text1.value = "Finished Buffering";
+	}
+}
+</SCRIPT>
+
+<SCRIPT FOR="MediaPlayer1" EVENT="MarkerHit(markerNum)" LANGUAGE="Jscript">
+	myForm.text2.value = MediaPlayer1.GetMarkerName(markerNum)
+</SCRIPT>
+
+<SCRIPT FOR="MediaPlayer1" EVENT="buffering(start)" LANGUAGE="Jscript">
+	doBuffering(start)
+</SCRIPT>
+
+
+</BODY>
+</HTML>

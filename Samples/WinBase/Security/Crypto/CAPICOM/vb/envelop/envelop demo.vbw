@@ -1,0 +1,4 @@
+frmEnvelop = 44, 44, 516, 400, , 22, 22, 533, 378, C
+Auxillary_Functions = 110, 110, 467, 466, 
+frmSelect = 0, 0, 0, 0, C, 88, 88, 435, 440, C
+frmRecipients = 0, 0, 0, 0, C, 66, 66, 333, 418, C

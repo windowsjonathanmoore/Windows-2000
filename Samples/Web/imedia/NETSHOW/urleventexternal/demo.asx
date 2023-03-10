@@ -1,0 +1,15 @@
+<ASX version = "3.0">
+<TITLE>External URL Events Demo</TITLE>
+
+
+<!-- If your content isn't coming off of a web server or your content does not live in the same directory as your ASX, you'll need to set this to the base HTTP path of where your files will live -->
+<!-- <BASE HREF="" /> -->
+
+    <Entry>
+	<TITLE>The first entry in an advanced ASX</TITLE>
+	<AUTHOR>SoftImage</AUTHOR>
+	<COPYRIGHT>(c)1998 SoftImage</COPYRIGHT>
+        <Ref href = "mms://netshow.microsoft.com/ms/sbnasfs/wmt/lighthouse.asf" />
+    </Entry>
+</ASX>
+

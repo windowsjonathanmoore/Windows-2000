@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Fly-In DHTML Behavior Demo</TITLE>
+
+<STYLE>
+  .fly{behavior:url(fly_JS.htc);position:relative;}
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+
+<H2>Fly-In DHTML Behavior</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<BR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<DIV class=fly delay=1000>
+  This is some text<IMG SRC=ie.gif WIDTH=62 HEIGHT=65 ALT="IE">
+  <BR>
+  This is some more text
+</DIV>
+
+<IMG SRC=ie.gif WIDTH=62 HEIGHT=65 CLASS=fly DELAY=3000 FROM=right ALT="IE">
+<BR>
+
+<DIV class=fly delay=3000>
+  This is some text
+  More text
+</DIV>
+
+<BR>
+
+<DIV class=fly delay=5000>
+  This is some text
+  This is some more text
+</DIV>
+
+<BR>
+
+<DIV class=fly delay=7000>
+  This is some text
+  This is some more text
+</DIV>
+
+</FONT>
+
+<P>&nbsp;</P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>
+

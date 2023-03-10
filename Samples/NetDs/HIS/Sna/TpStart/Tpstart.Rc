@@ -1,0 +1,25 @@
+#include	<windows.h>
+#include	<winver.h>
+#include	<version.h>
+
+#define	SNA_VER_FILE_TYPE	VFT_APP
+#define	SNA_VER_FILE_SUBTYPE	VFT2_UNKNOWN
+
+#define	SNA_VER_INTERNALNAME	"TPSTART\0"
+#define	SNA_VER_FILEDESC	"Host Integration Server SDK TPSTART Sample"
+#define	SNA_VER_ORIGINALNAME	"TPSTART.EXE\0"
+
+#include "..\..\snaver.rc"
+
+#include <tpstart.h>
+
+TPSTART	ICON	tpstart.ico
+
+STRINGTABLE
+BEGIN
+
+IDS_WMCLOSE_CAPTION	"TPSTART Confirmation"
+IDS_WMCLOSE_TEXT	"TPSTART is required to automatically start Invokable APPC Transaction Programs running as Win32 applications.\n\nAre you sure you want to close TPSTART ?"
+
+END
+

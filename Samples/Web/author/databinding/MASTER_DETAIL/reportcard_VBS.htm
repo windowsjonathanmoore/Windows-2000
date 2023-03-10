@@ -1,0 +1,288 @@
+<HTML>
+<HEAD>
+<TITLE>Report Card Viewer</TITLE>
+<META NAME="FILENAME" CONTENT="reportcard_VBS.HTM">
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H2>Report Card Viewer</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<P>
+
+<SCRIPT LANGUAGE="VBScript">
+	dim curPage, pageCount, pageSize, lastSelect
+
+	curPage = 0	' First page is index 0.
+	pageSize = 5
+	lastSelect = 1
+
+
+
+'==================================
+	' Find out how many pages we will need based on the number of records.  
+	sub init()
+	   pageCount = CInt(xmldso.recordset.recordCount / pageSize)
+		if ( (xmldso.recordset.recordCount MOD pageSize) <> 0 ) then
+			pageCount = pageCount + 1
+		end if
+	end sub
+
+'==================================
+	' When the mouse passes over an entry, highlight that entry.
+	sub mouseOver() 
+		dim element
+		set element = window.event.srcElement
+
+		'Bubble up to find the parent TD of the object that threw the event.
+		while (element.tagName <> "TD") 
+			set element = element.parentElement
+		wend 
+
+		if (element.style.backgroundColor <> "red") then
+			element.style.backgroundColor = "yellow"
+		end if
+	end sub
+
+'==================================
+	' When the mouse leaves an entry, return it to normal
+	sub mouseOut() 
+
+		dim element
+		set element = window.event.srcElement
+
+		while (element.tagName <> "TD") 
+			set element = element.parentElement
+		wend
+
+		if (element.style.backgroundColor <> "red") then
+			element.style.backgroundColor = "white"
+		end if
+	end sub
+
+'==================================
+	sub nextPage() 
+
+		clearBG
+
+		if (curPage <> (pageCount - 1) ) then
+			listTable.nextPage()
+			curPage = curPage + 1
+		end if
+
+		if (curPage = (pageCount - 1) ) then
+			document.all.last.disabled = true
+			document.all.next.disabled = true
+		end if
+
+		document.all.first.disabled = false
+		document.all.prev.disabled = false
+
+		setBG
+	end sub
+
+'==================================
+	sub prevPage()
+
+		clearBG ' Clear the red background from the page.
+
+		if (curPage <> 0) then 'Go to prev page, if possible.
+			listTable.previousPage()
+			curPage = curPage - 1 
+		end if
+
+'If we're at the first page, don't allow the user to go backward or to the first page.
+		if (curPage = 0) then 
+			document.all.first.disabled = true
+			document.all.prev.disabled = true
+		end if
+
+		document.all.last.disabled = false
+		document.all.next.disabled = false
+
+		setBG
+	end sub
+
+'==================================
+	sub firstPage() 
+
+		clearBG
+
+		listTable.firstPage()
+		curPage = 0
+		document.all.first.disabled = true
+		document.all.prev.disabled = true
+
+		document.all.last.disabled = false
+		document.all.next.disabled = false
+
+		setBG
+
+	end sub
+
+'==================================
+	sub lastPage() 
+
+		clearBG()
+
+		' This code is transplanted from the init method above..
+		pageCount = CInt(xmldso.recordset.recordCount / pageSize)
+		if ( (xmldso.recordset.recordCount MOD pageSize) <> 0 ) then
+			pageCount = pageCount + 1
+		end if
+		
+		listTable.lastPage()
+		curPage = pageCount - 1
+		document.all.last.disabled = true
+		document.all.next.disabled = true
+
+		document.all.first.disabled = false
+		document.all.prev.disabled = false
+
+		setBG()
+
+	end sub
+
+'==================================
+	sub rowclick()
+	  
+		clearBG()
+
+		lastSelect = window.event.srcElement.recordNumber
+		xmldso.recordset.AbsolutePosition = lastSelect
+		
+		if ((lastSelect MOD pageSize) = 0 ) then
+		listTable.rows(pageSize).cells(1).style.backgroundColor = "red"
+		else
+		listTable.rows(lastSelect MOD pageSize).cells(1).style.backgroundColor = "red"
+		end if
+	end sub
+
+'==================================
+sub setBG() 
+    dim position
+	position = xmldso.recordset.AbsolutePosition
+	if ( (position <= (pageSize * (curPage + 1))) AND (position > (pageSize * curPage)) ) then
+		if ((position MOD pageSize) = 0 ) then
+			listTable.rows(pageSize).cells(1).style.backgroundColor = "red" 
+		else
+			listTable.rows(position MOD pageSize).cells(1).style.backgroundColor = "red"
+		end if
+	end if
+end sub
+
+'==================================
+'
+sub clearBG() 
+	dim position
+	position = lastSelect
+
+	' Is previously selected item on this page? If it is, we'll have to clear out red background on that element.
+	if  (position <= (pageSize * (curPage + 1))) AND (position > (pageSize * curPage))  then
+		if ((position MOD pageSize) = 0 ) then
+			listTable.rows(pageSize).cells(1).style.backgroundColor = "white" 
+		else
+			listTable.rows(position MOD pageSize).cells(1).style.backgroundColor = "white"
+		end if
+	end if
+end sub
+
+'==================================
+sub getState()
+    if (xmldso.readyState = 4 AND xmldso.documentElement = null) then
+		alert(xmldso.parseError.reason)
+	elseif (xmldso.readyState = 4 AND xmldso.documentElement <> null) then
+		' Start with first record in display.
+		xmldso.recordset.MoveFirst() ' removed \\
+		document.all.listTable.rows(1).cells(1).style.backgroundColor = "red" ' removed\\
+		document.all.first.disabled = true
+		document.all.prev.disabled = true
+		init()
+	end if
+end sub
+
+</SCRIPT>
+
+<XML ID=xmldso SRC = "reportCard.xml" LANGUAGE="VBScript" onload="getState"></XML>
+
+<TABLE BORDER="1" WIDTH="100%" RULES="cols" FRAME="above">
+  <TR>
+    <TD ALIGN="middle" VALIGN="top" WIDTH="45%">
+    <P>Select name of student to bring up record.</P>
+      <TABLE ID="listTable" DATASRC="#xmldso" BORDER="1" CELLPADDING="5" DATAPAGESIZE="5" BGCOLOR="white" WIDTH="60">
+	<COLGROUP>
+	  <COL WIDTH="6%">
+	  <COL WIDTH="94%">
+	</COLGROUP>
+	<THEAD>
+          <TR>
+	    <TH></TH>
+	    <TH>Student</TH>
+	  </TR> 
+	</THEAD>
+	<TBODY onclick=rowclick()>
+	  <TR>
+	    <TD> 
+	      <FONT><INPUT id=SelectB Type=button value ="Details"></FONT>
+	    </TD> 
+	    <TD onMouseOver=mouseOver() onMouseOut=mouseOut()>
+	      <P><SPAN DATAFLD="LNAME"></SPAN>, 
+	      <SPAN DATAFLD="FNAME"></SPAN></P>
+	    </TD>
+	  </TR>
+	</TBODY>
+      </TABLE>
+      
+      <BR>
+
+      <INPUT ID="first" TYPE=button VALUE="First Page" onClick="firstPage();">
+      <INPUT ID="prev" TYPE=button VALUE="Previous Page" onClick="prevPage();">
+      <INPUT ID="next" TYPE=button VALUE="Next Page" onClick="nextPage();">
+      <INPUT ID="last" TYPE=button VALUE="Last Page" onClick="lastPage();"> 
+    </TD>
+    <TD ALIGN="middle" VALIGN="top">
+      <H4>Report Card for Student: <SPAN DATASRC="#xmldso" DATAFLD="LNAME"></SPAN>, <SPAN DATASRC="#xmldso" DATAFLD="FNAME"></SPAN></H4>
+      <TABLE CELLPADDING="5" BORDER="1" DATASRC="#xmldso" DATAFLD="COURSE">
+        <COLGROUP>
+	  <COL WIDTH="33">
+	  <COL WIDTH="33">
+	  <COL WIDTH="33">
+	</COLGROUP>
+	<THEAD>
+          <TR>
+	    <TH>Course Name</TH>
+	    <TH>Mark Received</TH>
+	    <TH>Section</TH>
+	  </TR>
+	</THEAD>
+	<TBODY>
+	  <TR>
+	    <TD ALIGN="middle" VALIGN="top"><SPAN DATAFLD="COURSENAME"></SPAN></TD>
+	    <TD ALIGN="middle" VALIGN="top"> <SPAN DATAFLD="MARK"></SPAN></TD>
+	    <TD ALIGN="middle" VALIGN="top"><SPAN DATAFLD="SECTION"></SPAN></TD>
+	  </TR>
+	</TBODY>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

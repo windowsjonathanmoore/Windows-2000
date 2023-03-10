@@ -1,0 +1,127 @@
+<HTML>
+
+<HEAD>
+<TITLE>C++ XML Data Source (XMLDSO)</TITLE>
+<META NAME="FILENAME" CONTENT="heuristic.htm">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H2>XML DSO: Exposing Attributes using the New Heuristic</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+	
+<XML id=DSC1 src="custOrderAttrib.xml"></XML>
+<P>
+  <TABLE border dataSrc=#DSC1 dataFld=Customer width=100%>
+    <THEAD>
+      <TR>
+        <TH>CustomerID Attribute</TH>
+        <TH>Company Name</TH> 
+        <TH>Address</TH>
+        <TH>Fax</TH>
+      </TR>
+    </THEAD>
+		 
+      <TR>
+        <TD>
+	  <TABLE dataSrc=#DSC1 dataFld=Customer.CustomerID>
+	    <TR>
+	      <TD><div datafld=AttribCustomer></div></TD>
+	    </TR>
+	  </TABLE>
+	</TD>
+			
+	<TD><div datafld=CompanyName></div></TD>
+	<TD><div datafld=Address></div></TD>
+	<TD><div datafld=Fax></div></TD>
+      </TR>
+	
+       <TR>
+	 <TD></TD>
+	 <TD colspan=3>
+	   <TABLE  border=2 width=80% datasrc=#DSC1 datafld=Customer.ORDER>
+	     <THEAD>
+	       <TR>
+	         <TH>Order ID Attribute</TH>
+	         <TH>Order Date</TH> 
+	         <TH>Ship Country</TH>
+	       </TR>
+	     </THEAD>
+	       <TR>
+		 <TD>
+		   <TABLE dataSrc=#DSC1 dataFld=Customer.ORDER.OrderID>
+		     <TR>
+		       <TD><div datafld=AttribOrder></div></TD>
+		     </TR>
+		   </TABLE>
+		  </TD>
+					
+		  <TD><center><div datafld=OrderDate></div></center></TD>
+		  <TD><center><div datafld=ShipCountry></div></center></TD>
+	       </TR>
+	   </TABLE>
+	 </TD>
+       </TR>
+  </TABLE>
+
+<P>
+
+<H3>Outer Elements exposed only by the XML DSO</H3>
+<TABLE> <comment> for Layout </comment>
+  <TR>
+    <TD>
+      <TABLE border dataSrc=#DSC1 dataFld=OuterCustomerID>
+        <THEAD>
+          <TR>
+            <TH>Customer Attrib</TH>
+          </TR>
+        </THEAD>
+      
+          <TR>
+	    <TD><div datafld=AttribCustomer></div></TD>
+	  </TR>
+      </TABLE>
+    </TD>
+    
+    <TD>
+      <TABLE border dataSrc=#DSC1 dataFld=OuterCompanyName>
+        <THEAD>
+          <TR>
+            <TH> Company Name Attribute</TH>
+          </TR>
+        </THEAD>
+        
+	  <TR>
+	    <TD><div datafld=AttribCompany></div></TD>
+	  </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>. 
+</FONT>
+
+</BODY>
+</HTML>

@@ -1,0 +1,149 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Select Control</TITLE>
+<META NAME="FILENAME" CONTENT="select_VBS.HTM">
+
+
+<SCRIPT LANGUAGE="VBScript">
+
+sub forward() 
+
+'This function increments the data bound record after checking to confirm 
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition <> StockList.recordset.RecordCount) then
+    StockList.recordset.MoveNext()
+    else
+    alert("Already at last record")
+  end if
+end sub
+
+
+sub reverse() 
+
+'This function decrements the data bound record after checking to confirm  
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition <> 1) then
+    StockList.recordset.MovePrevious()
+  else
+    alert("Already at first record")
+  end if
+end sub
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>The SELECT Control</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+SELECT allows the user to select a single item from a list of pre-defined
+choices.  Authors supply the list of choices in the OPTION tags
+within the SELECT element. Binding is supported to the VALUE attribute of the
+selected OPTION. Only single select mode is supported.  Both the
+combo/drop-down and list box formats are supported for display. SELECT can
+be used with both current record binding and repeated tables.
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+An example of SELECT used with current record binding is shown below.
+Click on the arrow buttons to change the current record. Notice that the
+value displayed in the SELECT changes to match the value in the current record.
+</FONT>
+
+<P>
+
+<CENTER>
+<STRONG>Company Name:  </STRONG>
+
+<SELECT NAME="choices" SIZE=1 DATASRC="#StockList" DATAFLD="Symbol">
+  <OPTION SELECTED VALUE="MSFT">Microsoft Corporation
+  <OPTION VALUE="WCOM">MCI WorldCom, Inc.
+  <OPTION VALUE="MRK">Merck & Co., Inc.
+  <OPTION VALUE="HWP">Hewlett-Packard
+</SELECT>
+
+<P>
+<HR WIDTH=100>
+<INPUT TYPE="button" VALUE="  <  " ONCLICK="reverse">
+<INPUT TYPE="button" VALUE="  >  " onClick="forward">
+<HR WIDTH=100>
+</CENTER>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>You can also use SELECT in a repeated table: </FONT>
+
+<P>
+
+<OBJECT ID="StockList" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" WIDTH=0 HEIGHT=0>
+  <PARAM NAME="UseHeader" VALUE="True">
+  <PARAM NAME="DataURL" VALUE="quotes.txt">
+</OBJECT>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<CENTER>
+  <TABLE DATASRC="#StockList" BORDER=1>
+    <THEAD>
+      <TR>
+        <TH><DIV> Symbol</DIV></TH>
+      </TR>
+    </THEAD>
+    
+    <TBODY>
+      <TR>
+        <TD>
+          <SELECT NAME="choices" SIZE=1 DATAFLD="Symbol">
+            <OPTION SELECTED VALUE="MSFT"> MSFT - Microsoft Corporation
+	    <OPTION VALUE="WCOM"> WCOM - MCI WorldCom, Inc.
+	    <OPTION VALUE="MRK"> MRK - Merck & Co., Inc.
+	    <OPTION VALUE="HWP"> HWP - Hewlett-Packard
+	  </SELECT>
+	 </TD>
+       </TR>
+     </TBODY>
+  </TABLE>
+</CENTER>
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>Click on <A HREF="quotes.txt">quotes.txt</A> to see the data file used by this page.</FONT>
+
+<P>
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

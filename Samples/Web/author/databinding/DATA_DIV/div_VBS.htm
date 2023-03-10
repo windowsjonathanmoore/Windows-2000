@@ -1,0 +1,141 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  The DIV Tag</TITLE>
+<META NAME="FILENAME" CONTENT="div_VBS.HTM">
+
+<SCRIPT LANGUAGE="VBScript">
+
+sub forward() 
+
+'This function increments the data bound record after checking to confirm 
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition <> StockList.recordset.RecordCount) then
+    StockList.recordset.MoveNext()
+    else
+    alert("Already at last element")
+  end if
+end sub
+
+
+sub reverse() 
+
+'This function decrements the data bound record after checking to confirm  
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition <> 1) then
+    StockList.recordset.MovePrevious()
+  else
+    alert("Already at first element")
+  end if
+end sub
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY topmargin="20" leftmargin="40" bgcolor="#ffffff" link="#000066" vlink="#666666" text="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+<H2>The DIV Tag</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+DIV is an HTML container tag that contains other HTML. There are three
+types of divisions: normal, relatively positioned, and absolute positioned.
+Data binding is supported to all three types.
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Data binding binds the content of a DIV to the data from a column in the data
+set. The column can contain either plain text or HTML. To render HTML, the
+DIV tag must include the DATAFORMATAS=html attribute.
+</FONT>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+A DIV can be bound to a column of the current record of a data set. An example
+is shown below.  Click on the arrow buttons to change the current record.
+Notice that the value displayed in the DIV changes to match the value in the
+current record.
+</FONT>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<CENTER>This is a DIV bound to plain text:</CENTER>
+<DIV align=center datasrc="#StockList" datafld="Symbol"></DIV>
+
+<P>
+
+<CENTER>This is a DIV bound to HTML:</CENTER>
+<DIV align=center datasrc="#StockList" datafld="Symbol_fmt" dataformatas=html></DIV>
+<HR width=100>
+<CENTER>
+<INPUT type="button" value="  <  " onClick="reverse">
+<INPUT type="button" value="  >  " onClick="forward">
+</CENTER>
+
+<HR width=100>
+<P>
+
+DIVs can also be used within repeated tables. Here's an example:
+<P>
+
+<OBJECT id="StockList" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" width=0 height=0>
+  <PARAM name="UseHeader" value="True">
+  <PARAM name="DataURL" value="quotes.txt">
+</OBJECT>
+</FONT>
+<CENTER>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<TABLE datasrc="#StockList" border=1>
+  <THEAD>
+    <TR>
+      <TH><DIV> Plain Text </DIV></TH>
+      <TH><DIV> HTML </DIV></TH>
+    </TR>
+  </THEAD>
+  <TBODY>
+    <TR>	
+      <TD align=center><DIV align=center datafld="Symbol"></DIV></TD>
+      <TD align=center><DIV align=center datafld="Symbol_fmt" dataformatas="html"></DIV></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</FONT>
+
+</CENTER>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <A href="quotes.txt">quotes.txt</a> to see the data file used by this page.
+</FONT>
+<P>
+<P>
+
+<HR>
+<BR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

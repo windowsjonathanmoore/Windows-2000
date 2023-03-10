@@ -1,0 +1,105 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: SuperPad - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo".\Release/urlpad.res" /d "NDEBUG" /d "_AFXDLL" "D:\samples\temp\urlpad.rc"" 
+Creating temporary file "C:\TEMP\RSPBEFC.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "..\Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp".\Release/SuperPad.pch" /Yu"stdafx.h" /Fo".\Release/" /Fd".\Release/" /FD /c 
+"D:\samples\temp\aboutbox.cpp"
+"D:\samples\temp\download.cpp"
+"D:\samples\temp\Fileopen.cpp"
+"D:\samples\temp\ipframe.cpp"
+"D:\samples\temp\linkitem.cpp"
+"D:\samples\temp\mainfrm.cpp"
+"D:\samples\temp\paddoc.cpp"
+"D:\samples\temp\padframe.cpp"
+"D:\samples\temp\paditem.cpp"
+"D:\samples\temp\padview.cpp"
+"D:\samples\temp\pageset.cpp"
+"D:\samples\temp\superpad.cpp"
+"D:\samples\temp\tabstop.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSPBEFC.tmp" 
+Creating temporary file "C:\TEMP\RSPBEFD.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "..\Include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp".\Release/SuperPad.pch" /Yc"stdafx.h" /Fo".\Release/" /Fd".\Release/" /FD /c 
+"D:\samples\temp\stdafx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSPBEFD.tmp" 
+Creating temporary file "C:\TEMP\RSPBEFE.tmp" with contents
+[
+webpost.lib urlmon.lib wininet.lib uuid.lib /nologo /subsystem:windows /incremental:no /pdb:".\Release/urlpad.pdb" /machine:I386 /out:".\Release\urlpad.exe" 
+.\Release\aboutbox.obj
+.\Release\download.obj
+.\Release\Fileopen.obj
+.\Release\ipframe.obj
+.\Release\linkitem.obj
+.\Release\mainfrm.obj
+.\Release\paddoc.obj
+.\Release\padframe.obj
+.\Release\paditem.obj
+.\Release\padview.obj
+.\Release\pageset.obj
+.\Release\stdafx.obj
+.\Release\superpad.obj
+.\Release\tabstop.obj
+.\Release\urlpad.res
+]
+Creating command line "link.exe @C:\TEMP\RSPBEFE.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+stdafx.cpp
+Compiling...
+aboutbox.cpp
+Generating Code...
+Compiling...
+download.cpp
+Generating Code...
+Compiling...
+Fileopen.cpp
+Generating Code...
+Compiling...
+ipframe.cpp
+Generating Code...
+Compiling...
+linkitem.cpp
+Generating Code...
+Compiling...
+mainfrm.cpp
+Generating Code...
+Compiling...
+paddoc.cpp
+Generating Code...
+Compiling...
+padframe.cpp
+Generating Code...
+Compiling...
+paditem.cpp
+Generating Code...
+Compiling...
+padview.cpp
+Generating Code...
+Compiling...
+pageset.cpp
+Generating Code...
+Compiling...
+superpad.cpp
+Generating Code...
+Compiling...
+tabstop.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+urlpad.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

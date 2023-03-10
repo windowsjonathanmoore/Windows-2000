@@ -1,0 +1,9 @@
+LIBRARY     PROPDIST
+DESCRIPTION "PROPERTY DISTRIBUTION EXPERT"
+VERSION     1.0
+
+EXPORTS
+        DllMain
+        Register
+        Configure
+        Run

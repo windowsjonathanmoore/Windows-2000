@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<style>
+BODY {
+	font: x-small Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFFFFF; }
+	
+h1, h2, h3, h4 {
+	font-family: verdana, Arial, Helvetica, sans-serif;	
+	font-weight: bold;
+	color: #000000; }
+	
+h1 {
+	font-size: 145%;
+	margin-bottom: .5em; }
+	
+h2 {
+	font-size: 125%;
+	margin-top: 1.5em;
+	margin-bottom: .5em; }
+	
+h3 {
+	font-size: 115%;
+	margin-top: 1.2em;
+	margin-bottom: .5em}
+	
+h4 {
+	font-size: 100%;
+	margin-top: 1.2em;
+	margin-bottom: .5em; }
+
+P  {
+	font: x-small Verdana, Arial, Helvetica, sans-serif;
+	color: #000000; }
+
+CODE {
+	font: 120% "Courier New", Courier, mono; }
+
+TD {
+	font-size: x-small; }
+
+A:LINK {
+	color: #0000FF; }
+	
+A:VISITED {
+	color: #660066; }
+	
+A:HOVER {
+	color: #FF9900; }
+	
+.label {
+	font-weight: bold; }
+	
+.tl {
+	margin-bottom: .75em; }
+	
+.atl {
+	padding-left: 1.5em;
+	padding-bottom: .75em; }
+	
+.cfe {
+	font-weight: bold; }
+	
+.mini {
+	font-size: smaller; }
+	
+LI {
+	margin-top: .75em;
+	margin-bottom: .75em; }
+	
+UL {
+	list-style: disc; }
+
+UL UL, OL OL, OL UL, UL OL {
+	margin-top: 1em;
+	margin-bottom: 1em; }
+	
+LI P {
+	margin-top: .5em;
+	margin-bottom: .5em; }
+
+.dt {
+	margin-bottom: -1em; }
+	
+.indent {
+	margin-left: 1.5em; }
+	
+SUP {
+	text-decoration: none;
+	font-size: smaller; }
+
+.product
+	{
+	text-align: right;
+	color: #333333;
+	font-size: smaller;
+	font-style: italic;
+	}
+</style></HEAD>
+<BODY>
+
+<H1><A NAME="odbcsamplesreadme"></A>ODBC Sample Applications Readme</H1>
+
+<P>© 1999 Microsoft Corporation. All rights reserved.</P>
+
+<P>This document contains late-breaking information about the ODBC samples, which have been created and tested for compatibility with this version of the Microsoft Data Access Components (MDAC). </P>
+
+<P>For information about the latest version of MDAC, see <A HREF="http://www.microsoft.com/data/download.htm">http://www.microsoft.com/data/download.htm</A>.</P>
+
+<P>For detailed information about the samples, see the ODBC documentation within the MDAC SDK, which is contained within the Platform SDK. When building samples, make sure MDAC SDK libraries are used and not similar libraries installed by other Microsoft products.</P>
+
+<H1>Technical Issues</H1>
+
+<H2>Odbcsql Sample - Command Line</H2>
+
+<P>The Odbcsql Sample implements an ODBC command-line interpreter that allows you to use SQL commands and view the results from the selected data source. The sample is written as an ODBC 2.<I>x</I> application. </P>
+
+<P>After allocating the environment and connection, the application connects to the driver specified or, if none, prompts you for the DSN. The command-line interpreter then prompts you for SQL commands to run against the data source. </P>
+
+<P>Results are displayed in columnar form after memory is allocated for the buffers and column titles are written. Column information is fetched and bindings are allocated for each column. (The char data type is assumed when determining display length although you might have better performance with other types.)&nbsp; </P>
+
+<P>A buffer is allocated for the data and mapped to the driver's buffer, which will be used to hold the data at fetch time. </P>
+
+<P>An error handling routine is also included.</P>
+
+<P class=label><B>Setup</B></P>
+
+<P>Build the sample using the source file, Odbcsql.c, provided in the \Samples\ODBC\odbcsql directory. Determine the DSN to use.</P>
+
+<P class=label><B>Running the Sample</B></P>
+
+<P>Run the executable file after successfully building the project. The sample will prompt you for a DSN. Once you are connected, the command-line prompt will appear. You can type SQL commands, evaluate the results, and compare them to the sample code.</P>
+
+<H1>Known Bugs and Limitations</H1>
+
+<P>There are no known bugs or limitations at this time.</P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,158 @@
+<HTML> 
+<HEAD>
+<TITLE>DirectAnimation SDK, JScript sample</TITLE>
+<SCRIPT LANGUAGE="JScript">
+<!--
+if (window.top.frames.length!=0 && window.top.frames[0].ShowNoButtons!=null)
+    window.top.frames[0].ShowNoButtons();
+//-->
+</SCRIPT>
+</HEAD>	 
+
+<BODY BGCOLOR=WHITE TOPMARGIN=15 LEFTMARGIN=20>
+<FONT FACE="Verdana, Arial, Helvetica" SIZE=2> 
+<CENTER>
+<H1>Transforms on 2D Vector Primitives</H1>
+</CENTER>
+
+<CENTER>
+<input type=button value="Blur" name="BlurButton">
+<input type=button value="DropShadow" name="DropShadowButton">
+<input type=button value="Engrave" name="EngraveButton">
+<input type=button value="Plain" name="PlainButton">
+<BR>
+<input type=button value="Short" name="ShortButton">
+<input type=button value="Medium" name="MediumButton">
+<input type=button value="Long" name="LongButton">
+</CENTER>
+          
+<OBJECT ID="DAControl"
+  STYLE="position:relative; left:50; top:0;width:600;height:400" 
+  CLASSID="CLSID:B6FFC24C-7E13-11D0-9B47-00C04FC2F51D">
+</OBJECT>
+
+<SCRIPT LANGUAGE="JScript">
+<!--
+m = DAControl.PixelLibrary; 
+
+function GetImageStructured() {
+  period = 3; // time in seconds
+  dim = 100;  // space in pixels
+  hDim = 3*dim/4;
+  qDim = dim/2;
+
+  // sinNum = 2*PI*time/period, varies between -1 and 1 every period
+  sinNum = m.Sin(m.Mul(m.LocalTime, m.DANumber(2*Math.PI/period)));
+
+  // construct a red oval with corresponding transform
+  redImg = m.Oval(dim,dim).Fill(m.DefaultLineStyle,        
+                              m.SolidColorImage(m.Red));
+  redXf = m.Compose2(m.Translate2(hDim, hDim), 
+                   m.Scale2UniformAnim(sinNum));
+
+  // construct a green rounded rectangle with corresponding transform
+  greenImg = m.RoundRect(dim,dim,qDim,qDim).Fill(m.DefaultLineStyle,   m.SolidColorImage(m.Green));
+  greenXf = m.Compose2(m.Translate2(hDim, -hDim), m.YShear2Anim(sinNum));
+
+  // construct a blue rectangle with corresponding transform
+  blueImg = m.Rect(dim,dim).Fill(m.DefaultLineStyle, 
+                               m.SolidColorImage(m.Blue));
+  blueXf = m.Compose2(m.Translate2(-hDim, -hDim), 
+    m.Translate2Anim(m.DANumber(0), m.Mul(m.DANumber(dim/4), sinNum)));
+
+  // construct a purple pie with corresponding transform
+  purpleImg = m.PieDegrees(-60, -120, dim, dim).
+                Fill(m.DefaultLineStyle, 
+                     m.SolidColorImage(m.Purple));
+  purpleXf = m.Compose2(m.Translate2(-hDim,hDim),m.Rotate2Anim(sinNum));
+ 
+  // construct transformed versions of these shapes. 
+  redImg = redImg.Transform(redXf);
+  greenImg = greenImg.Transform(greenXf);
+  blueImg = blueImg.Transform(blueXf);
+  purpleImg = purpleImg.Transform(purpleXf);
+
+  // combine them into one image
+  firstImg = m.OverlayArray(new 
+               Array(redImg,greenImg,blueImg,purpleImg));
+
+  // rotation by 45 degrees per sec around 3D first diagonal
+  rotXf  = m.Rotate3RateDegrees(m.Vector3(1,1,1), 45).ParallelTransform2();
+  secondImg = firstImg.Transform(rotXf);
+
+  // cycle through flat 2D image and 3D transformed counter part
+  resultImg = new ActiveXObject("DirectAnimation.DAImage");
+  resultImg.init(m.Until(firstImg, m.LeftButtonDown,
+                  m.Until(secondImg, m.LeftButtonDown, resultImg)));
+  return resultImg;
+}
+
+structImg = GetImageStructured();
+inputImgs = new Array(structImg);
+
+blurO = m.ApplyDXTransform("DXImageTransform.Microsoft.CrBlur", inputImgs, null);
+blurImg = blurO.OutputBvr;
+blurObj = blurO.TheTransform;
+
+dropShadow = m.ApplyDXTransform("DXImageTransform.Microsoft.DropShadow", inputImgs, null);
+dropShadowImg = dropShadow.OutputBvr;
+dropShadowObj = dropShadow.TheTransform;
+
+engrave = m.ApplyDXTransform("DXImageTransform.Microsoft.CrEngrave", inputImgs, null);
+engraveImg = engrave.OutputBvr;
+engraveObj = engrave.TheTransform;
+
+img = m.ModifiableBehavior(structImg);
+
+function BlurButton.onclick()  {
+  return img.SwitchTo(blurImg);
+}
+
+function DropShadowButton.onclick()  {
+  return img.SwitchTo(dropShadowImg);
+}
+
+function EngraveButton.onclick()  {
+  return img.SwitchTo(engraveImg);
+}
+
+function PlainButton.onclick()  {
+  return img.SwitchTo(structImg);
+}
+
+function ShortButton.onclick() {
+  blurObj.PixelRadius = 2;
+  dropShadowObj.offX = 3;
+  dropShadowObj.offY = 3;
+  return null;
+}
+
+function MediumButton.onclick() {
+  blurObj.PixelRadius = 6;
+  dropShadowObj.offX = 9;
+  dropShadowObj.offY = 9;
+  return null;
+}
+  
+function LongButton.onclick() {
+  blurObj.PixelRadius = 12;
+  dropShadowObj.offX = 20;
+  dropShadowObj.offY = 20;
+  return null;
+}
+
+// final image
+DAControl.Image = img;     
+     
+// start the animation       
+DAControl.Start()
+
+//-->
+</SCRIPT>
+<P>
+Parades four animate structured graphics primitives. <B>Pressing the Left Button 
+applies an additional 3D rotational transform. </B> This shows a simple
+form of hierarchical articulation.
+</FONT>
+</BODY>
+</HTML>

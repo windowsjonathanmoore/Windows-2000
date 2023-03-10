@@ -1,0 +1,137 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  The IFRAME Tag</TITLE>
+<META NAME="FILENAME" CONTENT="iframe_VBS.HTM">
+
+<SCRIPT language="VBScript">
+
+sub forward() 
+
+'This function increments the data bound record after checking to confirm 
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition <> StockList.recordset.RecordCount) then
+    StockList.recordset.MoveNext()
+    else
+    alert("Already at last element")
+  end if
+end sub
+
+
+sub reverse() 
+
+'This function decrements the data bound record after checking to confirm  
+'you are not already at the end of the recordset. If you are, the program 
+'alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition <> 1) then
+    StockList.recordset.MovePrevious()
+  else
+    alert("Already at first element")
+  end if
+end sub
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN="20" LEFTMARGIN="40" BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>The IFRAME Tag</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+You can bind the SRC attribute of an IFRAME to a URL in the column of a data
+set. The page at the URL specified will be displayed within the IFRAME.
+</FONT>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+An example of IFRAME used with current record binding is shown below.
+Click on the arrow buttons to change the current record. Notice that the
+page displayed in the IFRAME changes to match the value in the current record.
+</FONT>
+
+<P>
+
+
+<CENTER>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<IFRAME FRAMEBORDER=1 WIDTH="60%" DATASRC="#StockList" DATAFLD="url"></IFRAME>
+<HR WIDTH=100>
+<INPUT TYPE="button" VALUE="  <  " ONCLICK="reverse">
+<INPUT TYPE="button" VALUE="  >  " onClick="forward">
+
+<HR WIDTH=100>
+</FONT>
+</CENTER>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>IFRAMEs can also be used within a repeated table. An example follows.</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<OBJECT ID="StockList" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" WIDTH="0" HEIGHT="0">
+  <PARAM NAME="UseHeader" VALUE="True">
+  <PARAM NAME="TextQualifier" VALUE="&quot;">
+  <PARAM NAME="FieldDelim" VALUE=",">
+  <PARAM NAME="DataURL" VALUE="quotes.txt">
+</OBJECT>
+
+<CENTER>
+
+<TABLE BORDER=1 DATASRC="#StockList">
+  <THEAD>
+    <TR>
+      <TH><STRONG> IFrame </STRONG></TH>
+    </TR>
+  </THEAD>
+  
+  <TBODY>
+    <TR>
+      <TD><IFRAME WIDTH=490 HEIGHT=75 DATAFLD="url"></IFRAME></TD>
+    </TR>
+  </TBODY>		
+</TABLE>
+
+</CENTER>
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <A href="quotes.txt">quotes.txt</A> to see the data file
+used by this page.
+</FONT>
+
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="black">
+&copy; <A href="/misc/cpyright.htm" target="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

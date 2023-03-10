@@ -1,0 +1,260 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.8447.0 (3171d071).
+//
+// MSEIGFT.tlh
+//
+// C++ source equivalent of Win32 type library C:\\Program Files\\Host Integration Server\\system\\MSEIGFT.DLL
+// compiler-generated file created 01/22/01 at 02:15:45 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+namespace MSEIGFTLib {
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("35c0e97f-ca78-11d2-8114-0080c71b8071"))
+/* dispinterface */ _IEIGFileTransferCtlEvents;
+typedef enum __MIDL___MIDL_itf_MSHISFT_0000_0002 eigConnectionStateEnum;
+struct /* coclass */ EIGFileTransferCtl;
+struct __declspec(uuid("35c0e97d-ca78-11d2-8114-0080c71b8071"))
+/* dual interface */ IEIGFileTransferCtl;
+typedef enum __MIDL___MIDL_itf_MSHISFT_0000_0001 eigConnectionTypeEnum;
+typedef enum __MIDL___MIDL_itf_MSHISFT_0000_0003 eigAnswerYesNoEnum;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(_IEIGFileTransferCtlEvents, __uuidof(IDispatch));
+_COM_SMARTPTR_TYPEDEF(IEIGFileTransferCtl, __uuidof(IEIGFileTransferCtl));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("35c0e97f-ca78-11d2-8114-0080c71b8071"))
+_IEIGFileTransferCtlEvents : IDispatch
+{
+    //
+    // Wrapper methods for error-handling
+    //
+
+    // Methods:
+    HRESULT ConnectionStateChange (
+        eigConnectionStateEnum constate );
+    HRESULT TransferProgress (
+        short PercentageDone );
+    HRESULT ReportError (
+        long hr,
+        _bstr_t Text );
+    HRESULT TransferComplete ( );
+};
+
+enum __MIDL___MIDL_itf_MSHISFT_0000_0002
+{
+    eigConnStateUnspecified = -1,
+    eigConnStateIdle = 0,
+    eigConnStateConnecting = 1,
+    eigConnStateConnected = 2,
+    eigConnStateDisconnecting = 3
+};
+
+struct __declspec(uuid("35c0e97e-ca78-11d2-8114-0080c71b8071"))
+EIGFileTransferCtl;
+    // [ default ] interface IEIGFileTransferCtl
+    // [ default, source ] dispinterface _IEIGFileTransferCtlEvents
+
+struct __declspec(uuid("35c0e97d-ca78-11d2-8114-0080c71b8071"))
+IEIGFileTransferCtl : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetConnectionType,put=PutConnectionType))
+    eigConnectionTypeEnum ConnectionType;
+    __declspec(property(get=GetRDBName,put=PutRDBName))
+    _bstr_t RDBName;
+    __declspec(property(get=GetUserID,put=PutUserID))
+    _bstr_t UserID;
+    __declspec(property(get=GetPassword,put=PutPassword))
+    _bstr_t Password;
+    __declspec(property(get=GetPCCodePage,put=PutPCCodePage))
+    short PCCodePage;
+    __declspec(property(get=GetCCSID,put=PutCCSID))
+    short CCSID;
+    __declspec(property(get=GetConnectionState))
+    eigConnectionStateEnum ConnectionState;
+    __declspec(property(get=GetLocalLU,put=PutLocalLU))
+    _bstr_t LocalLU;
+    __declspec(property(get=GetRemoteLU,put=PutRemoteLU))
+    _bstr_t RemoteLU;
+    __declspec(property(get=GetModeName,put=PutModeName))
+    _bstr_t ModeName;
+    __declspec(property(get=GetNetAddr,put=PutNetAddr))
+    _bstr_t NetAddr;
+    __declspec(property(get=GetNetPort,put=PutNetPort))
+    _bstr_t NetPort;
+    __declspec(property(get=GetOverwriteHostFile,put=PutOverwriteHostFile))
+    eigAnswerYesNoEnum OverwriteHostFile;
+    __declspec(property(get=GetAppendToEnd,put=PutAppendToEnd))
+    eigAnswerYesNoEnum AppendToEnd;
+    __declspec(property(get=GetCreateIfNonExisting,put=PutCreateIfNonExisting))
+    eigAnswerYesNoEnum CreateIfNonExisting;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    eigConnectionTypeEnum GetConnectionType ( );
+    void PutConnectionType (
+        eigConnectionTypeEnum pVal );
+    _bstr_t GetRDBName ( );
+    void PutRDBName (
+        _bstr_t pVal );
+    _bstr_t GetUserID ( );
+    void PutUserID (
+        _bstr_t pVal );
+    _bstr_t GetPassword ( );
+    void PutPassword (
+        _bstr_t pVal );
+    short GetPCCodePage ( );
+    void PutPCCodePage (
+        short pVal );
+    short GetCCSID ( );
+    void PutCCSID (
+        short pVal );
+    eigConnectionStateEnum GetConnectionState ( );
+    _bstr_t GetLocalLU ( );
+    void PutLocalLU (
+        _bstr_t pVal );
+    _bstr_t GetRemoteLU ( );
+    void PutRemoteLU (
+        _bstr_t pVal );
+    _bstr_t GetModeName ( );
+    void PutModeName (
+        _bstr_t pVal );
+    _bstr_t GetNetAddr ( );
+    void PutNetAddr (
+        _bstr_t pVal );
+    _bstr_t GetNetPort ( );
+    void PutNetPort (
+        _bstr_t pVal );
+    HRESULT Connect ( );
+    HRESULT Disconnect ( );
+    HRESULT PutFile (
+        _bstr_t hostFile,
+        _bstr_t LocalFile );
+    HRESULT GetFile (
+        _bstr_t LocalFile,
+        _bstr_t hostFile );
+    HRESULT Cancel ( );
+    eigAnswerYesNoEnum GetOverwriteHostFile ( );
+    void PutOverwriteHostFile (
+        eigAnswerYesNoEnum pVal );
+    eigAnswerYesNoEnum GetAppendToEnd ( );
+    void PutAppendToEnd (
+        eigAnswerYesNoEnum pVal );
+    eigAnswerYesNoEnum GetCreateIfNonExisting ( );
+    void PutCreateIfNonExisting (
+        eigAnswerYesNoEnum pVal );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_ConnectionType (
+        eigConnectionTypeEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_ConnectionType (
+        eigConnectionTypeEnum pVal ) = 0;
+    virtual HRESULT __stdcall get_RDBName (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_RDBName (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_UserID (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_UserID (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_Password (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Password (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_PCCodePage (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_PCCodePage (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_CCSID (
+        short * pVal ) = 0;
+    virtual HRESULT __stdcall put_CCSID (
+        short pVal ) = 0;
+    virtual HRESULT __stdcall get_ConnectionState (
+        eigConnectionStateEnum * pVal ) = 0;
+    virtual HRESULT __stdcall get_LocalLU (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_LocalLU (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_RemoteLU (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_RemoteLU (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_ModeName (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_ModeName (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_NetAddr (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_NetAddr (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_NetPort (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_NetPort (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall raw_Connect ( ) = 0;
+    virtual HRESULT __stdcall raw_Disconnect ( ) = 0;
+    virtual HRESULT __stdcall raw_PutFile (
+        BSTR hostFile,
+        BSTR LocalFile ) = 0;
+    virtual HRESULT __stdcall raw_GetFile (
+        BSTR LocalFile,
+        BSTR hostFile ) = 0;
+    virtual HRESULT __stdcall raw_Cancel ( ) = 0;
+    virtual HRESULT __stdcall get_OverwriteHostFile (
+        eigAnswerYesNoEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_OverwriteHostFile (
+        eigAnswerYesNoEnum pVal ) = 0;
+    virtual HRESULT __stdcall get_AppendToEnd (
+        eigAnswerYesNoEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_AppendToEnd (
+        eigAnswerYesNoEnum pVal ) = 0;
+    virtual HRESULT __stdcall get_CreateIfNonExisting (
+        eigAnswerYesNoEnum * pVal ) = 0;
+    virtual HRESULT __stdcall put_CreateIfNonExisting (
+        eigAnswerYesNoEnum pVal ) = 0;
+};
+
+enum __MIDL___MIDL_itf_MSHISFT_0000_0001
+{
+    eigConnTypeUnspecified = -1,
+    eigConnTypeAPPC = 0,
+    eigConnTypeTCPIP = 1
+};
+
+enum __MIDL___MIDL_itf_MSHISFT_0000_0003
+{
+    eigAnswerYes = 0,
+    eigAnswerNo = 1
+};
+
+//
+// Wrapper method implementations
+//
+
+#include "MSEIGFT.tli"
+
+} // namespace MSEIGFTLib
+
+#pragma pack(pop)

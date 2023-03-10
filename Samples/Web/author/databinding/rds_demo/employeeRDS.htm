@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>Optimistic Update using RDS</TITLE>
+
+<STYLE>
+      TD {font-size:18pt}
+      INPUT {font-size:18pt}
+</STYLE>
+
+</HEAD>
+
+<BODY>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<P>
+<OBJECT classid="clsid:bd96c556-65a3-11d0-983a-00c04fc29e33" id=rds1 height=10 width = 10>   
+  <PARAM name="SQL" value="select * from direct_reports">
+  <PARAM name="SERVER" value="http://your_server">
+  <PARAM name="CONNECT" value="dsn=employees;UID=;PWD=;">
+</OBJECT>
+
+<H1 style="color:#0000CD">EMPLOYEE SALARIES</H1>
+
+<TABLE style="table-layout:fixed" border datasrc="#rds1">
+  <col width=150>
+  <col width=150>
+  <col width=100>
+
+  <THEAD>
+    <TH>First Name</TH>
+    <TH>Last Name</TH>
+    <TH>Salary</TH>
+  </THEAD>
+
+  <TR>
+    <TD>
+      <INPUT type=text datasrc=#rds1 datafld="First Name" size=15>
+    </TD>
+    <TD>
+      <INPUT type=text datasrc=#rds1 datafld="Last Name" size=15>
+    </TD>
+    <TD>
+      <INPUT type=text datasrc=#rds1 datafld="Salary" size=10>
+    </TD>
+  </TR>
+</TABLE>
+
+<BR><BR>
+<INPUT type=button id=updateDB name=updateDB value="Update">
+</BODY>
+
+<SCRIPT LANGUAGE="VBScript">
+
+    Sub updateDB_onclick()
+      On Error Resume Next
+
+      rds1.recordset.update
+      rds1.recordset.updateBatch
+
+      IF (Err.Number <> 0) Then
+        HandleError()
+      End IF
+
+    End Sub
+
+    Sub HandleError()
+      Msgbox "Conflict detected during update"
+      Set myRecordset = rds1.recordset 
+      myRecordset.Filter = 5  'adFilterConflictingRecords
+
+      MsgBox "Recordset could not be updated.  " & _
+             "Update conflicts occurred on " & _
+             CStr(myRecordset.RecordCount) & " records."
+  
+      myRecordset.Resync 4,1
+  
+      myRecordset.moveFirst()
+
+      While Not myRecordset.EOF
+        MsgBox "The original salary (" & _
+               myRecordset.fields("Salary").OriginalValue & _
+               ") has already been changed to " & _
+               myRecordset.fields("Salary").UnderlyingValue
+        myRecordset.moveNext()
+      Wend
+ 
+      rds1.sql = "select * from direct_reports"
+      rds1.refresh
+    End Sub
+</SCRIPT>
+
+</HTML>

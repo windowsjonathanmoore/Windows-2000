@@ -1,0 +1,11 @@
+LIBRARY       "GenSet"
+DESCRIPTION   'Generic Link Service Setup Custom Action DLL'
+
+HEAPSIZE      1024
+
+SEGMENTS
+	LIBMAIN_TEXT  PRELOAD NONDISCARDABLE
+
+EXPORTS
+	SetHISPath
+	GetHISData

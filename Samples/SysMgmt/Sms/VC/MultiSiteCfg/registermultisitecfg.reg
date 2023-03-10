@@ -1,0 +1,12 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\NodeTypes\{3AD39FC0-EFD6-11D0-BDCF-00A0C909FDD7}\SMS_Tools]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\NodeTypes\{3AD39FC0-EFD6-11D0-BDCF-00A0C909FDD7}\Extensions\SMS_Tools\CopySiteCfg]
+"Name"="Copy Site Settings..."
+"Description"="Copies site settings to multiple target sites"
+"CommandLine"="CopySiteCfg.exe /Server=##SUB:__Server##"
+"CriteriaQuery"=""
+"CriteriaMessage"=""
+
+

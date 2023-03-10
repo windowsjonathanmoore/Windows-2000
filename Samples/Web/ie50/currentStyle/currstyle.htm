@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>currentStyle Demo</TITLE>
+
+<STYLE>
+  div {border-style: solid; border-color:blue}
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+  CENTER { valign: middle }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>currentStyle Object</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<BR>
+
+<H3 style="font-family: verdana">Click anywhere to get a listing of style/currentStyle</H3>
+<BR>
+<DIV id=aDiv style="position: relative; left: 50px; font-family: arial,verdana,helvetica; font-weight: bold; background: yellow; width: 50%; height: 50px;"><CENTER>A Div</CENTER></DIV>
+<BR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<TABLE border=1 style="font-style: bold">
+  <TR style="background: green">
+    <TD style="background: blue; color: white;">Table Cell</TD>
+    <TD>Table Cell</TD>
+  </TR>
+  <TR style="background: yellow; font-family: verdana">
+    <TD>Table Cell</TD>
+    <TD style="cursor: hand">Table Cell</TD>
+  </TR>
+</TABLE>
+
+</FONT>
+
+<BR>
+<BR>
+
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+  function doIterate() {
+    var ts, anElement;
+    anElement = window.event.srcElement;
+    ts = "<table border=1 style='font-size: 10; font-family: verdana'>";
+    ts += "<tr style='font-style: bold; color: white; background-color: blue;'><td>"+anElement.tagName+" "+anElement.id+"</td></tr>";
+    ts += "<tr style='font-style: bold; color: white; background-color: blue;'><td>Variable</td><td>Style Value</td><td>Current Style Value</td></tr>";
+    for (varX in anElement.currentStyle) {
+       varCell = "<td>"+varX+"&nbsp</td>";
+       styleCell = "<td>"+anElement.style.getAttribute(varX)+"&nbsp</td>";
+       cstyleCell = "<td>"+eval("anElement.currentStyle."+varX)+"&nbsp</td>";
+       row = "<tr>"+varCell+styleCell+cstyleCell+"</tr>";
+       ts += row;
+    }
+
+    ts += "</table>";
+    targetArea.innerHTML = ts;
+  }
+  document.onclick = doIterate;
+</SCRIPT>
+
+<SPAN id=targetArea></SPAN>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

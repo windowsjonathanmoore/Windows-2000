@@ -1,0 +1,73 @@
+
+<HTML>
+<HEAD>
+<TITLE>Animated Buttons</TITLE>
+<META NAME="FILENAME" CONTENT="animated_JS.HTM">
+<STYLE>
+  .bigChange {color:blue; font-weight:bolder; font-size:175%; letter-spacing:4px;  text-transform: uppercase; background:yellow}
+  .start {color:yellow; background:navy}
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+  function highlightButton(s) {
+    if ("INPUT"==event.srcElement.tagName)
+      event.srcElement.className=s
+  }
+</SCRIPT>
+</HEAD>
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+  
+<H2>Animated Buttons</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<FORM NAME=highlight onmouseover="highlightButton('start')" onmouseout="highlightButton('')">
+    <input type="button" value="Button 1">
+    <input type="button" onmousedown="this.style.fontStyle='italic'" onmouseup="this.style.fontStyle=''" value="Click me" onclick="this.value='You clicked the button!'">
+    <input type="button" value="Button 3">
+</FORM>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  This page demonstrates how the style can be changed through interactions with the user. This technique makes the web-page more lively and interactive.
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  Dynamic HTML supports the CSS standard on the built in controls. When combined with the
+  object model, it allows the controls to change in appearance and size, as a result of interaction with
+  the user.
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  The &quot;Click me&quot; button demonstrates that even buttons can resize to accommodate changed button content, causing the document to automatically
+  reflow around them.
+</FONT>
+
+<P>
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+<P>
+</BODY>
+</HTML>
+

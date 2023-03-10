@@ -1,0 +1,88 @@
+PGM      /*  PARM(&QLIB)  */
+             DCLF       FILE(CHAT)
+
+             DCL        VAR(&ENTRY) TYPE(*CHAR) LEN(79)
+             DCL        VAR(&RQNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SQNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&QLIB)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ENTRYLEN) TYPE(*DEC) LEN(5)
+             DCL        VAR(&WAITTIME) TYPE(*DEC) LEN(5)
+             DCL        VAR(&CNT) TYPE(*DEC) LEN(5) VALUE(0)
+             DCL        VAR(&IN30) TYPE(*LGL)
+
+/* TEST PROGRAM */
+
+             CHGVAR     VAR(&RQNAME) VALUE('DQFIFORCV')
+             CHGVAR     VAR(&SQNAME) VALUE('DQFIFOSND')
+             CHGVAR     VAR(&QLIB) VALUE('QGPL')
+             CHGVAR     VAR(&ENTRYLEN) VALUE(79)
+
+             SNDF       DEV(*FILE)
+RCV:
+             CALL       PGM(QRCVDTAQ) PARM(&RQNAME &QLIB &ENTRYLEN +
+                          &ENTRY &WAITTIME)
+
+IF         COND(%SST(&ENTRY 1 10 ) *NE '          ') THEN(DO)
+             CHGVAR     VAR(&IN30) VALUE('0')
+ENDDO
+
+REFRESH:
+IF         COND(%SST(&ENTRY 1 10 ) *NE '          ') THEN(DO)
+             CHGVAR     VAR(&FLD001) VALUE(&FLD002)
+             CHGVAR     VAR(&FLD002) VALUE(&FLD003)
+             CHGVAR     VAR(&FLD003) VALUE(&FLD004)
+             CHGVAR     VAR(&FLD004) VALUE(&FLD005)
+             CHGVAR     VAR(&FLD005) VALUE(&FLD006)
+             CHGVAR     VAR(&FLD006) VALUE(&FLD007)
+             CHGVAR     VAR(&FLD007) VALUE(&FLD008)
+             CHGVAR     VAR(&FLD008) VALUE(&FLD009)
+             CHGVAR     VAR(&FLD009) VALUE(&FLD010)
+             CHGVAR     VAR(&FLD010) VALUE(&FLD011)
+             CHGVAR     VAR(&FLD011) VALUE(&FLD012)
+             CHGVAR     VAR(&FLD012) VALUE(&FLD013)
+             CHGVAR     VAR(&FLD013) VALUE(&FLD014)
+             CHGVAR     VAR(&FLD014) VALUE(&FLD015)
+             CHGVAR     VAR(&FLD015) VALUE(&FLD016)
+             CHGVAR     VAR(&FLD016) VALUE(&FLD017)
+             CHGVAR     VAR(&FLD017) VALUE(&FLD018)
+             CHGVAR     VAR(&FLD018) VALUE(&FLD019)
+             CHGVAR     VAR(&FLD019) VALUE(&ENTRY)
+             CHGVAR     VAR(&ENTRY) VALUE(' ')
+             CHGVAR     VAR(&IN11) VALUE(&IN12)
+             CHGVAR     VAR(&IN12) VALUE(&IN13)
+             CHGVAR     VAR(&IN13) VALUE(&IN14)
+             CHGVAR     VAR(&IN14) VALUE(&IN15)
+             CHGVAR     VAR(&IN15) VALUE(&IN16)
+             CHGVAR     VAR(&IN16) VALUE(&IN17)
+             CHGVAR     VAR(&IN17) VALUE(&IN18)
+             CHGVAR     VAR(&IN18) VALUE(&IN19)
+             CHGVAR     VAR(&IN19) VALUE(&IN20)
+             CHGVAR     VAR(&IN20) VALUE(&IN21)
+             CHGVAR     VAR(&IN21) VALUE(&IN22)
+             CHGVAR     VAR(&IN22) VALUE(&IN23)
+             CHGVAR     VAR(&IN23) VALUE(&IN24)
+             CHGVAR     VAR(&IN24) VALUE(&IN25)
+             CHGVAR     VAR(&IN25) VALUE(&IN26)
+             CHGVAR     VAR(&IN26) VALUE(&IN27)
+             CHGVAR     VAR(&IN27) VALUE(&IN28)
+             CHGVAR     VAR(&IN28) VALUE(&IN29)
+             CHGVAR     VAR(&IN29) VALUE(&IN30)
+
+
+             CHGVAR     VAR(&IN30) VALUE('1')
+             GOTO       CMDLBL(RCV)
+ENDDO
+             SNDF       DEV(*FILE)
+             RCVF       DEV(*FILE) WAIT(*NO)
+RCVF
+             IF         COND(&IN03) THEN(RETURN)
+
+             IF         (%SST(&FLD020 1 1) = ' ') GOTO RCV
+SEND:
+             CHGVAR     VAR(&ENTRY) VALUE(&FLD020)
+             CHGVAR     VAR(&IN30) VALUE('1')
+             CHGVAR     VAR(&ENTRYLEN) VALUE(79)
+
+             CALL PGM(QSNDDTAQ) PARM(&SQNAME &QLIB &ENTRYLEN &FLD020)
+GOTO      REFRESH
+ENDPGM

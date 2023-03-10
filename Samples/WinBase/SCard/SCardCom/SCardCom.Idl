@@ -1,0 +1,668 @@
+/*----------------------------------------------------------------------------
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) 1997-1999.  Microsoft Corporation.  All rights reserved.
+
+SCardCom.idl : IDL source for SCardCom.dll
+
+This file will be processed by the MIDL tool to
+produce the type library (SCardCom.tlb) and marshalling code.
+----------------------------------------------------------------------------*/
+
+
+#ifndef DO_NO_IMPORTS
+    import "SspsIdl.idl";
+    import "ocidl.idl";
+#endif
+
+interface ISCardAuth;
+interface ISCardFileAcess;
+interface ISCardManage;
+interface ISCardVerify;
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// Types and Constants")
+cpp_quote("//")
+
+cpp_quote("#ifndef _HSCARD_FILE")
+    cpp_quote("#define _HSCARD_FILE")
+    typedef ULONG_PTR HSCARD_FILE;
+cpp_quote("#endif // _HSCARD_FILE")
+
+cpp_quote("#ifndef _HSCARD_DEFINED")
+    cpp_quote("#define _HSCARD_DEFINED")
+    typedef ULONG_PTR HSCARD;
+cpp_quote("#endif")
+
+cpp_quote("#ifndef _NULL_DEFINED")
+    cpp_quote("#define _NULL_DEFINED")
+    #define NULL    0
+cpp_quote("#endif // !_NULL_DEFINED")
+
+cpp_quote("#ifndef _LPBYTE_DEFINED")
+    cpp_quote("#define _LPBYTE_DEFINED")
+    typedef [public] BYTE *LPBYTE;
+cpp_quote("#endif // !_LPBYTE_DEFINED")
+
+cpp_quote("#ifndef _LPCBYTE_DEFINED")
+    cpp_quote("#define _LPCBYTE_DEFINED")
+    typedef [public] const BYTE *LPCBYTE;
+cpp_quote("#endif // !_LPCBYTE_DEFINED")
+
+cpp_quote("#ifndef _ISO_ERROR_SUCCESS")
+    cpp_quote("#define _ISO_ERROR_SUCCESS")
+    #define ISO_SUCCESS 0x9000
+    cpp_quote("#define ISO_SUCCESS      (0x9000)")
+cpp_quote("#endif // !_ISO_ERROR_SUCCESS")
+
+cpp_quote("#ifndef _MAX_PATH_LEN_DEFINED")
+    cpp_quote("#define _MAX_PATH_LEN_DEFINED")
+    #define MAX_PATH_LEN    256
+    cpp_quote("#define MAX_PATH_LEN     (256)")
+cpp_quote("#endif // !_MAX_PATH_LEN_DEFINED")
+
+cpp_quote("#ifndef _MAX_NAME_LEN_DEFINED")
+    cpp_quote("#define _MAX_NAME_LEN_DEFINED")
+    #define MAX_NAME_LEN    16
+    cpp_quote("#define MAX_NAME_LEN     (16)")
+cpp_quote("#endif // !_MAX_NAME_LEN_DEFINED")
+
+cpp_quote("#ifndef _MAX_WRITE_LEN_DEFINED")
+    cpp_quote("#define _MAX_WRITE_LEN_DEFINED")
+    #define MAX_WRITE_LEN   255
+    cpp_quote("#define MAX_WRITE_LEN        (255)")
+cpp_quote("#endif // !_MAX_WRITE_LEN_DEFINED")
+
+cpp_quote("#ifndef _MAX_READ_LEN_DEFINED")
+    cpp_quote("#define _MAX_READ_LEN_DEFINED")
+    #define MAX_READ_LEN    250
+    cpp_quote("#define MAX_READ_LEN     (250)")
+cpp_quote("#endif // !_MAX_READ_LEN_DEFINED")
+
+cpp_quote("#ifndef _SC_TLV_VALID_DEFINED")
+    cpp_quote("#define _SC_TLV_VALID_DEFINED")
+    #define SC_TLV_VALID    1
+    cpp_quote("#define SC_TLV_VALID     (1)")
+cpp_quote("#endif // !_SC_TLV_VALID_DEFINED")
+
+cpp_quote("#ifndef _SC_TLV_NOT_VALID_DEFINED")
+    cpp_quote("#define _SC_TLV_NOT_VALID_DEFINED")
+    #define SC_TLV_NOT_VALID    0
+    cpp_quote("#define SC_TLV_NOT_VALID     (0)")
+cpp_quote("#endif // !_SC_TLV_NOT_VALID_DEFINED")
+
+cpp_quote("#ifndef _REFTYPE_DEFINED")
+    cpp_quote("#define _REFTYPE_DEFINED")
+    typedef [helpstring("Smart Card File Access Reference Types"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagREFTYPE {
+        SC_TYPE_BY_NAME,
+        SC_TYPE_BY_ID,
+        SC_TYPE_BY_SHORT_ID
+     } REFTYPE;
+cpp_quote("#endif // !_REFTYPE_DEFINED")
+
+cpp_quote("#ifndef _FILETYPE_DEFINED")
+    cpp_quote("#define _FILETYPE_DEFINED")
+    typedef [helpstring("Smart Card File Access File Types"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagFILETYPE {
+        SC_TYPE_DIRECTORIES,
+        SC_TYPE_FILES,
+        SC_TYPE_ALL_FILES,
+        SC_TYPE_DIRECTORY_FILE,
+        SC_TYPE_TRANSPARENT_EF,
+        SC_TYPE_FIXED_EF,
+        SC_TYPE_CYCLIC_EF,
+        SC_TYPE_VARIABLE_EF
+     } FILETYPE;
+cpp_quote("#endif // !_FILETYPE_DEFINED")
+
+cpp_quote("#ifndef _SEEKTYPE_DEFINED")
+    cpp_quote("#define _SEEKTYPE_DEFINED")
+    typedef [helpstring("Smart Card File Access Seek Types"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSEEKTYPE {
+        SC_SEEK_FROM_BEGINNING,
+        SC_SEEK_FROM_END,
+        SC_SEEK_RELATIVE
+     } SEEKTYPE;
+cpp_quote("#endif // !_SEEKTYPE_DEFINED")
+
+cpp_quote("#ifndef _SCARD_FLAGS_DEFINED")
+    cpp_quote("#define _SCARD_FLAGS_DEFINED")
+    typedef [helpstring("Smart Card File/Verification Flags"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSCARD_FLAGS {
+        SC_FL_NO_FLAGS = 0x00,
+        SC_FL_SECURE_MESSAGING = 0x01,
+        SC_FL_REPLACE = 0x02,
+        SC_FL_ERASE = 0x04,
+        SC_FL_OR = 0x08,
+        SC_FL_AND = 0x10,
+        SC_FL_RECURSIVE = 0x20,
+        SC_FL_NON_RECURSIVE = 0x40,
+        SC_FL_IHV_GLOBAL = 0x80,
+        SC_FL_IHV_LOCAL = 0x100,
+        SC_FL_IHV_ENABLE = 0x200,
+        SC_FL_IHV_DISABLE = 0x400,
+        SC_FL_IHV_CHANGE = 0x800,
+        SC_FL_PREALLOCATE = 0x1000,
+        SC_FL_GET_ALL_PROPERTIES = 0x2000,
+        SC_FL_STAT_DEFAULT = 0x4000,
+        SC_FL_IHV_CHECKONLY = 0x8000
+     } SCARD_FLAGS;
+cpp_quote("#endif // !_SCARD_FLAGS_DEFINED")
+
+cpp_quote("#ifndef _SCARD_SHARE_MODES_DEFINED")
+    cpp_quote("#define _SCARD_SHARE_MODES_DEFINED")
+    typedef [helpstring("SCard Share Modes"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSCARD_SHARE_MODES {
+        EXCLUSIVE = 1,
+        SHARED = 2
+     } SCARD_SHARE_MODES;
+cpp_quote("#endif // !_SCARD_SHARE_MODES_DEFINED")
+
+cpp_quote("#ifndef _SCARD_DISPOSITIONS_DEFINED")
+    cpp_quote("#define _SCARD_DISPOSITIONS_DEFINED")
+    typedef [helpstring("SCard Dispositions"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSCARD_DISPOSITIONS {
+        LEAVE = 0,
+        RESET = 1,
+        UNPOWER = 2,
+        EJECT = 3
+     } SCARD_DISPOSITIONS;
+cpp_quote("#endif // !_SCARD_DISPOSITIONS_DEFINED")
+
+cpp_quote("#ifndef _TLV_TABLE_DEFINED")
+    cpp_quote("#define _TLV_TABLE_DEFINED")
+    typedef [helpstring("TLV Structures"),
+             //uuid(),
+             //helpcontext(),
+             version(1.0)]
+    struct tagTLV_TABLE {
+        LONG cbSize;
+        [size_is(cbSize)] BYTE byData[];
+     } TLV_TABLE;
+
+    cpp_quote("#define _CB_TLV_TABLE_DEFINED")
+    cpp_quote("#define CB_TLV_TABLE     (sizeof(TLV_TABLE))")
+
+    cpp_quote("#define _PTLV_TABLE_DEFINED")
+    typedef [unique] TLV_TABLE *PTLV_TABLE;
+
+    cpp_quote("#define _PCTLV_TABLE_DEFINED")
+    typedef [unique] const TLV_TABLE *PCTLV_TABLE;
+
+    cpp_quote("#define _LPTLV_TABLE_DEFINED")
+    typedef [unique] TLV_TABLE *LPTLV_TABLE;
+
+    cpp_quote("#define _LPCTLV_TABLE_DEFINED")
+    typedef [unique] const TLV_TABLE *LPCTLV_TABLE;
+cpp_quote("#endif // !_TLV_TABLE_DEFINED")
+
+cpp_quote("#ifndef _SCARD_STATES_DEFINED")
+    cpp_quote("#define _SCARD_STATES_DEFINED")
+    typedef [helpstring("SCard States"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSCARD_STATES {
+        ABSENT = 1,
+        PRESENT = 2,
+        SWALLOWED = 3,
+        POWERED = 4,
+        NEGOTIABLEMODE = 5,
+        SPECIFICMODE = 6
+     } SCARD_STATES;
+cpp_quote("#endif // !_SCARD_STATES_DEFINED")
+
+cpp_quote("#ifndef _SCARD_PROTOCOLS_DEFINED")
+    cpp_quote("#define _SCARD_PROTOCOLS_DEFINED")
+    typedef [helpstring("SCard Protocols"),
+             //uuid(),
+             //helpcontext(),
+             v1_enum,   // force 32-bit transmission over RPC, if in use...
+             version(1.0)]
+    enum tagSCARD_PROTOCOLS {
+        T0 = 0x01,  // T=0 is the active protocol.
+        T1 = 0x02,  // T=1 is the active protocol.
+        RAW = 0xff  // Raw is the active protocol.
+     } SCARD_PROTOCOLS;
+cpp_quote("#endif // !_SCARD_PROTOCOLS_DEFINED")
+
+cpp_quote("#ifndef _FILESPEC_DEFINED")
+    cpp_quote("#define _FILESPEC_DEFINED")
+    typedef [helpstring("File specification structure."),
+             //uuid(),
+             //helpcontext(),
+             version(1.0)]
+    struct tagFILESPEC {
+        WORD wFileID;
+        BYTE byFilename[MAX_NAME_LEN];
+        BYTE byShortID;
+     } FILESPEC;
+
+    cpp_quote("#define _CB_FILESPEC_DEFINED")
+    cpp_quote("#define CB_FILESPEC  (sizeof(FILESPEC))")
+
+    cpp_quote("#define _PFILESPEC_DEFINED")
+    typedef [public] FILESPEC *PFILESPEC;
+
+    cpp_quote("#define _PCFILESPEC_DEFINED")
+    typedef [public] const FILESPEC *PCFILESPEC;
+
+    cpp_quote("#define _LPFILESPEC_DEFINED")
+    typedef [public] FILESPEC *LPFILESPEC;
+
+    cpp_quote("#define _LPCFILESPEC_DEFINED")
+    typedef [public] const FILESPEC *LPCFILESPEC;
+cpp_quote("#endif // _FILESPEC_DEFINED")
+
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// ISCardAuth Interface")
+cpp_quote("//")
+
+cpp_quote("#ifndef _LPSCARDAUTH_DEFINED")
+cpp_quote("#define _LPSCARDAUTH_DEFINED")
+    [
+        object,
+        uuid(7B063D61-6E40-11d0-B858-00C04FD424B9),
+        helpstring("ISCardAuth Interface"),
+        pointer_default(unique)
+    ]
+    interface ISCardAuth : IDispatch
+    {
+        // Includes -
+
+        import "oaidl.idl";
+
+        // Pointer(s) -
+
+        typedef [unique] ISCardAuth* LPSCARDATH;
+        typedef [unique] LPSCARDATH LPSCARDAUTH;
+
+        // Properties -
+
+        // Methods -
+        [id(0),
+         helpstring("Allows application to authenticate itself to the ICC")]
+        HRESULT APP_Auth(   [in]    LONG lAlgoID,
+                            [in]    LPBYTEBUFFER pParam,
+                            [in]    LPBYTEBUFFER pBuffer);
+
+        [id(1),
+         helpstring("Returns a challenge from ICC ")]
+        HRESULT GetChallenge(   [in]	LONG lAlgoID,
+                                [in]    LPBYTEBUFFER pParam,
+                                [in,out]    LONG* lpLengthOfChallenge,
+                                [in,out]    LPBYTEBUFFER* ppBuffer);
+
+        [id(2),
+         helpstring("Allows application to authenticate the ICC")]
+        HRESULT ICC_Auth(   [in]    LONG lAlgoID,
+                            [in]    LPBYTEBUFFER pParam,
+                            [in,out] LONG* lpLength,
+                            [in,out] LPBYTEBUFFER* ppBuffer);
+
+        [id(3),
+         helpstring("Called to initialize the object. This is an internal ONLY use function."),
+         hidden]
+        HRESULT Initialize( LONG* lp );
+
+        [id(4),
+         helpstring("Allows a remote app to authenticate the Client")]
+        HRESULT User_Auth(  [in]    LONG lAlgoID,
+                            [in]    LPBYTEBUFFER pParam,
+                            [in,out]    LONG* lpLength,
+                            [in,out]    LPBYTEBUFFER* ppBuffer);
+
+    };
+cpp_quote("#endif // !_LPSCARDAUTH_DEFINED")
+
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// ISCardFileAccess Interface Definition")
+cpp_quote("//")
+
+cpp_quote("#ifndef _LPSCARDFILEACCESS_DEFINED")
+cpp_quote("#define _LPSCARDFILEACCESS_DEFINED")
+    [
+        object,
+        uuid(4029DD8A-5902-11D0-B84C-00C04FD424B9),
+        helpstring("ISCardFileAccess Interface"),
+        pointer_default(unique)
+    ]
+    interface ISCardFileAccess : IDispatch
+    {
+        // Include(s) -
+
+        import "oaidl.idl";
+
+        // Pointer(s) -
+        typedef [unique] ISCardFileAccess* LPSCARDFILE;
+        typedef [unique] LPSCARDFILE LPSCARDFILEACCESS;
+
+        // Method(s) -
+
+        [id(0),
+         helpstring("Change the currently selected directory to the specified directory")]
+        HRESULT ChangeDir([in] REFTYPE refType,
+                          [in] BSTR bstrNewDir);
+
+        [id(1),
+         helpstring("Closes the specified file")]
+        HRESULT Close([in] HSCARD_FILE hFile);
+
+        [id(2),
+         helpstring("Create a file of the specified type at a specified location")]
+        HRESULT Create([in] REFTYPE refType,
+                       [in] BSTR bstrPathSpec,
+                       [in,out] LPTLV_TABLE* ppTLVs,
+                       [in,out] LONG* lpcTLVs,
+                       [in] SCARD_FLAGS flags,
+                       [in,defaultvalue(NULL)] LPBYTEBUFFER pDataBuffer);
+
+        [id(3),
+         helpstring("Deletes the specified file")]
+        HRESULT Delete([in] REFTYPE refType,
+                       [in] BSTR bstrPathSpec,
+                       [in] SCARD_FLAGS flags);
+
+        [id(4),
+         helpstring("Retrieve a list of the FileSpecs of the specified type")]
+        HRESULT Directory([in] FILETYPE fileType,
+                          [out, retval] LPSAFEARRAY *ppFileList);   // SAFEARRAY of BSTRs..
+
+        [id(5),
+         helpstring("Retrieve the absolute path to the currently selected directory")]
+        HRESULT GetCurrentDir([out, retval] BSTR* pbstrPathSpec);
+
+        [id(6),
+         helpstring("Retrieve list of file capabilites.")]
+        HRESULT GetFileCapabilities([in,out] LPTLV_TABLE* ppProperties,
+                                    [in,out] LONG* plProperties,
+                                    [in] SCARD_FLAGS Flags);
+
+        [id(7),
+         helpstring("Retrieve the primitive data referred by tags (TLV) for the specified object")]
+        HRESULT GetProperties([in] REFTYPE refType,
+                              [in] BSTR bstrPathSpec,
+                              [in,out] LPTLV_TABLE* ppTLV,
+                              [in,out] LONG* plcTLV,
+                              [in] SCARD_FLAGS flags);
+
+        [id(8),
+         helpstring("Called to initialize the object. This is an internal ONLY use function."),
+         hidden]
+        HRESULT Initialize( LONG* lp );
+
+        [id(9),
+         helpstring("Invalidate the specified file (EF or DF)")]
+        HRESULT Invalidate([in] BSTR bstrPathSpec,
+                           [in] SCARD_FLAGS flags);
+
+        [id(10),
+         helpstring("Opens the specified file for further use")]
+        HRESULT Open([in] REFTYPE refType,
+                     [in] BSTR bstrPathSpec,
+                     [out, retval] HSCARD_FILE* phFile);
+
+        [id(11),
+         helpstring("Read data from the specified file")]
+        HRESULT Read([in] HSCARD_FILE hFile,
+                     [in,out] LONG *lBytesToRead,
+                     [out] LPBYTEBUFFER* ppBuffer,
+                     [in] SCARD_FLAGS flags);
+
+        [id(12),
+         helpstring("Rehabilitate the specified file (EF or DF)")]
+        HRESULT Rehabilitate([in] BSTR bstrPathSpec,
+                             [in] SCARD_FLAGS flags);
+
+        [id(13),
+         helpstring("Selects the object from which access (read or write) will be done")]
+        HRESULT Seek([in] HSCARD_FILE hFile,
+                     [in] LONG lOffset,
+                     [in] SEEKTYPE seek);
+
+        [id(14),
+         helpstring("Set the primitive data referred by tags (TLV) for the specified object (file or directory)")]
+        HRESULT SetProperties([in] REFTYPE refType,
+                              [in] BSTR bstrPathSpec,
+                              [in] LPTLV_TABLE pTLV,
+                              [in] LONG lcTLV,
+                              [in] SCARD_FLAGS flags);
+
+        [id(15),
+         helpstring("Write data to the specified file")]
+        HRESULT Write(  [in] HSCARD_FILE hFile,
+                        [in] LONG lLength,
+                        [in] LPBYTEBUFFER pData,
+                        [in] SCARD_FLAGS flags);
+
+    };
+cpp_quote("#endif // !_LPSCARDFILEACCESS_DEFINED")
+
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// ISCardMange Interface")
+cpp_quote("//")
+
+cpp_quote("#ifndef _LPSCARDMANAGE_DEFINED")
+cpp_quote("#define _LPSCARDMANAGE_DEFINED")
+    [
+        object,
+        uuid(5E586211-5A09-11d0-B84C-00C04FD424B9),
+        helpstring("ISCardManage Interface"),
+        pointer_default(unique)
+    ]
+    interface ISCardManage : IDispatch
+    {
+        // Includes -
+
+        import "oaidl.idl";
+
+        // Pointer(s) -
+
+        typedef [unique] ISCardManage* LPSCARDMAN;
+        typedef [unique] LPSCARDMAN LPSCARDMANAGE;
+
+        // Properties -
+
+        // Methods -
+        [id(0),
+         helpstring("Allows application to start communication with an ICC")]
+        HRESULT AttachByHandle( [in] HSCARD hICC);
+
+        [id(1),
+         helpstring("Allows application request establishment of a context for a specific IFD.")]
+        HRESULT AttachByIFD(    [in] BSTR bstrIFDName,
+                                [in] SCARD_SHARE_MODES Flags );
+
+        [id(2),
+         helpstring("Creates instance of ISCardFileAccess interface.")]
+         HRESULT CreateFileAccess( ISCardFileAccess** ppISCardFileAccess );
+
+        [id(3),
+         helpstring("Creates instance of ISCardAuth interface.")]
+         HRESULT CreateCardAuth( ISCardAuth** ppISCardAuth );
+
+        [id(4),
+         helpstring("Creates instance of ISCardVerify interface.")]
+         HRESULT CreateCHVerification( ISCardVerify** ppISCardVerify );
+
+        [id(5),
+         helpstring("Release the attachment to a particular ICC or IFD.")]
+        HRESULT Detach();
+
+        [id(6),
+         helpstring("Lock for exclusive use the connected IFD/ICC.")]
+        HRESULT SCardLock();
+
+        [id(7),
+         helpstring("Allows application to reconnect to an ICC or IFD.")]
+        HRESULT Reconnect();
+
+        [id(8),
+         helpstring("Get status of ICC/IFD.")]
+        HRESULT Status( [out]   SCARD_STATES *pStatus,
+                        [out]   SCARD_PROTOCOLS *pProtocol);
+
+        [id(9),
+         helpstring("Unlock/release exclusive use of the connected IFD/ICC.")]
+        HRESULT SCardUnlock( [in, defaultvalue(LEAVE)]
+                             SCARD_DISPOSITIONS Disposition);
+
+        // New interfaces
+        [id(10),
+         helpstring("Creates an instance of an interface by GUID value of name.")]
+        HRESULT CreateInterface(    [in] LPGUID pguidInterface,
+                                    [in] BSTR bstrName,
+                                    [in] LONG *pUserData,
+                                    [out] LPUNKNOWN *ppInterface);
+    };
+cpp_quote("#endif // !_LPSCARDMANGEMENT_DEFINED")
+
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// ISCardVerify Interface")
+cpp_quote("//")
+
+cpp_quote("#ifndef _LPSCARDVERIFY_DEFINED")
+cpp_quote("#define _LPSCARDVERIFY_DEFINED")
+    [
+        object,
+        uuid(4029DD85-5902-11D0-B84C-00C04FD424B9),
+        helpstring("ISCardVerify Interface"),
+        pointer_default(unique)
+    ]
+    interface ISCardVerify : IDispatch
+    {
+        // Includes -
+
+        import "oaidl.idl";
+
+        // Pointer(s) -
+
+        typedef [unique] ISCardVerify* LPSCARDVER;
+        typedef [unique] LPSCARDVER LPSCARDVERIFY;
+
+        // Properties -
+
+        // Methods -
+        [id(0),
+         helpstring("Change the current user code")]
+        HRESULT ChangeCode( [in]    LPBYTEBUFFER pOldCode,
+                            [in]    LPBYTEBUFFER pNewCode,
+                            [in]    SCARD_FLAGS Flags,
+                            [in]    LONG lRef);
+
+        [id(1),
+         helpstring("Called to initialize the object. This is an internal ONLY use function."),
+         hidden]
+        HRESULT Initialize( LONG* lp );
+
+        [id(2),
+         helpstring("Unblock a blocked IHV")]
+        HRESULT Unblock(    [in]    LONG lData,
+                            [in]    SCARD_FLAGS Flags,
+                            [in]    LONG lRef);
+
+        [id(3),
+         helpstring("Resets the security context.")]
+        HRESULT ResetSecurityState( [in]    SCARD_FLAGS Flags);
+
+        [id(4),
+         helpstring("Authenticate the user.")]
+        HRESULT Verify( [in]    LPBYTEBUFFER pCode,
+                        [in]    SCARD_FLAGS Flags,
+                        [in,out]    LONG* lpRef);
+    };
+cpp_quote("#endif // !_LPSCARDVERIFICATION_DEFINED")
+
+cpp_quote("")
+cpp_quote("//////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("// SCardCom Type Library")
+cpp_quote("//")
+
+[
+    uuid(4029DD83-5902-11D0-B84C-00C04FD424B9),
+    version(1.0),
+    helpstring("SCardCom 1.0 Type Library")
+]
+library SCARDCOMLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(B0598981-6E6F-11d0-B859-00C04FD424B9),
+        helpstring("SCardAuth Class")
+    ]
+    coclass SCardAuth
+    {
+        [default] interface ISCardAuth;
+    };
+    [
+        uuid(4029DD8E-5902-11D0-B84C-00C04FD424B9),
+        helpstring("SCardFileAccess Class")
+    ]
+    coclass SCardFileAccess
+    {
+        [default] interface ISCardFileAccess;
+    };
+    [
+        uuid(5E586218-5A09-11d0-B84C-00C04FD424B9),
+        helpstring("SCardManage Class")
+    ]
+    coclass SCardManage
+    {
+        [default] interface ISCardManage;
+    };
+    [
+        uuid(4029DD89-5902-11D0-B84C-00C04FD424B9),
+        helpstring("SCardVerify Class")
+    ]
+    coclass SCardVerify
+    {
+        [default] interface ISCardVerify;
+    };
+};
+

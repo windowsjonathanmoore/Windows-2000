@@ -1,0 +1,267 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\TestAppC.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\TestAppC.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About TestAppC"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "TestAppC Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 1999 - 2001",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_TESTAPPC_DIALOG DIALOGEX 0, 0, 308, 284
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DDMIO File Transfer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "APPC",IDC_APPC,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    26,19,35,10
+    CONTROL         "TCP/IP",IDC_TCPIP,"Button",BS_AUTORADIOBUTTON,77,19,40,
+                    10
+    EDITTEXT        IDC_RDBNAME,82,44,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOCALLU,82,63,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REMOTELU,82,82,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MODE,82,101,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_USERID,82,120,73,14,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,82,139,73,14,ES_UPPERCASE | ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_HCCSID,82,158,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LCPAGE,82,177,73,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOCALFILENAME,200,147,73,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE,278,147,18,14
+    EDITTEXT        IDC_HOSTFILENAME,200,177,73,14,ES_AUTOHSCROLL
+    CONTROL         "OverWrite Host File",IDC_OVERWRITE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,26,227,77,10
+    CONTROL         "Append to End",IDC_APPEND,"Button",BS_AUTORADIOBUTTON,
+                    26,241,63,10
+    GROUPBOX        "Connection Type",IDC_STATIC,19,7,100,27
+    LTEXT           "RDB Name",IDC_RDB,19,50,37,8
+    LTEXT           "Local LU",IDC_SLOCALLU,19,69,30,8
+    LTEXT           "Remote LU",IDC_SREMOTELU,19,88,37,8
+    LTEXT           "Mode",IDC_SMODE,19,107,19,8
+    LTEXT           "User ID",IDC_STATIC,19,126,25,8
+    LTEXT           "Password",IDC_STATIC,19,145,32,8
+    LTEXT           "Host CCSID",IDC_STATIC,19,164,39,8
+    LTEXT           "Local Code Page",IDC_STATIC,19,183,56,8
+    LTEXT           "Local &File Name",IDC_STATIC,199,136,52,8
+    LTEXT           "Ho&st File Name",IDC_STATIC,199,165,49,8
+    GROUPBOX        "Upl&oad Options",IDC_STATIC,19,217,157,43
+    PUSHBUTTON      "Connect",IDC_CONNECT,246,20,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Download",IDC_DOWNLOAD,246,197,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Upload",IDC_UPLOAD,246,215,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Close",IDOK,246,263,50,14,NOT WS_TABSTOP
+    CONTROL         "",IDC_EIGFILETRANSFERCTL1,
+                    "{35C0E97E-CA78-11D2-8114-0080C71B8071}",WS_TABSTOP,262,
+                    64,19,17
+    LTEXT           "",IDC_STATUS,20,269,163,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 5,0,0,798
+ PRODUCTVERSION 5,0,0,798
+ FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+ FILEFLAGS VS_FF_PRERELEASE
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Host Integration Server SDK Filetransfer Sample\0"
+            VALUE "FileVersion", "Version 5.0\0"
+            VALUE "InternalName", "TestAppC\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corporation. All rights reserved.\0"
+            VALUE "LegalTrademarks", "Copyright (C) Microsoft Corporation. All rights reserved.\0"
+            VALUE "OriginalFilename", "TestAppC.EXE\0"
+            VALUE "ProductName", "Microsoft(R) Host Integration Server 2000\0"
+            VALUE "ProductVersion", "Version 5.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TESTAPPC_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 301
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 277
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_TESTAPPC_DIALOG DLGINIT
+BEGIN
+    IDC_EIGFILETRANSFERCTL1, 0x376, 134, 0
+0x0000, 0x0000, 0x0300, 0x0000, 0x0003, 0x0001, 0x0000, 0x0003, 0x0001, 
+0x0000, 0x0003, 0x0000, 0x0000, 0x0003, 0x0001, 0x0000, 0x0008, 0x0002, 
+0x0000, 0x0000, 0x0008, 0x0002, 0x0000, 0x0000, 0x0008, 0x0002, 0x0000, 
+0x0000, 0x0002, 0x04e4, 0x0002, 0x0025, 0x0008, 0x000c, 0x0000, 0x004c, 
+0x004f, 0x0043, 0x0041, 0x004c, 0x0000, 0x0008, 0x0002, 0x0000, 0x0000, 
+0x0008, 0x0010, 0x0000, 0x0051, 0x0050, 0x0043, 0x0053, 0x0055, 0x0050, 
+0x0050, 0x0000, 0x0008, 0x0002, 0x0000, 0x0000, 0x0008, 0x0008, 0x0000, 
+0x0034, 0x0034, 0x0036, 0x0000, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About TestAppC..."
+    IDS_WAIT                "Wait a Sec"
+    IDS_CONNECT             "Connect"
+    IDS_DISCONNECT          "Disconnect"
+    IDS_NETWORK             "Network"
+    IDS_PORT                "Port"
+    IDS_LOCALLU             "LocalLU"
+    IDS_REMOTELU            "RemoteLU"
+    IDS_MODE                "Mode"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\TestAppC.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

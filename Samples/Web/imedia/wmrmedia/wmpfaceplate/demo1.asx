@@ -1,0 +1,27 @@
+<ASX VERSION="3">
+
+<AUTHOR>Microsoft</AUTHOR>
+<TITLE>Media Player Demos</TITLE>
+
+	<ENTRY>
+		<REF HREF="studiodemo.mpg" />
+		<TITLE>Know the Past</TITLE>
+		<COPYRIGHT>1997, Microsoft, Inc.</COPYRIGHT>
+		<AUTHOR>Microsoft Studios</AUTHOR>
+	</ENTRY>
+
+	<ENTRY>
+		<REF HREF="SoftOpen300.asf" />
+		<TITLE>Games</TITLE>
+		<COPYRIGHT>1998, SoftImage, Inc.</COPYRIGHT>
+		<AUTHOR>SoftImage, Inc.</AUTHOR>
+	</ENTRY>
+
+	<ENTRY>
+		<REF HREF="CocktailTwist300.asf" />
+		<TITLE>Cocktail Twist</TITLE>
+		<COPYRIGHT>1998, SoftImage, Inc.</COPYRIGHT>
+		<AUTHOR>SoftImage, Inc.</AUTHOR>
+	</ENTRY>
+
+</ASX>

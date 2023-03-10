@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<HTML DIR="LTR">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Installing MSMQ Triggers</TITLE>
+
+</HEAD>
+
+<BODY>
+
+<P><A HREF="msmqtrig.htm" TITLE="MSMQ Triggers">MSMQ Triggers Topics</A> | <A HREF="msmqtrig_using.htm" TITLE="Using MSMQ Triggers">Next</A></P>
+<H2>Installing MSMQ Triggers</H2>
+
+<HR>
+
+<P>MSMQ Triggers runs on Windows&nbsp;2000 with Message Queuing installed and Windows&nbsp;NT&nbsp;4.0 with Service Pack 4 and on MSMQ 1.0 installed (Intel-based processors only).</P>
+
+<P>MSMQ Triggers cannot be installed on Windows&nbsp;95, on Windows&nbsp;98, on dependent client computers, or on server cluster nodes.</p>
+
+<P>MSMQ Triggers is not installed by <I>Windows&nbsp;2000 Resource Kit</I> Setup. To install it, use the following procedure:</P>
+
+<H3>To install <I>MSMQ Triggers</I></H3>
+
+<OL>
+<LI>On the <I>Resource Kit</I> CD, open the x86\Apps\Msmqtriggers folder, and then double-click MSMQTriggers.exe to start the setup program. Follow the instructions that appear on the screen.</LI>
+<LI>If needed, configure the MSMQ Triggers Service to run under a domain administrative account for the local computer. The default LocalSystem account can also be used to run this service.</LI>
+<LI>Grant the service account the Peek Message permission for all queues that will be associated with triggers for the local computer.</LI>
+<LI>Verify the computer has network connectivity.</LI>
+</OL>
+
+<P>The self-extracting setup program will install all DLL files into the \Winnt\System32 folder and all other files into the \Program Files\Microsoft\MSMQ Triggers folder of the local computer.</P>
+
+<P>The MSMQ Triggers service can run under the LocalSystem account or under a domain administrative account. By default, this service runs under the LocalSystem account. The account used must be able to access queues to which triggers are associated with; specifically, the account must be granted the Log On As A Service right, and you must be granted the Peek Message permission for all applicable queues. For more information, see the Windows&nbsp;2000 online documentation for Message Queuing.</P>
+
+<P>MSMQ Triggers installs with a set of default configuration values that are stored in the registry. These values can be changed later using the MMC snap-in. For more information, see <A HREF="msmqtrig_using.htm#changedefaultconfigvalues">Changing Default Configuration Values</a>.</P> 
+
+
+</BODY>
+</HTML>

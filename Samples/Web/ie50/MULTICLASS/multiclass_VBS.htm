@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Multi-CSS Classes Demo</TITLE>
+
+<STYLE>
+  span { font-size: 40; width: 150px; height: 50px; cursor: hand; text-align: top; }
+  .normal1 { font-family: verdana; color: red; }
+  .normal2 { font-family: arial; color: blue }
+  .over { font-weight: bold; filter: DropShadow(Color=#FF00FF, OffX=3, OffY=3); }
+  A:link { color: #003399; text-decoration: none; }
+  A:visited {color: #6699cc; text-decoration: none; }
+  A:hover {text-decoration: underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR=#ffffff TEXT=#000000 LINK=#000066 VLINK=#666666>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2 style="font-family: verdana">Multi-CSS Classes</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<BR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  As you mouse over each item, the <b>over</b> class is added, then removed, without disrupting the existing styles of the elements
+</FONT>
+
+<BR><BR>
+
+<SPAN class="normal1" oldClass="" over="true">Eggs</SPAN>
+<SPAN class="normal1" oldClass="" over="true">Pasta</SPAN>
+<SPAN oldClass="" over="true">Ham</SPAN>
+<SPAN oldClass="" over="true">Ribs</SPAN>
+<SPAN class="normal2" oldClass="" over="true">Eggs</SPAN>
+<SPAN class="normal2" oldClass="" over="true">Chicken</SPAN>
+
+<SCRIPT language="VBScript">
+
+  sub document_onmouseover () 
+    set e = window.event.srcElement
+    dim test
+    on error resume next
+    err.clear
+    test = e.over
+    if err.number <> 0 then
+      on error goto 0 
+	  exit sub
+    end if
+    on error goto 0 
+  
+    if (test = "true") then
+      e.oldClass = e.className
+      e.className = e.className & " over"
+    end if
+  end sub
+
+  sub document_onmouseout() 
+    set e = window.event.srcElement
+    dim test
+    on error resume next
+    err.clear
+    test = e.over
+    if err.number <> 0 then
+	on error goto 0 
+	exit sub
+    end if
+    on error goto 0 
+    if (test = "true") then
+      e.className = e.oldClass
+    end if
+  end sub
+
+</SCRIPT>
+
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------
+//
+// File:        msdfmap.idl
+//
+// Copyright:   Copyright (c) 1991-1999 Microsoft Corporation
+//
+// Contents:    IDL source for msdfmap.dll
+//
+// Comments:    This file will be processed by the MIDL tool to
+//              produce the type library (msdfmap.tlb) and marshalling code.
+//
+//-----------------------------------------------------------------------------
+
+import "oaidl.idl";
+import "ocidl.idl";
+	
+
+[
+	// MSDFMAP_VC type library
+	uuid(9D3B7E04-5BAF-11d1-922A-00C04FBBBFB3),
+	version(1.0),
+	helpstring("msdfmap 1.0 Type Library")
+]
+library MSDFMAPLib
+{
+	importlib("stdole32.tlb");
+#ifdef WIN32
+	importlib("stdole2.tlb");
+#else
+	importlib("stdole.tlb");
+#endif
+	importlib("msdfhdl.tlb");
+	
+
+	[
+		// MSDFMAP_VC.Handler
+		uuid(9D3B7E05-5BAF-11d1-922A-00C04FBBBFB3),
+		helpstring("Handler Class")
+	]
+	coclass Handler
+	{
+		[default] interface IDataFactoryHandler;
+	};
+};

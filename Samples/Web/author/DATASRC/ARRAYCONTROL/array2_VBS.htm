@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Array Data Source Control, Demo 2</TITLE>
+<META NAME="FILENAME" CONTENT="array2_VBS.HTM">
+
+<SCRIPT TYPE="text/vbscript" LANGUAGE="VBScript">
+  
+  dim quot
+  quot = """"
+  
+    sub transform()
+		document.all("DSC1").transform()
+    end sub
+
+    sub grow()
+      table1.dataSrc=""                ' remove binding
+      document.all("DSC1").moredata()
+    end sub
+
+    sub buildtable()
+      table1.dataSrc=""                ' remove binding
+      dim newtable, i
+      
+      newtable ="<table id=table1 border=1 datasrc=#DSC1><tbody><tr>"
+
+      for i = 0 to (DSC1.recordset.Fields.count - 1)
+		newtable = newtable + "<td width=50><SPAN DATAFLD=" & quot & "col" & (i + 1) & quot & "></SPAN></td>"
+      next
+
+      newtable = newtable + "</tr></tbody></table>"
+
+      table1.outerHTML = newtable
+    end sub
+</SCRIPT>
+
+<STYLE>
+  TD { font-size: 24; font-weight: bold }
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+  
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2> Array Data Source Control </H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<!--    <h2> Array Data Source Control</h2> -->
+<FONT FACE="verdana,arial,helvetica" SIZE=2>This example shows how a user can modify the data exposed by the sample array Data Source Control.</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on any of the fields and type a new value. The new value will be
+stored in the data source control. Then click the Transform button. The
+value is maintained within the array and is consistently displayed within
+the table in the HTML page.
+</FONT>
+
+<HR>
+
+<OBJECT id="DSC1" classid="clsid:7473DD44-3A50-11D1-9C26-0080C74E5396" align="baseline" border="0" width="0" height="0" codebase="ArrayControl.cab#version1,0,0,0"></object>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<BUTTON onclick='transform()'>Transform</BUTTON>
+</FONT>
+<HR>
+<P>
+  
+<TABLE border="1" datasrc="#DSC1">
+  <TBODY> 
+    <TR>
+      <TD width=50><INPUT TYPE=text DATAFLD="col1" SIZE=4></TD>
+      <TD width=50><INPUT TYPE=text DATAFLD="col2" SIZE=4></TD>
+      <TD width=50><INPUT TYPE=text DATAFLD="col3" SIZE=4></TD>
+      <TD width=50><INPUT TYPE=text DATAFLD="col4" SIZE=4></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+<HR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=7>First Row Elements: 
+  <SPAN DATASRC=#DSC1 DATAFLD="col1"></SPAN>,
+  <SPAN DATASRC=#DSC1 DATAFLD="col2"></SPAN>,
+  <SPAN DATASRC=#DSC1 DATAFLD="col3"></SPAN>,
+  <SPAN DATASRC=#DSC1 DATAFLD="col4"></SPAN>
+</FONT>
+
+<BR>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+ </FONT>
+
+</BODY>
+</HTML>

@@ -1,0 +1,117 @@
+<HTML>
+
+<HEAD>
+<TITLE>MSDN Online Samples: Using the Windows Media Logo and the Windows Media Player on a Web Page</TITLE>
+
+<SCRIPT language="JavaScript">
+  function setBandwidth (connectionSpeed) { 
+	if ((navigator.userAgent.indexOf("IE") > -1) && (navigator.platform == "Win32")) {
+		MediaPlayer.autoStart = true; 
+		MediaPlayer.Filename = connectionSpeed + '.asx'; 
+	} else {
+		document.MediaPlayer.SetAutoStart(true);
+                document.MediaPlayer.SetFileName(connectionSpeed + '.asx');
+	}
+  }
+</SCRIPT>
+
+<STYLE>
+  TD, TH { font-size: 75%; font-family: verdana,arial,helvetica; }
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF" TEXT="#000000" VLINK="#666666" LINK="#000066" ALINK="#FFFFFF">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H3>Embedding ASF Files in HTML with the Windows Media Player Logo</H3>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close();return false;'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close();return false;'>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+<FONT FACE="VERDANA" SIZE="2">
+<I>Browser Requirements: Internet Explorer 3.0+ or Netscape Navigator&reg; 4.04+</I>
+</FONT>
+
+<P>
+
+<TABLE border="0" cellspacing="0" cellpadding="4" bordercolor="Aqua" cols="4" rows="4" width="540">
+  <TR>
+    <TD WIDTH=340><B>Standalone Player: </B> The example to the right shows the Windows Media logo used in conjuction with a standalone
+     Windows Media Player.  These are a simple links to an ASF Stream Redirector file (ASX) using the anchor (&lt;A&gt;) tag.
+    </TD>
+    <P>&nbsp;</P>
+    <TD ALIGN="CENTER" VALIGN="TOP" WIDTH=200><IMG SRC="WMLogo.gif" WIDTH=87 HEIGHT=69 BORDER=0 ALT="Best experienced with Windows Media Player">
+      <BR>
+      <A TITLE="Play 28K Clip" href="28.asx"><FONT FACE="arial" COLOR="green"><B>28</B></FONT></A><FONT FACE="arial" SIZE=-3>kbps</FONT>
+      or&nbsp;<A  TITLE="Play 56K Clip" href="56.asx"><FONT FACE="arial" COLOR="green"><B>56</B></FONT></A><FONT FACE="arial" SIZE=-3>kbps</FONT>
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR align="LEFT" valign="TOP">
+    <TD><B>Embedded Player: </B> You can also use the Windows Media logo with an embedded version of the Windows Media Player.
+    In this example, we're resetting the filename of the Media Player using JavaScript.
+    </TD>
+    <TD ALIGN=CENTER WIDTH=200> 
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
+	<TR>
+	  <TD background="streamingSample.gif">
+	    <OBJECT ID="MediaPlayer"  
+	            CLASSID="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95" 
+	            CODEBASE="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701" 
+	            WIDTH=176 HEIGHT=144 
+	            STANDBY="Loading Microsoft Windows Media Player components..." 
+	            TYPE="application/x-oleobject">
+	      <PARAM NAME="FileName"           VALUE="28.asx">
+	      <PARAM NAME="TransparentAtStart" Value="true">
+	      <PARAM NAME="AutoStart"          Value="false">
+	      <PARAM NAME="AnimationatStart"   Value="false">
+	      <PARAM NAME="ShowControls"       Value="false">
+	      <PARAM NAME="autoSize" 	       Value="false">
+	      <PARAM NAME="displaySize" 	 Value="0">
+	      <EMBED TYPE="application/x-mplayer2" 
+	             pluginspage="http://www.microsoft.com/Windows/MediaPlayer/"
+          	     src="28.asx" 
+          	     Name=MediaPlayer 
+          	     AutoStart=0 
+          	     Width=176 Height=144 
+          	     transparentAtStart=0 
+          	     autostart=0 
+          	     animationAtStart=0
+                     ShowControls=0 
+                     autoSize=0 
+                     displaySize=0>
+              </EMBED>
+            </OBJECT>
+          </TD>
+        </TR>
+        <TR>
+          <TD><IMG WIDTH=43 HEIGHT=37 ALT="Best Experienced with Windows Media Player" SRC="bestExpWMP.gif"><A HREF="#" ONCLICK="setBandwidth('56')">
+              <IMG WIDTH=70 HEIGHT=37 ALT="Play 56K clip" BORDER=0 SRC="part2b.gif"></A><A HREF="#" ONCLICK="setBandwidth('28')">
+              <IMG WIDTH=63 HEIGHT=37 ALT="Play 28K clip" BORDER=0 SRC="part3b.gif"></A>
+	  </TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+
+
+<BR>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1998 Microsoft Corporation. All rights
+reserved. Terms of use</A>. 
+</FONT>
+
+</BODY>
+</HTML>

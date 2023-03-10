@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+
+<TITLE>MSDN Online Samples:  The ANCHOR Tag</TITLE>
+<META NAME="FILENAME" CONTENT="anchor_VBS.HTM">
+
+<SCRIPT LANGUAGE="VBScript">
+'==================================================================================
+' This sub checks the bounds of the recordset before it allows the current record to 
+' be incremented.
+
+sub forward ()
+  if (StockList.recordset.AbsolutePosition <> StockList.recordset.RecordCount) then
+    StockList.recordset.MoveNext()
+  else 
+  alert("Already at last element")
+  end if
+end sub
+
+' ==================================================================================
+' This sub checks the bounds of the recordset before it allows the current record to 
+' be decremented. 
+
+sub rewind ()
+  if (StockList.recordset.AbsolutePosition <> 1) Then
+    Stocklist.recordset.MovePrevious()
+  else
+  alert("Already at first element")
+  end if
+end sub
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+
+
+<BODY TOPMARGIN="20" LEFTMARGIN="40" BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H2>The ANCHOR Tag</H2>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+
+<BR>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Data binding is supported to the HREF attribute of an ANCHOR tag. Binding to
+the ANCHOR tag is supported in both current record and repeated table modes.
+</FONT>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+An example of a current record bound ANCHOR tag is shown below. Clicking on the
+arrow buttons will move the current record. This results in the anchor
+changing to display the values from the current record. Feel free to click on the anchor to navigate to the URL shown. For clarity, a bound SPAN tag is used
+within the anchor to display the URL.
+</FONT>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<OBJECT ID="StockList" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" WIDTH=0 HEIGHT=0>
+  <PARAM NAME="UseHeader" VALUE="True">
+  <PARAM NAME="TextQualifier" VALUE="&quot;">
+  <PARAM NAME="FieldDelim" VALUE=",">
+  <PARAM NAME="DataURL" VALUE="quotes.txt">
+</OBJECT>
+</FONT>
+
+<CENTER>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<A DATASRC="#StockList" DATAFLD="url" TARGET="_top"> 
+  <SPAN DATASRC="#StockList" DATAFLD="url"> </SPAN>
+</A>
+<HR width=100>
+<INPUT TYPE="button" VALUE="  <  " onClick="rewind">
+<INPUT TYPE="button" VALUE="  >  " onClick="forward">
+</FONT>
+<HR width=100>
+<P>
+</CENTER>
+
+
+Anchors can also be used within a repeated table. An example is shown below.
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<center>
+<TABLE DATASRC="#StockList" ALIGN=center BORDER=1>
+  <THEAD>
+    <TR>
+      <TH>Links</TH>
+    </TR>
+  </THEAD>
+
+  <TBODY>
+    <TR>
+      <TD ALIGN=center>
+        <A DATAFLD="url" TARGET="_top"><DIV DATAFLD="url"></DIV></A>
+      </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</CENTER>
+</FONT>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <A HREF="quotes.txt">quotes.txt</A> to see the data file used by this page.
+</FONT>
+
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

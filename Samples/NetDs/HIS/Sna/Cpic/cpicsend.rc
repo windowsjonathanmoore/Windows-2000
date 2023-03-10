@@ -1,0 +1,15 @@
+#include	<windows.h>
+
+#include	<winver.h>
+#include	<version.h>
+
+#define	SNA_VER_FILE_TYPE	VFT_APP
+#define	SNA_VER_FILE_SUBTYPE	VFT2_UNKNOWN
+
+#define	SNA_VER_INTERNALNAME	"CPICSEND\0"
+#define	SNA_VER_FILEDESC 	"Host Integration Server SDK CPICSEND Sample"
+#define	SNA_VER_ORIGINALNAME	"CPICSEND.EXE\0"
+
+#include "..\..\snaver.rc"
+
+

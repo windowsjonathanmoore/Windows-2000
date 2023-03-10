@@ -1,0 +1,122 @@
+
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Repeated Tables</TITLE>
+<META NAME="FILENAME" CONTENT="repeat_VBS.HTM">
+
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META name="GENERATOR" content="Microsoft FrontPage 2.0">
+
+<SCRIPT LANGUAGE="VBScript">
+
+sub symbolClick() 
+  quotelist.SortColumn = "Symbol"
+  quotelist.Reset()
+end sub
+
+sub quoteClick() 
+  quotelist.SortColumn = "Quote"
+  quotelist.Reset()
+end sub
+
+sub changeOnclick() 
+  quotelist.SortColumn = "Change"
+  quotelist.Reset()
+end sub
+
+sub volumeOnclick()
+  quotelist.SortColumn = "Volume"
+  quotelist.Reset()
+end sub
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Repeated Tables</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<OBJECT id="quotelist" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" align="baseline" border="0" width="0" height="0">
+  <PARAM name="DataURL" value="quotes.txt">
+  <PARAM name="UseHeader" value="True">
+</OBJECT>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on the table headers to sort by that column. Note that the sort is done on the client, without a round-trip to the server.
+</FONT>
+
+<P>
+
+<TABLE border="1" id="elemtbl" datasrc="#quotelist">
+  <THEAD>    
+    <TR>
+        <TD><font color="#0000FF"><b><u><DIV id="symbol" style="cursor:hand" onClick="symbolClick">Symbol</DIV></u></b></font></TD>
+        <TD><font color="#0000FF"><b><u><DIV id="quote" style="cursor:hand" onClick="quoteClick">Quote</DIV></u></b></font></TD>
+        <TD><font color="#0000FF"><b><u><DIV id=change style="cursor:hand" onClick="changeOnclick">Change</DIV></u></b></font></TD>
+        <TD><font color="#0000FF"><b><u><DIV id=volume style="cursor:hand" onClick="volumeOnclick">Volume</DIV></u></b></font></TD>
+    </TR>
+  </THEAD>
+  
+  <TBODY>    
+    <TR>
+        <TD align=right><SPAN DATAFLD="Symbol"></SPAN></TD>
+        <TD align=right><DIV DATAFLD="Quote"></DIV></TD>
+        <TD align=right><SPAN DATAFLD="Change"></SPAN></TD>
+        <TD align=right><DIV DATAFLD="Volume"></DIV></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+<HR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<B>Description</B><BR>
+Repeated tables are a key feature of the data binding
+functionality included in Dynamic HTML. Repeated tables allow a
+page author to merge data with an HTML table on the client. The
+HTML table is used as a template. The content of the table is
+repeated once for each record in the data set and the data set is
+supplied by a data source object on the page. The table (template)
+is bound to the data source using the DATASRC attribute on
+&lt;TABLE&gt;. (DATASRC is a W3C-proposed extension to HTML.)
+</FONT>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The key advantage of repeated tables is that the repetition is
+done on the client without requiring round-trips to the server
+or storing state on the server. The data can subsequently be
+sorted, filtered, or manipulated in any fashion, and the page will
+dynamically be redrawn to reflect the changes -- without writing
+complicated scripts, server-side CGI processes, or Java&#153; code.
+</FONT>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>. 
+</FONT>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,3 @@
+LIBRARY CUSTOM
+EXPORTS
+    RasCustomScriptExecute

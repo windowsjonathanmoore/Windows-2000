@@ -1,0 +1,5 @@
+No configuration specified. Defaulting to ReBar - Win32 Release.
+Warning: cannot find "ReBar.dep"
+	if not exist ".\Release/" mkdir ".\Release"
+	rc.exe /l 0x409 /fo".\Release\ReBar.res" /d "NDEBUG" .\ReBar.rc
+	cl.exe @C:\DOCUME~1\strohma\LOCALS~1\Temp\nma01120.

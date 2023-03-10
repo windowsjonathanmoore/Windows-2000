@@ -1,0 +1,14 @@
+#include	<windows.h>
+
+#include	<winver.h>
+#include	<version.h>
+
+#define	SNA_VER_FILE_TYPE	VFT_APP
+#define	SNA_VER_FILE_SUBTYPE	VFT2_UNKNOWN
+
+#define	SNA_VER_INTERNALNAME	"AREMOTE\0"
+#define	SNA_VER_FILEDESC 	"Host Integration Server SDK AREMOTE Sample"
+#define	SNA_VER_ORIGINALNAME	"AREMOTE.EXE\0"
+
+#include "..\..\snaver.rc"
+

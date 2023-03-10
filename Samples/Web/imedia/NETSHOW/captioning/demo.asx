@@ -1,0 +1,11 @@
+<ASX version = "3.0">
+<TITLE>External Captioning Demo</TITLE>
+
+    <Entry>
+	<TITLE>Captioning Demo</TITLE>
+	<AUTHOR>Busch Entertainment Corporation</AUTHOR>
+	<COPYRIGHT>1998 Busch Entertainment Corporation</COPYRIGHT>
+        <Ref href = "mms://netshow.microsoft.com/ms/sbnasfs/wmt/shamu_28.asf" />
+    </Entry>
+</ASX>
+

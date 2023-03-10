@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<TITLE>Runtimestyle Demo</TITLE>
+
+<STYLE>
+  #aDiv { border-style: solid; border-color:blue;font-size:14; }
+  A:link { color: #003399; text-decoration: none; }
+  A:visited { color: #6699cc; text-decoration: none; }
+  A:hover { text-decoration: underline; }
+</STYLE>
+
+<SCRIPT language="VBScript">
+
+  dim quot
+  quot = """"
+
+  sub toggle(prop,value,element)
+	' Test for the existence of prop in the element
+	dim test
+	on error resume next
+	err.clear
+	test = eval("aDiv.runtimeStyle." & prop)
+	if err.number <> 0 then
+		on error goto 0 
+		exit sub
+	end if
+	on error goto 0 
+	if (test = value) then
+	   execute("aDiv.runtimeStyle." & prop & " = " & quot & quot)
+	   element.value = value
+	else 
+	   execute("aDiv.runtimeStyle." & prop & " = " & quot & value & quot)
+	   element.value = "blank"
+	end if
+	showValues()
+  end sub
+
+  function showProp ( varX, whichElement )
+	 dim varCell , ruleCell, styleCell, cstyleCell, rstyleCell, row  
+     varCell = "<td>" & varX & "&nbsp</td>"
+	 ruleCell = "<td>" & cssStyle(varX)&  "</td>"
+     styleCell = "<td>" & aDiv.style.getAttribute(varX) & "&nbsp</td>"
+     cstyleCell = "<td>" & eval("aDiv.currentStyle."&varX) & "&nbsp</td>"
+     rstyleCell = "<td>" & eval("aDiv.runtimeStyle."&varX) & "&nbsp</td>"
+     row = "<tr>" & varCell & ruleCell & styleCell & rstyleCell & cstyleCell & "</tr>"
+	 showProp = row
+  end function
+
+  sub showValues()
+	dim rCount, cCount, test 
+	rCount = 1
+	while (rCount < output.rows.length) 
+		set r = output.rows(rCount)
+		cCount = 1
+		while (cCount < 5) 
+			set c = r.cells(cCount)
+			on error resume next
+			err.clear
+			test  = eval("aDiv." & output.cells(cCount).innerText & "." & output.cells(rCount * 5).innerText  )
+			if err.number <> 0 then 
+				test = "N/A"
+			end if
+			on error goto 0  
+			c.innerText = test 
+			cCount = cCount + 1
+		wend
+		rCount = rCount + 1
+	wend
+  end sub
+</SCRIPT>
+
+</HEAD>
+
+<BODY onload='showValues()'>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>CSS Rules/Style/RuntimeStyle/CurrentStyle for a Div</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<DIV id=aDiv style="BACKGROUND: blue; BORDER-BOTTOM-COLOR: navy; BORDER-LEFT-COLOR: navy; BORDER-RIGHT-COLOR: navy; BORDER-TOP-COLOR: navy; COLOR: white; HEIGHT: 40px; LEFT: 50px; WIDTH: 75%">
+  runtimeStyle.x overrides style.x overrides css rules for x
+</DIV>
+<BR>
+
+<TABLE id=output border=1 style="font-size: 14; font-family: verdana">
+  <TR style="font-style: bold; color: white; background-color: blue;">
+    <TD>CSS Property</td><td>document.styleSheets(0).rules(0).style</TD>
+    <TD>style</TD>
+    <TD>runtimeStyle</TD>
+    <TD>currentStyle</TD>
+  </TR>
+  <TR>
+    <TD>backgroundColor</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+  <TR>
+    <TD>borderColor</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+  <TR>
+    <TD>borderStyle</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+  <TR>
+    <TD>color</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+  <TR>
+    <TD>fontSize</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+  <TR>
+    <TD>width</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+    <TD>nbsp;</TD>
+  </TR>
+</TABLE>
+
+<BR>
+
+<TABLE>
+  <TR style="FONT-WEIGHT: bold">
+    <TD>Property</TD>
+    <TD>Change value to</TD>
+  </TR>
+  <TR>
+    <TD>runtimeStyle.backgroundColor:</TD>
+    <TD><INPUT type=button id=iBGColor value=red language="VBScript" onclick='toggle "backgroundColor","red",iBGColor'></TD>
+  </TR>
+  <TR>
+    <TD>runtimeStyle.borderColor:</TD>
+    <TD><INPUT type=button id=iBorColor value=tan language="VBScript" onclick='toggle "borderColor","tan",iBorColor'></TD>
+  </TR>
+  <TR>
+    <TD>runtimeStyle.fontSize:</TD>
+    <TD><INPUT id="iFSize" language="VBScript" onPropertyChange="aDiv.runtimeStyle.fontSize = iFSize.value : showValues()"></TD>
+  </TR>
+</TABLE>
+
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

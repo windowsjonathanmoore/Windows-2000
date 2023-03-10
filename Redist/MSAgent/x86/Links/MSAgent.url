@@ -1,0 +1,14 @@
+[DEFAULT]
+BASEURL=http://msdn.microsoft.com/workshop/c-frame.htm
+
+[DOC#7#8]
+BASEURL=http://msdn.microsoft.com/workshop/imedia/agent/toc.htm
+ORIGURL=/workshop/imedia/agent/toc.htm#/workshop/imedia/agent/default.asp
+
+[DOC#7#9]
+BASEURL=http://msdn.microsoft.com/workshop/imedia/agent/default.asp
+ORIGURL=/workshop/imedia/agent/default.asp
+
+[InternetShortcut]
+URL=http://msdn.microsoft.com/workshop/c-frame.htm#/workshop/imedia/agent/default.asp
+Modified=A0ED66B0D636BF016F

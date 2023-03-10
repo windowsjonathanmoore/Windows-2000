@@ -1,0 +1,138 @@
+<
+<HTML>
+<HEAD>
+<TITLE>The IMG Tag</TITLE>
+<META NAME="FILENAME" CONTENT="img_JS.HTM">
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function forward() {
+
+//This function increments the data bound record after checking to confirm 
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further. 
+
+  if (StockList.recordset.AbsolutePosition != StockList.recordset.RecordCount) {
+	StockList.recordset.MoveNext();
+	}
+	else {
+	alert("Already at last element");
+	}
+}
+
+function reverse() {
+
+//This function decrements the data bound record after checking to confirm  
+//you are not already at the end of the recordset. If you are, the program 
+//alerts you that it cant go any further.  
+
+  if (StockList.recordset.AbsolutePosition != 1) {
+	StockList.recordset.MovePrevious();
+	}
+	else {
+	alert("Already at first element");
+	}
+}
+
+</SCRIPT>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" text="#000000">
+!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>The IMG Tag</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+The SRC element of the IMG tag can be bound to the current record of a data set. The bound data should consist of a URL to an image file.
+</FONT>
+
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Here is an example of an IMG tag that uses current record binding.  Clicking on
+the arrow buttons will move the current record. This results in the bound URL
+changing and the bound image displaying the image from the new URL.
+</FONT>
+
+<P>
+
+<CENTER>
+<IMG ALIGN="CENTER" DATASRC="#StockList" DATAFLD="Chart" WIDTH=192 HEIGHT=96 ALT="Chart">
+<P>
+
+<HR WIDTH=100>
+<INPUT TYPE="button" VALUE="  <  " ONCLICK="reverse();">
+<INPUT TYPE="button" VALUE="  >  " onClick="forward();">
+<HR WIDTH=100>
+</CENTER>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Bound images can also be used in repeated tables. Here's an example:
+</FONT>
+
+<P>
+
+<OBJECT ID="StockList" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" WIDTH=0 HEIGHT=0>
+  <PARAM NAME="UseHeader" VALUE="True">
+  <PARAM NAME="TextQualifier" VALUE="&quot;">
+  <PARAM NAME="FieldDelim" VALUE=",">
+  <PARAM NAME="DataURL" VALUE="quotes.txt">
+</OBJECT>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<CENTER>
+
+<TABLE DATASRC="#StockList" BORDER=1>
+  <THEAD>
+    <TR>
+      <TH ALIGN=LEFT><DIV ALIGN="CENTER"> Repeated Table</DIV></TH>
+    </TR>
+  </THEAD>
+  
+  <TBODY>
+    <TR>	
+      <TD ALIGN="CENTER"><IMG ALIGN="CENTER" DATAFLD="Chart" WIDTH=192 HEIGHT=96 ALT="Chart"></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+</CENTER>
+</FONT>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+Click on <A HREF="quotes.txt">quotes.txt</A> to see the
+data file used by this page.
+</FONT>
+
+<P>
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

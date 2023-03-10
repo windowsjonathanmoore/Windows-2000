@@ -1,0 +1,11 @@
+<ASX version = "3.0">
+<TITLE>Cross Platform Embed</TITLE>
+    <Entry>
+	<MoreInfo href = "http://www.softimage.com" />
+	<Abstract>Visit the SoftImage Web site</abstract>
+	<TITLE>Cross Platform Clip</TITLE>
+	<AUTHOR>SoftImage</AUTHOR>
+	<COPYRIGHT>(c)1998 SoftImage</COPYRIGHT>
+        <Ref href = "mms://netshow.microsoft.com/ms/sbnasfs/wmt/lighthouse.asf" />
+    </Entry>
+</ASX>

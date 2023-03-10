@@ -1,0 +1,18 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{BDD4A1A1-7A1F-11D0-AC13-00A0C91E29D5}") = "gretzky/ADOXML2", "ADOXML2.vip", "{429F6BBD-A348-4624-B1B1-027DBE3142FA}"
+	ProjectSection(SourceCodeControl) = preProject
+		SccAuxPath = 
+		WebServer = http://gretzky
+		WebName = ADOXML2
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {429F6BBD-A348-4624-B1B1-027DBE3142FA}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {429F6BBD-A348-4624-B1B1-027DBE3142FA}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,198 @@
+/*****************************************************************************/
+/*                                                                           */
+/* Printer Definition File for HP Laserjet series II and DeskJet             */
+/*                                                                           */
+/*****************************************************************************/
+
+/*****************************************************************************/
+/*                                                                           */
+/* Macro Definition Section                                                  */
+/* ========================                                                  */
+/*                                                                           */
+/* Macros can be defined to be used later in the file as shorthand for       */
+/* control code sequences.                                                   */
+/*                                                                           */
+/* This section of the file is de-limited by the BEGIN_MACROS and END_MACROS */
+/* markers. The format of a macro definition is:                             */
+/*                                                                           */
+/*         <macro name> EQU <list of bytes>                                  */
+/*                                                                           */
+/* where <list of bytes> consists of decimal and/or hex values separated by  */
+/* spaces. A decimal value is 3 digits long (with preceding zero if          */
+/* necessary e.g. 023) and a hex value is 2 digits long.                     */
+/*                                                                           */
+/*****************************************************************************/
+BEGIN_MACROS
+LFF              EQU 0A                 /* line feed                         */
+FFF              EQU 0C                 /* form feed                         */
+CRR              EQU 0D                 /* carriage return                   */
+
+P10              EQU 1B 26 6B 30 53     /* 10    pitch-characters per inch   */
+P12              EQU 1B 26 6B 34 53     /* 12    pitch-characters per inch   */
+P15              EQU 1B 28 73 31 35 48  /* 15    pitch-characters per inch   */
+P17              EQU 1B 26 6B 32 53     /* 16.67 pitch-characters per inch   */
+P20              EQU 1B 28 73 31 37 48  /* 17.1  pitch-characters per inch   */
+
+CS1              EQU 1B 28 38 55        /* Roman 8 char set 1                */
+EC1              EQU 1B 28 30 4E        /* ECMA-94 Latin 1 char set 1        */
+
+SUL              EQU 1B 26 64 44        /* start underline                   */
+CUL              EQU 1B 26 64 40        /* cancel underline                  */
+SBP              EQU 1B 28 73 31 42     /* start bold printing               */
+CBP              EQU 1B 28 73 30 42     /* cancel bold printing              */
+SIT              EQU 1B 28 73 31 53     /* start italic                      */
+CIT              EQU 1B 28 73 30 53     /* cancel italic                     */
+
+LL6              EQU 1B 26 6C 36 44     /* set line length 6 lines per inch  */
+LL8              EQU 1B 26 6C 38 44     /* set line length 8 lines per inch  */
+
+ENV              EQU 1B 26 6C 36 48     /* select envelope feeder            */
+MAN              EQU 1B 26 6C 32 48     /* select manual feeder              */
+DR3              EQU 1B 26 6C 34 48     /* select auxiliary feeder (as DR2)  */
+DR1              EQU 1B 26 6C 31 48     /* select primary paper drawer       */
+DR2              EQU 1B 26 6C 34 48     /* select secondary paper drawer     */
+SPX              EQU 1B 26 6C 30 53     /* set simplex                       */
+DPX              EQU 1B 26 6C 32 53     /* set duplex                        */
+TDX              EQU 1B 26 6C 31 53     /* set tumble duplex                 */
+
+LET              EQU 1B 26 6C 32 41     /* set Paper = Letter                */
+
+COS              EQU 1B 2A 72 33 55     /* select simple palette             */
+CO0              EQU 1B 2A 76 30 53     /* set foreground colour - Black     */
+CO1              EQU 1B 2A 76 34 53     /* set foreground colour - Blue      */
+CO2              EQU 1B 2A 76 31 53     /* set foreground colour - Red       */
+CO3              EQU 1B 2A 76 32 53     /* set foreground colour - Green     */
+CO4              EQU 1B 2A 76 33 53     /* set foreground colour - Yellow    */
+CO5              EQU 1B 2A 76 35 53     /* set foreground colour - Magenta   */
+CO6              EQU 1B 2A 76 36 53     /* set foreground colour - Cyan      */
+
+END_MACROS
+
+/*****************************************************************************/
+/*                                                                           */
+/* Control Codes                                                             */
+/* =============                                                             */
+/*                                                                           */
+/* Following the macro definitions, control codes and font definitions for   */
+/* the printer can be specified.                                             */
+/*                                                                           */
+/* These parameters are specified in the following way:                      */
+/*                                                                           */
+/*        <parameter name> = <value>                                         */
+/*                             or                                            */
+/*                           <control code sequence>                         */
+/*                                                                           */
+/* where <value> is a macro, (2-digit) hex or (3-digit) decimal value        */
+/* and <control code sequence> is a list of macros and/or hex and/or         */
+/* decimal values and/or the DCHAR identifier separated by spaces.           */
+/*                                                                           */
+/* The DCHAR identifier                                                      */
+/* --------------------                                                      */
+/*                                                                           */
+/* The DCHAR identifier enables the use of sequences which require a value   */
+/* to be inserted at run-time.  The value to be inserted is converted into   */
+/* the ASCII string equivalent (the format used by HP's PCL).  For example   */
+/* the PCL sequence to set variable print density is                         */
+/*                                                                           */
+/* 1B 28 73 #..# 48                                                          */
+/*                                                                           */
+/* where # is the number of characters per inch, as a decimal ASCII string   */
+/* (e.g. to set 12 CPI, the sequence  1B 28 73 31 32 48  should be sent to   */
+/* the printer).                                                             */
+/*                                                                           */
+/* This sequence could be represented in the PDF file as                     */
+/*                                                                           */
+/* SET_VARIABLE_PRINT_DENSITY = 1B 28 73 DCHARS 48                           */
+/*                                                                           */
+/* Then, if a command to set the CPI comes down in the datastream, the       */
+/* keyword DCHARS tells the PrintServer to insert the requested value into   */
+/* the sequence in this particular format before sending the sequence to     */
+/* the printer.                                                              */
+/*                                                                           */
+/* Font Definitions                                                          */
+/* ----------------                                                          */
+/*                                                                           */
+/* Font definitions are stored in the PDF file in the following format:      */
+/*                                                                           */
+/*        "font name" = <value>                                              */
+/*                        or                                                 */
+/*                      <control code sequence>                              */
+/*                                                                           */
+/* Where the font names are delimited by literal quotes, and should be       */
+/* the names as displayed by the Graphical User Interface.                   */
+/*                                                                           */
+/*****************************************************************************/
+
+/*****************************************************************************/
+/* Control Codes                                                             */
+/*****************************************************************************/
+START_JOB = CUL CBP EC1               /* switch to ECMA-94 Latin 1           */
+END_JOB = CUL CBP CS1 FFF             /* return to Roman8 char set, then FF  */
+
+CARRIAGE_RETURN = CRR                 /* carriage-return                     */
+NEW_LINE = CRR LFF                    /* new line                            */
+LINE_FEED = LFF                       /* line feed                           */
+FORM_FEED = FFF                       /* form feed                           */
+
+SET_6_LINES_PER_INCH       = LL6      /* code for 6 lines per inch           */
+SET_8_LINES_PER_INCH       = LL8      /* code for 8 lines per inch           */
+                                      /* code for set varaible LPI           */
+SET_VARIABLE_PRINT_DENSITY = 1B 28 73 DCHARS 48
+
+SET_10_CHARACTERS_PER_INCH = P10      /* code for 10 CPI                     */
+SET_12_CHARACTERS_PER_INCH = P12      /* code for 12 CPI                     */
+SET_15_CHARACTERS_PER_INCH = P15      /* code for 15 CPI                     */
+SET_17_CHARACTERS_PER_INCH = P17      /* code for 16.67 CPI                  */
+SET_20_CHARACTERS_PER_INCH = P20      /* code for 17.1 CPI                   */
+                                      /* code for set varaible CPI           */
+SET_VARIABLE_LINE_DENSITY  = 1B 26 6C DCHARS 43
+
+SELECT_ENVELOPE = ENV                 /* code select envelope feeder         */
+SELECT_MANUAL   = MAN                 /* code select manual feeder           */
+SELECT_DRAWER3  = DR3                 /* code select auxiliary feeder        */
+SELECT_DRAWER1  = DR1                 /* code select primary paper drawer    */
+SELECT_DRAWER2  = DR2                 /* code select secondary paper drawer  */
+
+RESET_DUPLEX = SPX                    /* code for set simplex                */
+SET_DUPLEX = DPX                      /* code for set duplex                 */
+SET_DUPLEX_TUMBLE =TDX                /* code for set tumble duplex          */
+
+START_HIGHLIGHT_INTENSE = SBP         /* start bold printing                 */
+END_HIGHLIGHT_INTENSE = CBP           /* end bold printing                   */
+START_HIGHLIGHT_UNDERLINE = SUL       /* start underline printing            */
+END_HIGHLIGHT_UNDERLINE = CUL         /* end underline printing              */
+START_ITALIC = SIT                    /* start italic printing               */
+END_ITALIC = CIT                      /* end italic printing                 */
+
+START_SUPERSCRIPT = 1B 2A 70 2D 32 35 59  /* start superscript printing      */
+END_SUPERSCRIPT = 1B 2A 70 2B 32 35 59    /* end superscript printing        */
+START_SUBSCRIPT = 1B 2A 70 2B 32 35 59    /* start subscript printing        */
+END_SUBSCRIPT = 1B 2A 70 2D 32 35 59      /* end subscript printing          */
+
+START_COLOR_BLACK   = CO0             /* code for black                      */
+START_COLOR_BLUE    = CO1             /* code for blue                       */
+START_COLOR_RED     = CO2             /* code for red                        */
+START_COLOR_GREEN   = CO3             /* code for green                      */
+START_COLOR_YELLOW  = CO4             /* code for yellow                     */
+START_COLOR_MAGENTA = CO5             /* code for magenta                    */
+START_COLOR_CYAN    = CO6             /* code for cyan                       */
+
+TOP_MARGIN      = 1B 26 6C DCHARS 45  /* code for set variable Top Margin    */
+SET_PAGE_LENGTH = 1B 26 6C DCHARS 46  /* code for set variable Page Length   */
+LEFT_MARGIN     = 1B 26 61 DCHARS 4C  /* code for set variable Left Margin   */
+RIGHT_MARGIN    = 1B 26 61 DCHARS 4D  /* code for set variable Left Margin   */
+
+SET_FONT_SIZE   = 1B 28 73 DCHARS 56  /* code for set variable Font Size     */
+
+/*****************************************************************************/
+/* Font Definitions                                                          */
+/*****************************************************************************/
+"Latin 1"     = EC1
+"Roman-8"     = CS1
+"WingDings"   = 1B 28 35 37 39 4C
+"Symbol"      = 1B 28 31 39 4D
+
+/*****************************************************************************/
+/* End of Definition File                                                    */
+/*****************************************************************************/
+

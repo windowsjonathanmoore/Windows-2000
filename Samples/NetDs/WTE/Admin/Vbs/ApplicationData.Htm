@@ -1,0 +1,22 @@
+<HTML>
+<BODY>
+<!--
+
+(C) 1999 Microsoft Corporation.  All rights reserved.
+
+-->
+<SCRIPT LANGUAGE=VBSCRIPT>
+        Set WTE = CreateObject("WTE.Root")
+        Set Admin = WTE.Arrays.GetContainingArray
+        Set WTEApps = Admin.Applications
+
+        document.writeln "Installed WTE Applications: " + CStr(WTEApps.Count) + "<BR>"
+
+        For Each WTEApp in WTEApps
+                document.writeln "Application name: " + WTEApp.Name + ", Home Page: " + WTEApp.HomePage + "<BR>"
+        Next
+
+
+</SCRIPT>
+</BODY>
+</HTML>

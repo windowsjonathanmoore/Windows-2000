@@ -1,0 +1,35 @@
+<%@ Language=JavaScript %>
+<%
+
+// Generate the correct HTTP headers to signify that this is an XML stream 
+Response.ContentType = "text/xml";
+Response.Expires = 0;
+
+// Generate the OLE DB connection string
+//var strConn = "Provider=SQLOLEDB.1;User ID=sa;Initial Catalog=";
+//strConn += Request( "txtDatabase" ) + ";Data Source=" + Request( "txtComputer" );
+
+var strConn = "Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=pubs;Data Source=JUNIOR2";
+
+// Generate the SQL statement
+var strSQL = new String( Request( "txtSQL" ) );
+var strSQL2 = new String( "select * from titles" );
+//var strSQL2 = "select * from titles";
+
+Response.Write( strSQL + ", " + strSQL.length + "\n" );
+Response.Write( strSQL2 + ", " + strSQL.length + "\n" );
+
+//if( strSQL == strSQL2 )
+{
+	Response.Write( "equals" );
+
+	// Create an ADO recordset object
+	var objRS = new ActiveXObject( "ADODB.Recordset" );
+	objRS.Source = strSQL2;
+	objRS.ActiveConnection = strConn;
+	objRS.Open();
+
+	// Save the ADO recordset to the HTTP response stream
+	objRS.Save( Response, adPersistXML );
+}
+%>

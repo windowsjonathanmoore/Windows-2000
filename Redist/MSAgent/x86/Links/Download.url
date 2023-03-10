@@ -1,0 +1,14 @@
+[DEFAULT]
+BASEURL=http://msdn.microsoft.com/msagent/c-frame.htm
+
+[DOC#7#8]
+BASEURL=http://msdn.microsoft.com/msagent/toc.htm#/msagent/agentdl.asp
+ORIGURL=/msagent/toc.htm#/msagent/agentdl.asp
+
+[DOC#7#9]
+BASEURL=http://msdn.microsoft.com/msagent/agentdl.asp
+ORIGURL=/msagent/agentdl.asp
+
+[InternetShortcut]
+URL=http://msdn.microsoft.com/msagent/c-frame.htm#/msagent/agentdl.asp
+Modified=C044CE520627BF0111

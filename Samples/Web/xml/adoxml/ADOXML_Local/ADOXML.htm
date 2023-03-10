@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>Retrieve XML-marshaled ADO recordset from server</TITLE>
+<LINK rel="stylesheet" type="text/css" href="global.css">
+</HEAD>
+<BODY>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<P>This sample application allows you to enter a database server name, a
+   database name as well as a SQL statement which will be executed and
+   returned to you in an XML representation. The XML in this example will
+   be displayed using the default stylesheet in IE5 and this current HTML
+   page will be unloaded from memory.</p>
+
+<!-- This is the HTML form that will be used to gather up the parameters to	
+	 pass to the ASP page as part of an HTTP POST request. If you want to try
+	 the VBScript version of the server side code, change the action attribute
+	 of the <form> element from runQueryJ.asp to runQuery.asp -->
+	 
+<FORM action="runQueryJ.asp" method="post" id="frmQuery">
+<LABEL>Computer name:</LABEL><INPUT type="text" name="txtComputer" maxLength="50"><BR>
+<LABEL>Database name:</LABEL><INPUT type="text" name="txtDatabase" maxLength="20"><BR>
+<LABEL>SQL statement:</LABEL><INPUT type="text" name="txtSQL" maxLength="200"><BR>
+
+<INPUT type="submit" value="Submit">
+</FORM>
+
+</BODY>
+</HTML>

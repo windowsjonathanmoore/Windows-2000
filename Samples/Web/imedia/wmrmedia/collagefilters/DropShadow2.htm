@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0034)file://G:\Temp2\Repros\DShadow.htm -->
+<HTML><HEAD><TITLE>Wipe Image transform in DirectAnimation</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2013.2700" name=GENERATOR></HEAD>
+<BODY bgColor=white leftMargin=20 link=#0033cc><FONT 
+face="Verdana, Arial, Helvetica" size=2>
+<CENTER>
+<H1>Wipe Image Transform in DirectAnimation</H1>
+<OBJECT classid=CLSID:B6FFC24C-7E13-11D0-9B47-00C04FC2F51D id=DAControl 
+style="HEIGHT: 342px; LEFT: 0px; POSITION: relative; TOP: 50px; WIDTH: 512px"></OBJECT></CENTER>
+<SCRIPT language=JScript>
+<!--
+
+   // The DirectAnimation library
+   m = DAControl.MeterLibrary;
+
+function GetImageStructured() {
+  period = 3; // time in seconds
+  dim = 100;  // space in pixels
+  hDim = 3*dim/4;
+  qDim = dim/2;
+
+  // sinNum = 2*PI*time/period, varies between -1 and 1 every period
+  sinNum = m.Sin(m.Mul(m.LocalTime, m.DANumber(2*Math.PI/period)));
+
+  // construct a red oval with corresponding transform
+  redImg = m.Oval(dim,dim).Fill(m.DefaultLineStyle,        
+                              m.SolidColorImage(m.Red));
+  redXf = m.Compose2(m.Translate2(hDim, hDim), 
+                   m.Scale2UniformAnim(sinNum));
+
+  // construct a green rounded rectangle with corresponding transform
+  greenImg = m.RoundRect(dim,dim,qDim,qDim).Fill(m.DefaultLineStyle,   m.SolidColorImage(m.Green));
+  greenXf = m.Compose2(m.Translate2(hDim, -hDim), m.YShear2Anim(sinNum));
+
+  // construct a blue rectangle with corresponding transform
+  blueImg = m.Rect(dim,dim).Fill(m.DefaultLineStyle, 
+                               m.SolidColorImage(m.Blue));
+  blueXf = m.Compose2(m.Translate2(-hDim, -hDim), 
+    m.Translate2Anim(m.DANumber(0), m.Mul(m.DANumber(dim/4), sinNum)));
+
+  // construct a purple pie with corresponding transform
+  purpleImg = m.PieDegrees(-60, -120, dim, dim).
+                Fill(m.DefaultLineStyle, 
+                     m.SolidColorImage(m.Purple));
+  purpleXf = m.Compose2(m.Translate2(-hDim,hDim),m.Rotate2Anim(sinNum));
+ 
+  // construct transformed versions of these shapes. 
+  redImg = redImg.Transform(redXf);
+  greenImg = greenImg.Transform(greenXf);
+  blueImg = blueImg.Transform(blueXf);
+  purpleImg = purpleImg.Transform(purpleXf);
+
+  // combine them into one image
+  firstImg = m.OverlayArray(new 
+               Array(redImg,greenImg,blueImg,purpleImg));
+
+  // rotation by 45 degrees per sec around 3D first diagonal
+  rotXf  = m.Rotate3RateDegrees(m.Vector3(1,1,1), 45).ParallelTransform2();
+  secondImg = firstImg.Transform(rotXf);
+
+  // cycle through flat 2D image and 3D transformed counter part
+  finalImg = new ActiveXObject("DirectAnimation.DAImage");
+  finalImg.init(m.Until(firstImg, m.LeftButtonDown,
+                  m.Until(secondImg, m.LeftButtonDown, finalImg)));
+  return finalImg;
+}
+
+   //img1 = m.ImportImage("apple.gif");
+   //img2 = m.ImportImage("../../media/image/tulipshol2.jpg");
+
+img1 = GetImageStructured();
+   
+   inputImgs = new Array(img1);
+
+   chroma = new ActiveXObject("DXImageTransform.Microsoft.DropShadow");
+
+   // set the width of the transition band,
+   // which is a custom property on the transform
+   //chroma.Color = "#ffffff";
+
+   function myInterp(duration) {
+       forward = m.Interpolate(0, 1, duration);
+       back = m.Interpolate(1, 0, duration);
+       return m.Sequence(forward, back).RepeatForever();
+   }
+
+   // cycle through effect in 4 seconds
+   result = m.ApplyDXTransform(chroma, inputImgs, null);
+
+
+  trans = new ActiveXObject("DirectAnimation.DATransform2");
+  trans.Init(m.Until(m.IdentityTransform2, m.LeftButtonDown, 
+                    m.Until(m.Rotate2RateDegrees(60), m.LeftButtonDown, trans)));
+   //finalImage = img1;
+   finalImage = result.OutputBvr.Transform(trans);
+
+   finalImage = m.Overlay(finalImage, m.SolidColorImage(m.White));
+
+   DAControl.Image = finalImage;
+   DAControl.Start();
+
+-->
+</SCRIPT>
+
+<CENTER><FONT face=Verdana,Tahoma,Arial 
+size=4></FONT></CENTER></FONT></BODY></HTML>

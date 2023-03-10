@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<title>Retrieve XML-marshaled ADO recordset from server</title>
+<link rel="stylesheet" type="text/css" href="global.css">
+</head>
+<body>
+
+<script LANGUAGE="javascript">
+
+function btnSubmit_onclick() {
+	
+	// Formulate the request to the Active Server Page by passing the 
+	// arguments on the command line
+	
+}
+
+</script>
+
+<p>This sample application allows you to enter a database server name, a
+   database name as well as a SQL statement which will be executed and
+   returned to you in an XML representation.</p>
+
+<!-- This is the HTML form that will be used to gather up the parameters to	 pass to the ASP page as part of an HTTP POST request -->
+	 
+<form action="runQuery.asp" method="post" id="frmQuery">
+<label>Computer name:</label><input type="text" name="txtComputer" maxLength="50"><br>
+<label>Database name:</label><input type="text" name="txtDatabase" maxLength="20"><br>
+<label>SQL statement:</label><input type="text" name="txtSQL" maxLength="200"><br>
+
+<input type="submit" value="Submit" id="btnSubmit" language="JavaScript" onclick="return btnSubmit_onclick()">
+</form>
+
+</body>
+</html>

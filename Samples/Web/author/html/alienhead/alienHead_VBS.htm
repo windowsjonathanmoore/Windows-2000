@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+
+<TITLE>MSDN Online Samples:  AlienHead</TITLE>
+<META NAME="FILENAME" CONTENT="alienhead_VBS.HTM">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+<SCRIPT LANGUAGE="VBScript">
+      dim curElement
+      curElement = -1 
+      
+      sub document_onMouseMove() 
+      	dim newleft 
+      	dim newTop
+        newleft = 0 
+        newTop = 0
+        if ( window.event.button = 1 ) AND (curElement <> -1) then
+        'if ( window.event.button = 1 ) AND (not (curElement is null)) then
+        window.defaultStatus = curElement
+          newleft = window.event.clientX-document.all.OuterDiv.offsetLeft-(curElement.offsetWidth/2)
+          if (newleft<0) then 
+		    newleft=0
+          end if 
+          curElement.style.pixelLeft = newleft
+          newtop = window.event.clientY -document.all.OuterDiv.offsetTop-(curElement.offsetHeight/2)
+          if (newtop<0) then
+          	newtop=0
+          end if
+          curElement.style.pixelTop = newtop
+          window.event.returnValue = false
+          window.event.cancelBubble = true
+        end if
+       end sub
+
+      sub document_onDragStart() 
+        ' Don't do default drag operation.
+        if ("IMG" = window.event.srcElement.tagName) then
+        window.event.returnValue = false
+	    end if
+      end sub
+
+      sub document_onMouseDown()
+        if ((window.event.button = 1) AND (window.event.srcElement.tagName = "IMG")) then
+          set curElement = window.event.srcElement
+          Window.defaultStatus = curElement
+        end if
+      end sub
+
+      sub document_onMouseUp()
+        curElement = -1 
+        'curElement = null 
+        Window.defaultStatus = curElement
+      end sub	
+      
+      sub alienhead_onmousedown() ' Do not allow the alien head to be dragged.
+		window.event.cancelBubble = true 
+	  end sub
+	  
+</SCRIPT>
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN="40" BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Alienhead</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+<P>
+
+<FONT face=verdana,arial,helvetica size=2>
+
+<FONT face="Verdana, Arial, Helvetica" size=3><B>Use the mouse to drag and create an alien!</B></FONT> 
+<BR><BR>
+
+<DIV id=OuterDiv style="HEIGHT: 400px; POSITION: relative; WIDTH: 100%">
+  <IMG height=86 id=alienhead src="images/alienhead.gif" style="HEIGHT: 150px; LEFT: 142pt; POSITION: absolute; TOP: 83pt; WIDTH: 230px; Z-INDEX: 2" width=135 > 
+  <IMG height=51 id=hair1 src="images/hair1.gif" style="HEIGHT: 38pt; LEFT: 0pt; POSITION: absolute; TOP: 8pt; WIDTH: 63pt; Z-INDEX: 22" width=84 > 
+  <IMG height=44 id=hair2 src="images/hair2.gif" style="HEIGHT: 33pt; LEFT: 8pt; POSITION: absolute; TOP: 116pt; WIDTH: 56pt; Z-INDEX: 21" width=74 > 
+  <IMG height=67 id=hair3 src="images/hair3.gif" style="HEIGHT: 50pt; LEFT: 0pt; POSITION: absolute; TOP: 58pt; WIDTH: 68pt; Z-INDEX: 20" width=90 > 
+  <IMG height=60 id=ears1 src="images/ears1.gif" style="HEIGHT: 45pt; LEFT: 68.256pt; POSITION: absolute; TOP: 23.976pt; WIDTH: 89pt; Z-INDEX: 19" width=119 > 
+  <IMG height=64 id=ears2 src="images/ears2.gif" style="HEIGHT: 48pt; LEFT: 167.256pt; POSITION: absolute; TOP: 178.488pt; WIDTH: 93pt; Z-INDEX: 18" width=124 > 
+  <IMG height=58 id=ears3 src="images/ears3.gif" style="HEIGHT: 44pt; LEFT: 175.536pt; POSITION: absolute; TOP: 110.232pt; WIDTH: 85pt; Z-INDEX: 17" width=113 > 
+  <IMG height=46 id=nose1 src="images/nose1.gif" style="HEIGHT: 35pt; LEFT: 327pt; POSITION: absolute; TOP: 99pt; WIDTH: 29pt; Z-INDEX: 16" width=39 > 
+  <IMG height=54 id=nose2 src="images/nose2.gif" style="HEIGHT: 41pt; LEFT: 203.256pt; POSITION: absolute; TOP: 112.536pt; WIDTH: 26pt; Z-INDEX: 15" width=54 > 
+  <IMG height=38 id=nose3 src="images/nose3.gif" style="HEIGHT: 29pt; LEFT: 213.768pt; POSITION: absolute; TOP: 67.536pt; WIDTH: 29pt; Z-INDEX: 14" width=39 > 
+  <IMG height=26 id=mouth1 src="images/mouth1.gif" style="HEIGHT: 20pt; LEFT: 368pt; POSITION: absolute; TOP: 107pt; WIDTH: 59pt; Z-INDEX: 13" width=78 > 
+  <IMG height=30 id=mouth2 src="images/mouth2.gif" style="HEIGHT: 23pt; LEFT: 368pt; POSITION: absolute; TOP: 140pt; WIDTH: 50pt; Z-INDEX: 12" width=66 > 
+  <IMG height=30 id=mouth3 src="images/mouth3.gif" style="HEIGHT: 23pt; LEFT: 368pt; POSITION: absolute; TOP: 74pt; WIDTH: 47pt; Z-INDEX: 11" width=62 > 
+  <IMG height=24 id=eyes1 src="images/eyes1.gif" style="HEIGHT: 18pt; LEFT: 200.232pt; POSITION: absolute; TOP: 95.256pt; WIDTH: 47pt; Z-INDEX: 10" width=62 > 
+  <IMG height=25 id=eyes2 src="images/eyes2.gif" style="HEIGHT: 19pt; LEFT: 198.72pt; POSITION: absolute; TOP: 110.232pt; WIDTH: 38pt; Z-INDEX: 9" width=50 > 
+  <IMG height=24 id=eyes3 src="images/eyes3.gif" style="HEIGHT: 18pt; LEFT: 189pt; POSITION: absolute; TOP: 150.768pt; WIDTH: 50pt; Z-INDEX: 8" width=66 > 
+  <IMG height=28 id=shoe1 src="images/shoes1.gif" style="HEIGHT: 21pt; LEFT: 335pt; POSITION: absolute; TOP: 173pt; WIDTH: 71pt; Z-INDEX: 7" width=94 > 
+  <IMG height=29 id=shoe2 src="images/shoes2.gif" style="HEIGHT: 22pt; LEFT: 335pt; POSITION: absolute; TOP: 206pt; WIDTH: 74pt; Z-INDEX: 6" width=99 > 
+  <IMG height=26 id=shoes3 src="images/shoes3.gif" style="HEIGHT: 20pt; LEFT: 335pt; POSITION: absolute; TOP: 231pt; WIDTH: 79pt; Z-INDEX: 5" width=105 > 
+  <IMG height=42 id=hands1 src="images/hands1.gif" style="HEIGHT: 32pt; LEFT: 153.72pt; POSITION: absolute; TOP: 171pt; WIDTH: 119pt; Z-INDEX: 4" width=159 > 
+  <IMG height=34 id=hands3 src="images/hands3.gif" style="HEIGHT: 26pt; LEFT: 158.976pt; POSITION: absolute; TOP: 90.72pt; WIDTH: 141pt; Z-INDEX: 3" width=188 > 
+</DIV>
+
+<TABLE border=0 cellPadding=0 cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TD align=left colSpan=2 VALIGN="TOP"><FONT face="Verdana, Arial, Helvetica" size=2><b>Description</b></FONT></TD>
+  </TR>
+  <TR>
+    <TD align=left colSpan=2 VALIGN="TOP"><FONT face="Verdana, Arial, Helvetica" size=2>With Alienhead, users can position the various fruits and nuts to make their favorite alien face. Behind this light-hearted demo is some very serious technology.</FONT></TD>
+  </TR>
+  <TR>
+    <TD align=left colSpan=2 vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2><p><br><b>1. CSS 2-D Positioning</b><br></FONT></P></TD>
+  </TR>
+  <TR>
+    <TD align=left vAlign=top><IMG border=0 height=1 src="/sitebuilder/graphics/trans-space.gif" width=17 ></TD>
+    <TD align=left vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>All of the images on the page are arranged in 2-D space.</FONT></TD>
+  </TR>
+  <TR>
+    <TD align=left colSpan=2 vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2><p><br><b>2. Event bubbling</b><br></FONT></P></TD>
+  </TR>
+  <TR>
+    <TD align=left vAlign=top><IMG border=0 height=1 src="/sitebuilder/graphics/trans-space.gif" width=17 ></TD>
+    <TD align=left vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>The code that allows elements to be positioned is only 15 lines long. Each individual graphic does not require separate event handlers. The events are captured at the document level.</FONT></TD>
+  </TR>
+  <TR>
+    <TD align=left vAlign=top><IMG border=0 height=1 src="/sitebuilder/graphics/trans-space.gif" width=17 ></TD>
+    <TD align=left vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2><p></p></FONT></TD>
+  </TR>
+  <P></P>
+  </TBODY>
+</TABLE>
+
+</FONT>
+<P>
+<P>
+<P>
+<P>
+<HR>
+<FONT color=black face="MS SANS SERIF" size=1>&copy; <A href="/misc/cpyright.htm" target=_top >1999 Microsoft Corporation. All rights 
+reserved. Terms of use</A>. 
+</FONT>
+</P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<HTML DIR="LTR">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>MSMQ Triggers Examples</TITLE>
+
+</HEAD>
+
+<BODY>
+
+<P><A HREF="msmqtrig.htm" TITLE="MSMQ Triggers">MSMQ Triggers Topics</A> | <A HREF="msmqtrig_trouble.htm" TITLE="ToolName Syntax">Previous</A></P>
+
+<H2>MSMQ Triggers Example</H2>
+
+<HR>
+
+<P>Suppose you create a new trigger named &quot;PrivateTrigger&quot; that is associated with the private queue &quot;Mycomputer\Myqueue&quot;, and is comprised of two rules: &quot;MyRule1&quot; and &quot;MyRule2&quot;.</P>
+
+<P>Each of these rules defines a condition (such as Message Label Contains &quot;marketing&quot;) and an action to be taken when the condition is true (such as open &quot;Pbrush.exe&quot; with parameter &quot;Message Label&quot;). In addition, a rule handler object is attached to the rule, by default this is the supplied IMSMQRuleHandler.</P>
+
+<P>When a message arrives at Mycomputer\Myqueue, the MSMQ Triggers Service is notified. Next, for the &quot;PrivateTrigger&quot; trigger defined for that queue, the rules &quot;MyRule1&quot; and &quot;MyRule2&quot; associated with that trigger are applied. Lastly, Microsoft Paint is opened if all the conditions for those triggers are met (are true).</P> 
+    
+</BODY>
+</HTML>

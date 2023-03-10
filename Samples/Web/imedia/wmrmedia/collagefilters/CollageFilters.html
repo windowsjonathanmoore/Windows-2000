@@ -1,0 +1,155 @@
+<HTML> 
+<HEAD>
+<TITLE>DirectAnimation & DirectTransform, JScript sample</TITLE>
+<SCRIPT LANGUAGE="JScript">
+<!--
+if (window.top.frames.length!=0 && window.top.frames[0].ShowNoButtons!=null)
+    window.top.frames[0].ShowNoButtons();
+//-->
+</SCRIPT>
+</HEAD>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A HREF="#" ONCLICK="self.close();return false">Close This Sample</A>
+</FONT><hr>	 
+
+<BODY BGCOLOR=WHITE TOPMARGIN=15 LEFTMARGIN=20>
+<FONT FACE="Verdana, Arial, Helvetica" SIZE=2> 
+<CENTER>
+<H1>DirectX Transform Filters on 2-D Vector Primitives</H1>
+</CENTER>
+
+<CENTER>
+<input type=button value="Blur" name="BlurButton">
+<input type=button value="DropShadow" name="DropShadowButton">
+<input type=button value="Engrave" name="EngraveButton">
+<input type=button value="Plain" name="PlainButton">
+<BR>
+<input type=button value="Short" name="ShortButton">
+<input type=button value="Medium" name="MediumButton">
+<input type=button value="Long" name="LongButton">
+</CENTER>
+          
+<OBJECT ID="DAControl"
+  STYLE="position:relative; left:50; top:0;width:600;height:400" 
+  CLASSID="CLSID:B6FFC24C-7E13-11D0-9B47-00C04FC2F51D">
+</OBJECT>
+
+<SCRIPT LANGUAGE="JScript">
+<!--
+m = DAControl.PixelLibrary; 
+
+function GetImageStructured() {
+  period = 3; // time in seconds
+  dim = 100;  // space in pixels
+  hDim = 3*dim/4;
+  qDim = dim/2;
+
+  // sinNum = 2*PI*time/period, varies between -1 and 1 every period
+  sinNum = m.Sin(m.Mul(m.LocalTime, m.DANumber(2*Math.PI/period)));
+
+  // construct a red oval with corresponding transform
+  redImg = m.Oval(dim,dim).Fill(m.DefaultLineStyle,        
+                              m.SolidColorImage(m.Red));
+  redXf = m.Compose2(m.Translate2(hDim, hDim), 
+                   m.Scale2UniformAnim(sinNum));
+
+  // construct a green rounded rectangle with corresponding transform
+  greenImg = m.RoundRect(dim,dim,qDim,qDim).Fill(m.DefaultLineStyle,   m.SolidColorImage(m.Green));
+  greenXf = m.Compose2(m.Translate2(hDim, -hDim), m.YShear2Anim(sinNum));
+
+  // construct a blue rectangle with corresponding transform
+  blueImg = m.Rect(dim,dim).Fill(m.DefaultLineStyle, 
+                               m.SolidColorImage(m.Blue));
+  blueXf = m.Compose2(m.Translate2(-hDim, -hDim), 
+    m.Translate2Anim(m.DANumber(0), m.Mul(m.DANumber(dim/4), sinNum)));
+
+  // construct a purple pie with corresponding transform
+  purpleImg = m.PieDegrees(-60, -120, dim, dim).
+                Fill(m.DefaultLineStyle, 
+                     m.SolidColorImage(m.Purple));
+  purpleXf = m.Compose2(m.Translate2(-hDim,hDim),m.Rotate2Anim(sinNum));
+ 
+  // construct transformed versions of these shapes. 
+  redImg = redImg.Transform(redXf);
+  greenImg = greenImg.Transform(greenXf);
+  blueImg = blueImg.Transform(blueXf);
+  purpleImg = purpleImg.Transform(purpleXf);
+  return m.OverlayArray(new 
+               Array(redImg,greenImg,blueImg,purpleImg));
+}
+
+structImg = GetImageStructured();
+inputImgs = new Array(structImg);
+
+blurO = m.ApplyDXTransform("DXImageTransform.Microsoft.CrBlur", inputImgs, null);
+blurImg = blurO.OutputBvr;
+blurObj = blurO.TheTransform;
+
+dropShadow = m.ApplyDXTransform("DXImageTransform.Microsoft.DropShadow", inputImgs, null);
+dropShadowImg = dropShadow.OutputBvr;
+dropShadowObj = dropShadow.TheTransform;
+
+engrave = m.ApplyDXTransform("DXImageTransform.Microsoft.CrEngrave", inputImgs, null);
+engraveImg = engrave.OutputBvr;
+engraveObj = engrave.TheTransform;
+
+img = m.ModifiableBehavior(structImg);
+
+function BlurButton.onclick()  {
+  return img.SwitchTo(blurImg);
+}
+
+function DropShadowButton.onclick()  {
+  return img.SwitchTo(dropShadowImg);
+}
+
+function EngraveButton.onclick()  {
+  return img.SwitchTo(engraveImg);
+}
+
+function PlainButton.onclick()  {
+  return img.SwitchTo(structImg);
+}
+
+function ShortButton.onclick() {
+  blurObj.PixelRadius = 2;
+  dropShadowObj.offX = 3;
+  dropShadowObj.offY = 3;
+  return null;
+}
+
+function MediumButton.onclick() {
+  blurObj.PixelRadius = 6;
+  dropShadowObj.offX = 9;
+  dropShadowObj.offY = 9;
+  return null;
+}
+  
+function LongButton.onclick() {
+  blurObj.PixelRadius = 12;
+  dropShadowObj.offX = 20;
+  dropShadowObj.offY = 20;
+  return null;
+}
+
+// final image
+DAControl.Image = img;     
+     
+// start the animation       
+DAControl.Start()
+
+//-->
+</SCRIPT>
+<P>
+Displays four animated structured graphics primitives. 
+You can select the filter to be applied.
+Also, you can modify the <B>size</B> custom parameter (and thereby increase or decrease the effect) of the Blur and DropShadow filters by clicking on the Short, Medium, or Long buttons.
+</FONT>
+<P>
+<P>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+</BODY>
+</HTML>

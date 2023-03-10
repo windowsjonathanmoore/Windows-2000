@@ -1,0 +1,211 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\IHVLinks.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\IHVLinks.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_IHVLINKS_DIALOG DIALOGEX 0, 0, 317, 143
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION 
+"Microsoft Host Integration Server - Add Third Party Link Services Support"
+
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Tree1",IDC_IHV_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_CHECKBOXES | 
+                    TVS_TRACKSELECT | TVS_INFOTIP | TVS_NOSCROLL | WS_BORDER | 
+                    WS_TABSTOP,15,14,185,122
+    GROUPBOX        "Hardware Support",IDC_STATIC,7,2,303,138
+    LTEXT           "Description",IDC_DESCRIPTION,206,14,100,122,0,
+                    WS_EX_CLIENTEDGE
+END
+
+IDD_WELCOME DIALOG DISCARDABLE  0, 0, 317, 191
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION 
+"Microsoft Host Integration Server - Add Third Party Link Services Support"
+
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_WELCOMETITLE,"Static",SS_WHITEFRAME,103,8,192,15
+    CONTROL         "",IDC_WELCOMETITLE2,"Static",SS_WHITEFRAME,103,22,192,
+                    15
+    LTEXT           "This wizard will guide you through the process of installing third party link services.  ",
+                    IDC_STATIC,115,50,181,32
+    LTEXT           "",IDC_TXT_DB_NAME2,115,87,181,19
+END
+
+IDD_FINISH DIALOG DISCARDABLE  0, 0, 317, 191
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION 
+"Microsoft Host Integration Server - Add Third Party Link Services Support"
+
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_FINISHTITLE,"Static",SS_WHITEFRAME,103,8,192,15
+    CONTROL         "",IDC_FINISHTITLE2,"Static",SS_WHITEFRAME,103,22,192,15
+    LTEXT           "You have successfully completed the third party link services support wizard.  When you click ""Finish"", the various third party tools for installing the link services you have selected will be launched.  ",
+                    IDC_STATIC,115,50,181,32
+    LTEXT           "",IDC_TXT_DB_NAME2,115,87,181,19
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_IHVLINKS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 305
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_WELCOME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 184
+    END
+
+    IDD_FINISH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 184
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_WELCOME256          BITMAP  DISCARDABLE     "res\\welc256.bmp"
+IDB_HEADER256           BITMAP  DISCARDABLE     "res\\head256.bmp"
+IDB_HEADER16            BITMAP  DISCARDABLE     "res\\head16.bmp"
+IDB_WELCOME16           BITMAP  DISCARDABLE     "res\\welc16.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_WELCOME_TEXT        "Welcome to the Third Party"
+    IDS_WELCOME_TEXT2       "Link Services Installation Wizard"
+    IDS_WIZARD_SHEET        "Microsoft Host Integration Server - Add Third Party Link Services Support"
+    IDS_WIZARD_TITLE_TEXT_FONT_SIZE "22"
+    IDS_HEADER_LINKS        "Please select the link services you wish to install"
+    IDS_SUBHEADER_LINKS     "The following link services have been provided to Microsoft by third party vendors.  Click on a link service to view its description."
+    IDS_FINISH_TEXT         "Completing the Third Party"
+    IDS_FINISH_TEXT2        "Link Services Installation Wizard"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\IHVLinks.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

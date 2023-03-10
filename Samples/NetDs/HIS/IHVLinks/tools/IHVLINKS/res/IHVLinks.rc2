@@ -1,0 +1,32 @@
+//
+// IHVLINKS.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+// BEGIN: VERSION INFO BLOCK
+#include <winver.h>
+#include <version.h>
+
+#define	SNA_VER_FILE_TYPE	VFT_DLL
+#define	SNA_VER_FILE_SUBTYPE	VFT2_UNKNOWN
+
+#define	SNA_VER_INTERNALNAME	"IHVLINKS\0"
+#define	SNA_VER_FILEDESC 	"Host Integration Server SDK Link Services Installation Wizard Sample"
+#define	SNA_VER_ORIGINALNAME	"IHVLINKS.EXE\0"
+
+#include	"..\..\..\..\snaver.rc"
+
+// END: VERSION INFO BLOCK
+
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////

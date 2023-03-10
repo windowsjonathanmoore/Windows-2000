@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  HTML Clock</TITLE>
+<META NAME="FILENAME" CONTENT="clock_VBS.HTM">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+<SCRIPT LANGUAGE="VBScript">
+sub tick() 
+  dim hours, minutes, seconds, ap
+  dim intHours, intMinutes, intSeconds
+  dim today
+
+  intHours = Hour(Now)
+  intMinutes = Minute(Now)
+  intSeconds = Second(Now)
+
+  if (intHours = 0) then 
+     hours = "12:"
+     ap = "Midnight"
+  elseif (intHours < 12) then  
+     hours = intHours & ":"
+     ap = "A.M."
+  elseif (intHours = 12) then
+     hours = "12:"
+     ap = "Noon"
+     else 
+       intHours = intHours - 12
+       hours = intHours & ":"
+       ap = "P.M."
+  end if
+
+  if (intMinutes < 10) then
+     minutes = "0" & intMinutes & ":"
+  else 
+     minutes = intMinutes & ":"
+  end if
+
+  if (intSeconds < 10) then
+     seconds = "0" & intSeconds & " "
+  else 
+     seconds = intSeconds & " "
+  end if 
+
+  timeString = hours & minutes & seconds & ap
+
+  Clock.innerHTML = timeString
+
+  window.setTimeout "tick", 100
+end sub
+
+sub window_onload
+  tick
+end sub
+
+</SCRIPT>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>HTML Clock</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A HREF="#" ONCLICK="self.close()"><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A HREF="#" ONCLICK="self.close()">Close This Sample</A>
+</FONT>
+<HR>
+
+<P>
+<P>
+
+<DIV id=Clock align=center style="font-family: Verdana; font-size: 40; color:#0000FF">&nbsp;</DIV>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+This example displays the current time immediately, without 
+server interaction. This sample requires neither animated nor 
+downloaded images. The document automatically re-flows based on 
+content changes. Authors can implement this clock easily and 
+quickly with just a few lines of code.
+</FONT>
+
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+</BODY>
+</HTML>

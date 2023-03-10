@@ -1,0 +1,101 @@
+
+<HTML>
+<HEAD>
+<TITLE>HTML Clock</TITLE>
+<META NAME="FILENAME" CONTENT="clock_JS.HTM">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>HTML Clock</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+<P>
+<P>
+
+<DIV id=Clock align=center style="font-family: Verdana; font-size: 40; color:#0000FF">&nbsp;</DIV>
+
+<SCRIPT LANGUAGE="JavaScript">
+function tick() {
+  var hours, minutes, seconds, ap;
+  var intHours, intMinutes, intSeconds;
+  var today;
+
+  today = new Date();
+
+  intHours = today.getHours();
+  intMinutes = today.getMinutes();
+  intSeconds = today.getSeconds();
+
+  if (intHours == 0) {
+     hours = "12:";
+     ap = "Midnight";
+  } else if (intHours < 12) { 
+     hours = intHours+":";
+     ap = "A.M.";
+  } else if (intHours == 12) {
+     hours = "12:";
+     ap = "Noon";
+  } else {
+     intHours = intHours - 12
+     hours = intHours + ":";
+     ap = "P.M.";
+  }
+
+  if (intMinutes < 10) {
+     minutes = "0"+intMinutes+":";
+  } else {
+     minutes = intMinutes+":";
+  }
+
+  if (intSeconds < 10) {
+     seconds = "0"+intSeconds+" ";
+  } else {
+     seconds = intSeconds+" ";
+  } 
+
+  timeString = hours+minutes+seconds+ap;
+
+  Clock.innerHTML = timeString;
+
+  window.setTimeout("tick();", 100);
+}
+
+window.onload = tick;
+
+</SCRIPT>
+
+<P></P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+This example displays the current time immediately, without 
+server interaction. This sample requires neither animated nor 
+downloaded images. The document automatically re-flows based on 
+content changes. Authors can implement this clock easily and 
+quickly with just a few lines of code.
+</FONT>
+
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

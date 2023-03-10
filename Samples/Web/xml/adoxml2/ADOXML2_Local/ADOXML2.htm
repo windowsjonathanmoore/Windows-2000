@@ -1,0 +1,218 @@
+<html>
+<head>
+<meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<title>A simple shopping cart application</title>
+<link rel="stylesheet" type="text/css" href="global.css">
+</head>
+<body>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<p>This sample application implements a simple shopping 
+cart application using the SQL Server Pubs sample database. It allows you to 
+perform queries (enter price &lt; 15 in the SQL WHERE clause as a sample) 
+against the pubs database. The application returns to you a list of books that 
+match your query requirements. You can then select which books that you want 
+from that list by clicking on the check box next to each book, followed by the 
+Add to shopping cart button when you are done selecting books. The list of books in your shopping
+   cart is also displayed below. You can perform another query to select another
+   list of books (e.g. price &gt; 15) from which you can 
+   add selections to your shopping cart. When you are finished shopping,
+   you can click on the Check Out button which will cause the server
+   to compute your total and display the XML that contains
+   your order total in a message box.</p>
+
+<script language=JavaScript>
+
+// Globally-scoped array of 'buy' items
+var rgToBuy;
+
+// Globally-scoped XML parser
+var objXMLReq = null;
+
+// Handle user toggling the "buy" checkbox on a row in our table
+function toggleBuy() {
+	
+	if( event.srcElement.tagName == "INPUT" ) {
+		var i = event.srcElement.rownum;
+		rgToBuy[ i ] = !rgToBuy[ i ];
+	}
+}
+
+// List of field names to display
+var rgFields = new Array( "title", "type", "price", "notes", "pubdate" );
+
+// Generate the shopping cart HTML <TABLE> from raw xml data
+// We will only display the title of the book and its price
+function generateCartHTML( objXML ) {
+
+	var objCollRows = objXML.documentElement.selectNodes( "//z:row" );
+	var strHTML = "<TABLE><THEAD><TH>Title</TH><TH>Price</TH></THEAD><TBODY>";
+	
+	for( var i = 0; i < objCollRows.length; i++ ) {
+		strHTML += "<TR><TD>" + objCollRows.item( i ).attributes.getNamedItem( "title" ).text + "</TD>";
+		strHTML += "<TD>" + objCollRows.item( i ).attributes.getNamedItem( "price" ).text + "</TD></TR>";
+	}
+	
+	strHTML += "</TBODY></TABLE>";
+	return strHTML;	
+}
+
+// Generate the book list HTML <TABLE> from raw xml data
+function generateBookListHTML( objXML ) {
+
+	var i, j = 0;
+	var strHTML = "<TABLE language=javascript onclick='return toggleBuy()'><THEAD><TH>Buy</TH><TH>authors</TH>";
+	
+	// Retrieve the collection of database rows
+	var objCollRows = objXML.selectNodes( "//z:row" );
+	
+	// Build the table headings
+	for( i = 0; i < rgFields.length; i++ )
+		strHTML += "<TH>" + rgFields[ i ] + "</TH>";
+	
+	strHTML += "</THEAD><TBODY>";
+	
+	for( i = 0; i < objCollRows.length; i++ ) {
+
+		strHTML += "<tr><td><input rownum=" + i + " type=checkbox></td>";
+
+		// Build the list of authors!
+		var objCollAuthors = objCollRows.item( i ).selectNodes( "AUTHORS1" );
+		
+		strHTML += "<td>";
+		for( j = 0; j < objCollAuthors.length; j++ ) {
+			strHTML += objCollAuthors.item( j ).attributes.getNamedItem( "au_lname" ).text + ", ";
+			strHTML += objCollAuthors.item( j ).attributes.getNamedItem( "au_fname" ).text + "\n";
+		}
+		strHTML += "</td>";
+					
+		// Grab only the fields in the rgFields array
+		for( j = 0; j < rgFields.length; j++ ) {
+			
+			// We can run into cases where we have null attribute names!
+			try {
+				strHTML += "<td>" + objCollRows.item( i ).attributes.getNamedItem( rgFields[ j ] ).text + "</td>";
+			}
+			catch( e ) {
+				strHTML += "<td></td>";
+			}
+		}
+		strHTML += "</tr>";
+	}
+	strHTML += "</TBODY></TABLE>";
+
+	// Dimension the array appropriately and initialize the 'to buy' array to false
+	rgToBuy = new Array( objCollRows.length );
+	for( i = 0; i < objCollRows.length; i++ )
+		rgToBuy[ i ] = false;
+				
+	return strHTML;
+}
+
+function frmQuery_onsubmit() {
+
+	// Convert the input parameters into the appropriate XML string
+	var strRequestXML = "<request><computer>" + frmQuery.txtComputer.value + "</computer>";
+	strRequestXML += "<database>" + frmQuery.txtDatabase.value + "</database>";
+	strRequestXML += "<where><![CDATA[" + frmQuery.txtSQL.value + "]]></where></request>";
+
+	// Create an instance of the XML HTTP Request object
+	if( objXMLReq == null )
+		objXMLReq = new ActiveXObject( "Microsoft.XMLHTTP" );
+	
+	// Prepare the XMLHTTP Request object to issue a synchronous HTTP POST 
+	// request to the URL specified by the <form> action attribute
+	objXMLReq.open( "POST", frmQuery.action, false );
+
+	// Execute the HTTP POST request, passing strRequestXML as the request body
+	objXMLReq.send( strRequestXML );
+
+	// Drop the generated HTML into our <div> output element
+	divOutputResponse.innerHTML = generateBookListHTML( objXMLReq.responseXML );
+
+	// Cancel the default action of the <form> element
+	return false;
+}
+
+function btnAddToCart_onclick() {
+
+	// Select the rows in our current shopping cart 
+	var collRows = objXMLReq.responseXML.selectNodes( "//z:row" );
+
+	for( var i = 0; i < rgToBuy.length; i++ ) {
+
+		// Add to our shopping cart if buy bit is set
+		if( rgToBuy[ i ] )
+			xmlCart.documentElement.appendChild( collRows.item( i ) );
+	}
+	
+	// Display raw contents of our shopping cart		
+	divOutputCart.innerHTML = generateCartHTML( xmlCart );
+}
+
+function btnCheckout_onclick() {
+	
+	// Transmit the XML stored in the shopping cart to the server
+	var objXMLReq = new ActiveXObject( "Microsoft.XMLHTTP" );
+
+	// Send the XML stream to checkout.asp	
+	objXMLReq.open( "POST", "checkout.asp", false );
+	objXMLReq.send( xmlCart.documentElement.xml );
+
+	// Show the response
+	alert( objXMLReq.responseXML.xml );	
+	
+	// Whack the input fields
+	xmlCart.documentElement.text = "";
+	divOutputCart.innerHTML = "";
+	divOutputResponse.innerHTML = "";		
+}
+
+</script>
+
+<!-- This is the HTML form that will be used to gather up the parameters to	
+	 pass to the ASP page as part of an HTTP POST request. If you want to try
+	 the VBScript version of the server side code, change the action attribute
+	 of the <form> element from runQueryJ.asp to runQuery.asp -->
+<form action="runQueryJ.asp" 
+	  method="post" 
+	  id="frmQuery"
+	  language=JavaScript
+	  onsubmit="return frmQuery_onsubmit()">
+	  
+	<label>Computer name:</label><input id="txtComputer" name="txtComputer" maxLength="50" value="junior2" ><br>
+	<label>Database name:</label><input id="txtDatabase" name="txtDatabase" maxLength="20" value="pubs" ><br>
+	<label>SQL WHERE clause:</label><input id="txtSQL" name="txtSQL" maxLength="200" ><br>
+
+	<input type="submit" value="Submit" id=btnSubmit>
+
+</form>
+
+<!-- This is the outut <DIV> element that we'll use to display the contents
+     of the shopping cart. -->
+<p>Shopping cart:</p>
+<div id=divOutputCart></div>
+
+<!-- XML data island that is used to store the contents of the shopping cart -->
+<xml id=xmlCart>
+<cart/>
+</xml>
+
+<input type=button 
+	   id=btnCheckout 
+	   value="Check Out" 
+	   language=JavaScript 
+	   onclick="return btnCheckout_onclick()">
+
+<p>List of books that match current query:</p>
+<!-- DIV element that is used to display the contents of the query result -->
+<div id=divOutputResponse></div>
+
+<input type=button
+	   id=btnAddToCart
+	   value="Add to shopping cart"
+	   language=JavaScript
+	   onclick="return btnAddToCart_onclick()">
+	   
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<HTML DIR="LTR">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>MSMQ Triggers</TITLE>
+
+<META NAME="MS-HKWD" CONTENT="MSMQ Triggers">
+<META NAME="MS-HKWD" CONTENT="MSMQ Trigger Manager">
+<META NAME="MS-HKWD" CONTENT="MSMQ Trigger Monitor">
+<META NAME="MS-HKWD" CONTENT="MSMQ Triggers Service">
+<META NAME="MS-HKWD" CONTENT="Trigmon.exe">
+<META NAME="MS-HKWD" CONTENT="Trigserv.exe">
+<META NAME="MS-HKWD" CONTENT="MSMQTriggers.exe">
+<META NAME="MS-HKWD" CONTENT="MSMQ">
+<META NAME="MS-HKWD" CONTENT="Message Queuing">
+<META NAME="MS-HKWD" CONTENT="MSMQ tools">
+<META NAME="MS-HKWD" CONTENT="Message Queuing tools">
+<META NAME="MS-HKWD" CONTENT="triggers">
+<META NAME="MS-HKWD" CONTENT="trigger rules">
+<META NAME="MS-HKWD" CONTENT="rules">
+<META NAME="MS-HKWD" CONTENT="rules, trigger">
+<META NAME="MS-HKWD" CONTENT="rule handler">
+<META NAME="MS-HKWD" CONTENT="trigger conditions">
+<META NAME="MS-HKWD" CONTENT="conditions">
+<META NAME="MS-HKWD" CONTENT="conditions, trigger">
+<META NAME="MS-HKWD" CONTENT="trigger actions">
+<META NAME="MS-HKWD" CONTENT="action arguments">
+<META NAME="MS-HKWD" CONTENT="arguments, action">
+<META NAME="MS-HKWD" CONTENT="actions">
+<META NAME="MS-HKWD" CONTENT="queues">
+<META NAME="MS-HKWD" CONTENT="queues, MSMQ">
+<META NAME="MS-HKWD" CONTENT="messages">
+<META NAME="MS-HKWD" CONTENT="queues, MSMQ">
+</HEAD>
+
+<BODY>
+
+
+
+<H1>MSMQ Triggers</H1>
+
+<HR>
+
+<P>MSMQ Triggers is Message Queuing application that allows you to  associate incoming messages in a queue with functionality in a COM component or standalone .exe. As such, business rules can be invoked in response to such messages without any additional programming.</P>
+
+<P>MSMQ Triggers works with Message Queuing for Windows&nbsp;2000 and MSMQ&nbsp;1.0 for Windows&nbsp;NT 4.0.</P> 
+
+<H3>MSMQ Triggers Concepts</H3>
+
+<P>Triggers are associated with specific queues on a computer and are invoked every time a Message Queuing message arrives at such queues. A trigger is comprised of one or more rules. These rules are defined by actions that will be invoked when all conditions associated with a rule are true.</P> 
+
+<P>A <I>trigger</I> is an automatic action taken in response to a message event. In the context of MSMQ Triggers, an event is defined as one or more conditions being satisfied with respect to a message arriving at a queue. The collection of all triggers on a particular computer is called the <I>trigger set</I>.</P>
+
+<P>A <I>condition</I> is a test that is applied when a message arrives at a monitored queue. The condition can test for a property of a message only. A condition is always paired with an action.</P>
+
+<P>An <I>action</I> is an executable behavior that is taken when a condition is true. An action can be expressed as an executable and argument list; or, a COM component, method, and argument list. Arguments are also called parameters.</P>
+
+<P>A <I>rule</I> is an action-condition pair. A rule describes an action that will be taken when a specific condition is true. The collection of all rules (for all triggers) on a particular computer is called the <I>rule set</I>. A default rule handler, IMSMQRuleHandler, is used to test the condition and implement the action for a rule. This is the only supported rule handler.</P>
+
+<P>An <I>action</I> is an executable behavior that is taken when a condition is true. An action can be expressed as an executable and argument list; or, a COM component, method, and argument list. Arguments are also called parameters.</P>
+
+<P>A <I>rule</I> is an action-condition pair. A rule describes an action that will be taken when a specific condition is true. The collection of all rules (for all triggers) on a particular computer is called the <I>rule set</I>. A default rule handler, IMSMQRuleHandler, is used to test the condition and implement the action for a rule. This is the only supported rule handler.</P>
+
+<P>The MSMQ Triggers Service reads messages from a monitored queue, that is, the service peeks at such messages. Messages are not removed from queues by this service. It should be noted that another Message Queuing application may open the queue and remove messages before the MSMQ Triggers Service can peek at the queue.</P> 
+
+<B>Note</B>
+<P>On Windows&nbsp;NT&nbsp;4.0, a trigger cannot be associated with a private queue located on a remote computer.</P>
+
+<H3>Why Use MSMQ Triggers?</H3>
+
+<P>To provide message-handling functionality currently, applications developers must create a receiving application that invokes specific behavior on a per-message basis.</P>  
+
+<P>By using MSMQ Triggers, specific behavior can be invoked at a queue level. Application developers no longer need to write any infrastructure code to provide such message-handling functionality.</P>
+
+<H3>MSMQ Triggers Components</H3>
+
+<P>MSMQ Triggers consists of three separate programs. The first, Trigserv.exe, is the executable for running the MSMQ Triggers service. The second, Trigsnap.dll, is a snap-in DLL used in Microsoft Management Console (MMC) to manage triggers and define rules. The third, MSMQ Trigger Monitor (Trigmon.exe), is a troubleshooting application used to capture and display detailed trace and diagnostic information generated by the MSMQ Triggers Service. </P>
+
+<A NAME="msmqtrig_topics"></A><P><B>MSMQ Triggers Topics</B></P>
+<UL>
+	<LI><A HREF="msmqtrig_installing.htm">Installing MSMQ Triggers</A></LI>
+	<LI><A HREF="msmqtrig_using.htm">Using MSMQ Trigger Manager</A></LI>
+	<LI><A HREF="msmqtrig_examples.htm">MSMQ Triggers Example</A></LI>
+	<LI><A HREF="msmqtrig_trouble.htm">Troubleshooting MSMQ Triggers</A></LI>
+</UL>
+
+<P><B>Files Required</B></P>
+<UL>
+	<LI>Msmqtriggers.exe - self-extracting setup program that installs MSMQ Triggers</LI>
+	<LI>Trigserv.exe - main executable for the MSMQ Triggers Service</LI>
+	<LI>Trigobjs.dll - DLL that contains COM objects used by the MSMQ Triggers Service</LI>
+	<LI>Trigsnap.dll - snap-in DLL for MMC used to manage triggers and rules</LI>
+	<LI>Trigmon.exe - Microsoft&reg; Visual Basic&reg; executable for MSMQ Trigger Monitor</LI>
+</UL>
+
+<P><B>For More Information</B></P>
+
+<P>For more information on Message Queuing, visit:<BR>
+<A HREF="http://www.microsoft.com/ntserver/appservice/exec/overview/msmq_overview.asp" TARGET="out">Message Queuing Overview and Resources Web site</A>.</P>
+
+
+</BODY>
+</HTML>

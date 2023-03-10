@@ -1,0 +1,22 @@
+#include <windows.h>
+#include <raserror.h>
+
+/* NT-standard version information
+*/
+#include <ntverp.h>
+
+#define VER_FILETYPE             VFT_DLL
+#define VER_FILESUBTYPE          VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR  "Remote Access Custom Dialog Dll"
+#define VER_INTERNALNAME_STR     "custom.dll"
+#define VER_ORIGINALFILENAME_STR "custom.dll"
+
+//#if defined( BUILD_PRODUCT_VER ) && ( BUILD_PRODUCT_VER >= 400 )
+
+//#include "common.ver"   // NT5.0 version file.
+
+//#else
+
+//#include "routing.ver"  // Router Version File - lies in routing\inc
+
+//#endif

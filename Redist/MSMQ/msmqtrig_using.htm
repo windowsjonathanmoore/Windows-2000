@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<HTML DIR="LTR">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Using MSMQ Triggers</TITLE>
+
+</HEAD>
+
+<BODY>
+
+<P><A HREF="msmqtrig.htm" TITLE="MSMQ Triggers">MSMQ Triggers Topics</A> | <A HREF="msmqtrig_installing.htm" TITLE="Installing MSMQ Triggers">Previous</A> | <A HREF="msmqtrig_trouble.htm" TITLE="Troubleshooting MSMQ Triggers">Next</A></P>
+
+<H2>Using MSMQ Triggers</H2>
+
+<HR>
+
+<P>Triggers and their rules are displayed in, and can be managed from, the Computer Management snap-in in the Microsoft Management Console (MMC) for Windows&nbsp;2000 and Windows&nbsp;NT&nbsp;4.0. For Windows&nbsp;2000, you must first expand <B>Services and Applications</B> and then expand <B>Message Queuing</B> in the console tree (usually the left pane).</P>
+
+<P>Under the Triggers folder, the Trigger definitions folder and the Rule definitions folder can then be expanded to view individual trigger and rule definitions respectively. Alternatively, a queue folder can also be expanded to view related triggers and rules. Simply right-click a trigger or rule to access properties and definitions.</P>
+
+<P><B>Note</B></P>
+<P>The version of MMC required for using MSMQ Triggers with the Computer Management snap-in is version 1.1. This version is not provided with Windows&nbsp;NT 4.0. For information on upgrading the version of MMC you are using, see the <A HREF="http://www.microsoft.com/isapi/redir.dll?PRD=Win2000&Sbp=ResKit&Ar=Management&Sba=mmc" TARGET="_new">Microsoft Management Console Home Page</A>.</P>
+
+<P>For more information on MMC and using snap-ins, see Windows Help for MMC.</P>
+
+<H3>Managing Triggers</H3>
+
+<P>All triggers created on the local computer are displayed in the Computer Management snap-in. The left pane displays the trigger set and the rule set, while the right pane displays additional properties associated with each trigger.</P>
+
+<P>Triggers can be serialized. Serialized triggers will process messages in the order in which they arrive; however, the throughput is lower than for non-serialized triggers as messages are processed one at a time. Non-serialized triggers allow for higher throughput but may not process messages in the order in which they arrive, such as when multiple messages are processed simultaneously. Multiple triggers associated with a queue must be either all serialized or all non-serialized, otherwise their behavior cannot be defined. It is recommended that you use only a single trigger with the serialized option since the order of trigger firing is random according to their GUIDs.</P> 
+
+<P>The following describes the various tasks associated with managing triggers on a computer.</p>
+
+<P><B>To create a trigger</B></P>
+<OL>
+<LI>In the console tree, expand <B>Triggers</B>, right-click <B>Trigger definitions</B>, point to <B>New</B>, and then click <B>New trigger</B>.</LI>
+<LI>In <B>Trigger name</B>, enter a name for the trigger.</LI>
+<LI>In <B>Queue path name</B>, enter the name of the queue to attach the trigger to. This must be the path name, not the format name for the queue. For example, Mycomputer\Myqueue is a valid format.</LI>
+<LI>Select if the trigger is to be enabled or disabled.</LI>
+<LI>Select if the trigger is to be serialized or not.</LI>
+<LI>Create rules for this trigger as needed. For more information, see <A HREF="msmqtrig_using.htm#Tocreatearule">To create a rule</A>.</LI>
+</OL>
+
+
+<P><B>Note</B></P>
+<P>Before creating a trigger, verify that the account the MSMQ Trigger Service runs under has been granted the Peek Message permission for all existing queues that will be associated with triggers.</P>
+
+<P><B>To edit a trigger definition</B></P>
+<OL>
+<LI>In the console tree, expand <B>Triggers</B>, double-click <B>Trigger definitions</B>, right-click the applicable trigger, and then click <B>Properties</B>.</LI>
+<LI>Change the trigger properties as needed.</LI>
+</OL>
+
+<P><B>To delete a trigger</B></P>
+<UL>
+<LI>In the console tree, double-click <B>Triggers</B>, expand <B>Trigger definitions</B>, right-click the applicable trigger, and then click <B>Delete</B>.</LI>
+</UL>
+
+<H3>Managing Rules for Triggers</H3>
+
+<P>All rules created on the local computer are displayed in the Computer Management snap-in. You can assign multiple rules to a trigger; in this case, the rules are executed in the order they are displayed in the rules list. You can change the priority of rules in this list. Rules displayed are disabled by default, you must select the applicable check box next to the rule to enable it for use with the trigger.</P>
+
+<P>To summarize, a rule is comprised of one or more conditions, with an action executed when the condition(s) are true. The condition is applied to a message when it arrives at the monitored queue, and yields either a true or false result. Multiple conditions must all be true for an action to be executed. If no condition is specified, this will always return a true value. This is useful when you want a trigger to fire unconditionally every time a message arrives at the monitored queue. The following table lists the supported conditions.</P>
+
+<TABLE border=1>
+<TR>
+<!--Column 1--><TH>Condition</TH>
+<!--Column 2--><TH>Description</TH>
+</TR>
+<TR>
+<!--Column 1--><TD>Message Label Contains/Does Not Contain</TD>
+<!--Column 2--><TD>Tests if the label of the arrived message contains (or does not contain) the string you specified. This string is case-sensitive.</TD>
+</TR>
+<TR>
+<!--Column 1--><TD>Message Priority Equals/Not Equal/Greater Than/Less Than</TD>
+<!--Column 2--><TD>Tests if the priority of the arrived message satisfies the mathematical expression you specified.</TD>
+</TR>
+<TR>
+<!--Column 1--><TD>Message AppSpecific Equals/Not Equal/Greater Than/Less Than</TD>
+<!--Column 2--><TD>Tests if some application-specific numeric value satisfies the mathematical expression you specified. </TD>
+</TR>
+<TR>
+<!--Column 1--><TD>Message Body Contains/Does Not Contain</TD>
+<!--Column 2--><TD>This applies only to messages in which the body type is VT_BSTR, otherwise the condition will always be false.</TD>
+</TR>
+<TR>
+<!--Column 1--><TD>Message Source Machine ID Equals/Not Equals</TD>
+<!--Column 2--><TD>Tests if the source computer GUID is equal to (or does not equal) the value you specified.</TD>
+</TR>
+</TABLE>
+
+<P>Actions taken when a condition is true are either expressed in the form of an executable file and arguments (parameters), or in the form of a COM component, method, and arguments. You can specify one or more arguments to be passed per action. The supported arguments are listed on the <B>Action</B> tab for the rule definitions property page.</P> 
+
+<P>When the action specified is in the form of a COM component, you can specify a return value that determines whether the MSMQ Trigger Service will continue processing rules or not. In this case, the return value should be of the enum type MSMQTriggerObjects::RulesProcessingStatus, and can have the values RULES_PROCESSING_CONTINUE or RULES_PROCESSING_STOP.</P>
+
+<P>The following describes the various tasks associated with managing trigger rules.</p>
+
+<P><A NAME="Tocreatearule"><B>To create a rule for a trigger</B></A></P>
+<OL>
+<LI>In the console tree, expand <B>Triggers</B>, right-click <B>Rule definitions</B>, point to <B>New</B>, and then click <B>New rule</B>.</LI>
+<LI>On the <B>General</B> tab, enter a name and a description for the rule.</LI>
+<LI>On the <B>Conditions</B> tab, select a condition from the list, enter the condition value or string in the space adjacent, and then click the plus (<B>+</B>) button. (You can also use the minus (<I>-</I>) button to remove a condition). Repeat this step as needed.</LI>
+<LI>On the <B>Action</B> tab, do one of the following:
+	<UL>
+	<LI>To start an executable when the condition is met, click <B>Start standalone executable</B> and in <B>Standalone EXE path</B>, enter the folder path and name to the executable file. If desired, select the <B>Show window</B> check box.</LI>
+	<LI>To start a COM component when the condition is met, click <B>Invoke COM component </B>, in <B>COM component prog-id</B>, enter the program ID or CLSID for the component, and in <B>Method name</B>, enter the method used.</LI>
+	</UL></li>
+<LI>In <B>Parameters</B>, select an argument from the list, and then click the plus (<B>+</B>) button. (You can also use the minus (<B>-</B>) button to remove an argument). Repeat this step as needed.</LI>
+<LI>If applicable, click the up-arrow or down-arrow buttons to move each parameter higher or lower in priority. This changes the order in which the parameters are passed.</LI>
+<LI>When finished, click <B>Apply</B> and then click <B>OK</B>.</LI>
+<LI>In the console tree, right-click the trigger you want to associate the rule with and then click <B>Add/remove rules</B>.</LI>
+<LI>On the <B>Rules list</B> tab, select the check box next to the new rule to enable it.</LI>
+</OL>
+
+<P><A NAME="Toeditarule"><B>To edit a rule definition</B></A></P>
+<OL>
+<LI>In the console tree, expand <B>Triggers</B>, double-click <B>Rule definitions</B>, right-click the applicable rule, and then click <B>Properties</B>.</LI>
+<LI>Change properties and values as needed.</LI>
+</OL>
+
+<P><B>To change the priority of a rule for a trigger</B></P>
+<OL>
+<LI>In the console tree, expand <B>Triggers</B>, expand <B>Trigger definitions</B>, and then expand the applicable trigger.</LI>
+<LI>Right-click the applicable rule underneath the trigger, point to <B>All Tasks</B>, and then click <B>Move Up</B> or click <B>Move Down</B> as needed to give the rule a higher or lower priority respectively.</LI>
+</OL>
+
+<P><B>To delete a rule</B></P>
+<UL>
+<LI>In the console tree, expand <B>Triggers</B>, expand <B>Rule definitions</B>, right-click the applicable rule, and then click <B>Delete</B>.</LI>
+</UL>
+
+<H3><A NAME="changedefaultconfigvalues">Changing Default Configuration Values</A></H3>
+
+<P>MSMQ Triggers installs with a set of default configuration values. You can change these values after installation using the Computer Management snap-in by right-clicking <B>Triggers</B>, clicking <B>Properties</B>, and then changing the values as needed.</P>
+
+<P>All configuration information, as well as trigger definition information, is stored in the local registry under HKEY_LOCAL_MACHINE\Software\Microsoft\MSMQ\Triggers.</P>
+
+<P><B>Notes</B></P>
+<UL>
+    <LI>The <B>Default message body</B> value is the size of the buffer that the MSMQ Triggers Service will allocate for an incoming message. This value should be set to a size that will accommodate 90% of all messages that are expected to arrive in monitored queues. If this value is set too small, it will force the service to reallocate these buffers for every message. If set too large, too much memory will be allocated.</LI>
+	<LI>If you want to use MSMQ Triggers Monitor, you must first select the <B>Write to log queue</B> check box. For more information, see <A HREF="msmqtrig_trouble.htm#usingtriggermonitor">Using MSMQ Triggers Monitor</A>.</LI>
+</UL>
+
+</BODY>
+</HTML>

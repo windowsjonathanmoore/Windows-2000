@@ -1,0 +1,17 @@
+<%@ Language=VBScript %>
+<%
+Response.ContentType = "text/xml"
+Response.Expires = 0
+%>
+<?xml version="1.0"?>
+<%
+dim strConn, strSQL, objRS
+strConn = "Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;"
+strConn = strConn + "Initial Catalog=" + Request( "txtDatabase" )
+strConn = strConn + ";Data Source=" + Request( "txtComputer" )
+strSQL = Request( "txtSQL" )
+
+set objRS = Server.CreateObject( "ADODB.Recordset" )
+objRS.Open strSQL, strConn 
+objRS.Save Response, adPersistXML 
+%>

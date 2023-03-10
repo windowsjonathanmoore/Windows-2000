@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Marker Seeking</TITLE>
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+</HEAD>
+
+
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Seeking to Markers</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<CENTER>
+<!-- BEGIN GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+<OBJECT ID="MediaPlayer1" width=160 height=182 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="FileName" VALUE="markers.asx">
+  <PARAM NAME="ShowStatusBar" VALUE="True">
+  <EMBED type="application/x-mplayer2" 
+	pluginspage = "http://www.microsoft.com/Windows/MediaPlayer/"
+	SRC="markers.asx"
+	name="MediaPlayer1"
+	width=160
+	height=182
+	ShowStatusBar=true></EMBED>
+</OBJECT>
+<!-- END GENERIC ALL BROWSER FRIENDLY HTML FOR WINDOWS MEDIA PLAYER -->
+
+<FORM Name="markerForm">
+	<INPUT TYPE="button" VALUE="1" onClick="seekToMarker(1)">
+	<INPUT TYPE="button" VALUE="2" onClick="seekToMarker(2)">
+	<INPUT TYPE="button" VALUE="3" onClick="seekToMarker(3)">
+	<INPUT TYPE="button" VALUE="4" onClick="seekToMarker(4)">
+</FORM>
+</CENTER>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+// This function receives an integer from the buttons above and resets the current 
+//	position of the file to that marker.
+function seekToMarker(iWhichMarker){
+    if ((navigator.userAgent.indexOf("IE") > -1) && (navigator.platform == "Win32")) {
+	// This is an error handler.  If the user tries to scan to a marker which doesn't
+	//     exist, the player will pop an error message.  By using this code, we
+	//     can create a custom error message.
+	if (iWhichMarker <= document.MediaPlayer1.MarkerCount) {
+		// This resets the current marker in the file.
+		document.MediaPlayer1.CurrentMarker = iWhichMarker;
+	} else {  
+		alert("This Marker doesn't exist.");
+	}
+    } else {
+	if (iWhichMarker <= document.MediaPlayer1.GetMarkerCount()) {
+		document.MediaPlayer1.SetCurrentMarker(iWhichMarker);
+	} else {
+		alert("This Marker doesn't exist.");
+	}
+
+    }
+}
+</SCRIPT>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>

@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Event Handling Demo2</TITLE>
+<style>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</style>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" onload="loader()">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Handling Events Cross-Browser</H2>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<CENTER>
+<script language="JavaScript">
+<!--
+    if ( navigator.appName == "Netscape" ) 
+    {
+         //-- This next line ensures that any plugins just installed are updated in the Browser
+         //-- without quitting the browser.
+        navigator.plugins.refresh();
+         // We don't need the APPLET within IE, and APPLET is treated as an implied
+         // end to the OBJECT tag by the IE HTML parser.
+         // ***Please note that if you do not need to script events, you can safely remove the next two lines
+        document.write("\x3C" + "applet MAYSCRIPT Code=NPDS.npDSEvtObsProxy.class" )
+        document.writeln(" width=5 height=5 name=appObs\x3E \x3C/applet\x3E")
+     }
+//-->
+</script>
+<OBJECT ID="MediaPlayer1" width=160 height=120 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase=
+	"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="AutoStart" VALUE="False">
+  <PARAM NAME="FileName" VALUE="events2.asx">
+  <PARAM NAME="ShowControls" VALUE="False">
+  <PARAM NAME="ShowStatusBar" VALUE="False">
+  <EMBED type="application/x-mplayer2" 
+	pluginspage="http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/"
+	SRC="events2.asx"
+	name="MediaPlayer1"
+	width=160
+	height=120
+	autostart=0
+	showcontrols=0>
+  </EMBED>
+</OBJECT>
+
+
+
+<TABLE>
+ <TR>
+  <TD><A HREF="#" onmouseover="swap(image1,'play.gif')" onmouseout="swap(image1,'play_low.gif')" OnClick="document.MediaPlayer1.Play()"><IMG border=0 name="image1" SRC="play_low.gif"></A></TD>
+  <TD><A HREF="#" onmouseover="swap(image2,'pause.gif')" onmouseout="swap(image2,'pause_low.gif')" OnClick="PauseClick()"><IMG border=0 name="image2" SRC="pause_low.gif"></A></TD>
+  <TD><A HREF="#" onmouseover="swap(image3,'stop.gif')" onmouseout="swap(image3,'stop_low.gif')" OnClick="StopClick()"><IMG border=0 name="image3" id="image3" SRC="stop_low.gif"></A></TD>
+ </TR>
+</TABLE>
+
+</CENTER>
+
+<SCRIPT LANGUAGE="JavaScript">
+var bControl;
+
+function swap(whichImage, whatURL){
+	if (whichImage.src.indexOf('_hi') == -1) {
+		whichImage.src = whatURL;
+	}
+}
+
+function StopClick(){
+	document.MediaPlayer1.Stop(); 
+	if (bControl == true){
+		document.MediaPlayer1.CurrentPosition=0;
+	} else {
+		document.MediaPlayer1.SetCurrentPosition(0);
+	}
+}
+
+function PauseClick(){
+   	if (bControl == true) {
+		if (document.MediaPlayer1.PlayState == 2){
+			document.MediaPlayer1.Pause();
+		}
+	} else {
+		if (document.MediaPlayer1.GetPlayState() == 2){
+			document.MediaPlayer1.Pause();
+		}
+   	}
+}
+function OnDSPlayStateChangeEvt (oldState, newState){
+//function OnDSPlayStateChangeEvt(oldState, newState){
+	doPlayStateChanges(oldState,newState);
+}
+
+function loader(){
+	if ((navigator.userAgent.indexOf('IE') > -1) && (navigator.platform == "Win32")) {
+		bControl = true;
+	} else {
+		var plugIn = document.MediaPlayer1;
+		bControl = false;
+		document.appObs.setByProxyDSPlayStateChangeObserver(plugIn,true); // listen for NewStream Event	
+	}
+	document.MediaPlayer1.Play(); 
+}
+
+function doPlayStateChanges(oldState,newState){
+	timerID = setTimeout("document.image1.src = \"play_low.gif\";",0);
+	timerID = setTimeout("document.image2.src = \"pause_low.gif\";",0);
+	timerID = setTimeout("document.image3.src = \"stop_low.gif\";",0);
+
+	switch(newState) {
+	case 0:
+		timerID = setTimeout("document.image3.src = \"stop_hi.gif\";",0);
+		break;
+	case 1:
+		timerID = setTimeout("document.image2.src = \"pause_hi.gif\";",0);
+		break;
+	case 2:
+		timerID = setTimeout("document.image1.src = \"play_hi.gif\";",0);
+		break;
+	}
+}
+</SCRIPT>
+
+<SCRIPT FOR="MediaPlayer1" EVENT="PlayStateChange(oldState,newState)" LANGUAGE="Jscript">
+	doPlayStateChanges(oldState, newState);
+</SCRIPT>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+Report Card Viewer
+
+Files:
+reportcard.htm
+reportcard.xml
+reportcard.dtd
+
+Description:
+This demo illustrates the master/detail feature available with Internet Explorer 5.  This
+feature allows you to do current record binding on a hierarchical recordset. In this particular case,
+the new C++ XMLDSO is being used as the Data Source Object. 
+
+To view the details of each student's performance, click on the "Details" button or on the name itself.
+The current record now becomes that of the chosen student and the information contained within that "student" 
+element is displayed in the table to the right.
+
+This is also a good example of using ADO methods and properties to process XML data.
+
+Compatibility/Platform Compatibility:
+You must be running Microsoft Internet Explorer 5 or greater to view this demo.
+

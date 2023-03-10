@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Calendar Data Source Applet</TITLE>
+<META NAME="FILENAME" CONTENT="applet_VBS.HTM">
+
+
+<SCRIPT TYPE="text/vbscript" LANGUAGE="VBScript">
+	dim loaded
+	loaded = false
+
+	sub window_onload
+	  loaded = true
+	  language.selectedIndex=0
+	  changeLocale
+    end sub
+
+	sub language_onfocus
+		if not(loaded) then
+		me.blur()
+		end if
+	end sub
+
+      sub setLabels()
+		  dim i
+          dim id
+          dim e
+          dim label
+          dim j
+          for i = 0 to 6
+			j = i + 1
+			id = "col" & j
+            label = Calendar.getDayLabel(i)
+            set e = document.all.item(id)
+            e.innerText = label
+          next
+          document.all.item("date").innerText = Calendar.getDate()
+      end sub
+
+      sub changeLocale()
+		dim e
+		dim i
+        set e = document.all.item("language")
+        i = e.selectedIndex
+        Calendar.setLocale(e.options(i).value)
+        setLabels()
+      end sub
+
+      function getLanguage()
+		dim s
+		dim e
+		dim i
+        s = Calendar.getLocale()
+        e = document.all.item("language")
+
+        for i = 0 to (e.length - 1)
+			if (e.options(i).value = s) then
+                getLanguage = i
+			end if
+		next
+        getLanguage = -1
+      end function
+
+      sub changeMonth(which)
+        if (which = "previous") then
+          Calendar.ChangeMonth(-1)
+        elseif (which = "next") then
+          Calendar.ChangeMonth(1)
+        end if
+        document.all.item("date").innerText = Calendar.getDate()
+      end sub
+
+      sub mousemove(which)
+		dim e
+		dim color
+		if (which = "over") then
+			color = "yellow"
+		else
+			color = ""
+		end if
+
+		set e = window.event.srcElement
+
+        while (e.tagName <> "TD" AND e.tagName <> "TABLE")
+          set e = e.parentElement
+        wend
+
+        if (e.tagName = "TD") then
+          e.style.backgroundColor = color
+        end if
+      end sub
+
+</SCRIPT>
+
+<STYLE>
+  TD    {width:80px; height:50px; font-size:60%;}
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2> Calendar Data Source Applet</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A>
+</FONT>
+<HR>
+
+<P>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  The applet implements a JavaBeans-compliant interface to expose its data
+  to the page. The data set the applet provides consists of rows representing
+  weeks in the month and columns representing the days of the week.
+</FONT>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+  You can change the month the applet displays by clicking on the buttons
+  and the language by selecting one of the languages from the drop down list.
+  These buttons use script code to invoke methods on the data source applet.
+  The data source applet then displays a data set corresponding to the month
+  and year specified.
+</FONT>
+
+<P>
+<DIV>
+  <INPUT type=button value="Previous Month" onclick='changeMonth("previous")' language=javascript>
+  <INPUT type=button value="  Next Month  " onclick='changeMonth("next")' language=javascript>
+   Language:
+  <SELECT id=language onchange=changeLocale() language=javascript>
+    <OPTION value="en.USA">English</OPTION>
+    <OPTION value="iw.">Hebrew</OPTION>
+    <OPTION value="lt.">Lithuanian</OPTION>
+    <OPTION value="ru.">Russian</OPTION>
+    <OPTION value="et.">Estonian</OPTION>
+    <OPTION value="pl.">Polish</OPTION>
+    <OPTION value="hu.">Hungarian</OPTION>
+    <OPTION value="is.">Icelandic</OPTION>
+  </SELECT>
+
+</DIV>
+
+<APPLET id=Calendar width=0 height=0 code=CalendarApplet.class>
+  <PARAM NAME="cabbase" VALUE="calendar.cab">
+</APPLET>
+
+<H2 id=date>&nbsp;</H2>
+
+<TABLE id=table onMouseOver='mousemove("over")' onMouseOut='mousemove("out")' border bgcolor="white" datasrc=#Calendar cellpadding=3>
+  <THEAD>
+    <TR>
+      <TH id=col1>1</TH>
+      <TH id=col2>2</TH>
+      <TH id=col3>3</TH>
+      <TH id=col4>4</TH>
+      <TH id=col5>5</TH>
+      <TH id=col6>6</TH>
+      <TH id=col7>7</TH>
+    </TR>
+  </THEAD>
+
+  <TBODY>
+    <TR>
+      <TD valign=top><DIV datafld=1 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=2 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=3 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=4 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=5 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=6 dataformatas=HTML></DIV></TD>
+      <TD valign=top><DIV datafld=7 dataformatas=HTML></DIV></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+<BR><BR>
+<P>
+<HR>
+
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+ TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

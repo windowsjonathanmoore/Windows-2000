@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0034)file://G:\Temp2\Repros\DShadow.htm -->
+<HTML><HEAD><TITLE>Wipe Image transform in DirectAnimation</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2013.2700" name=GENERATOR></HEAD>
+<BODY bgColor=white leftMargin=20 link=#0033cc><FONT 
+face="Verdana, Arial, Helvetica" size=2>
+<CENTER>
+<H1>Wipe Image Transform in DirectAnimation</H1>
+<OBJECT classid=CLSID:B6FFC24C-7E13-11D0-9B47-00C04FC2F51D id=DAControl 
+style="HEIGHT: 342px; LEFT: 0px; POSITION: relative; TOP: 50px; WIDTH: 512px"></OBJECT></CENTER>
+<SCRIPT language=JScript>
+<!--
+
+   // The DirectAnimation library
+   m = DAControl.MeterLibrary;
+
+function GetImageStructured()
+  {
+    var img;
+    var w = .003;
+    var h = .003;
+    var x = .002;
+    var y = .002;
+
+    img = new Array();
+    img[0] = m.Rect(w,h).Fill(m.DefaultLineStyle,m.SolidColorImage(m.Red))
+             .Transform(m.Rotate3RateDegrees(m.XVector3, Math.random()*-20-15).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.YVector3, Math.random()*-20-20).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.ZVector3, Math.random()*-20-25).ParallelTransform2())
+             .Transform(m.Translate2(x,y));
+    img[1] = m.Rect(w,h).Fill(m.DefaultLineStyle,m.SolidColorImage(m.Green))
+             .Transform(m.Rotate3RateDegrees(m.XVector3, Math.random()*20+15).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.YVector3, Math.random()*20+20).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.ZVector3, Math.random()*20+25).ParallelTransform2())
+             .Transform(m.Translate2(-x,y));
+    img[2] = m.Rect(w,h).Fill(m.DefaultLineStyle,m.SolidColorImage(m.Blue))
+             .Transform(m.Rotate3RateDegrees(m.XVector3, Math.random()-20-15).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.YVector3, Math.random()-20-20).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.ZVector3, Math.random()-20-25).ParallelTransform2())
+             .Transform(m.Translate2(-x,-y));
+    img[3] = m.Rect(w,h).Fill(m.DefaultLineStyle,m.SolidColorImage(m.Black))
+             .Transform(m.Rotate3RateDegrees(m.XVector3, Math.random()*20+15).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.YVector3, Math.random()*20+20).ParallelTransform2())
+             .Transform(m.Rotate3RateDegrees(m.ZVector3, Math.random()*20+25).ParallelTransform2())
+             .Transform(m.Translate2(x,-y));
+    img[4] = m.DetectableEmptyImage.Crop(m.Point2(-.005,-.005),m.Point2(.005,.005));
+    return m.OverlayArray(img);
+  }
+
+   //img1 = m.ImportImage("apple.gif");
+   //img2 = m.ImportImage("../../media/image/tulipshol2.jpg");
+
+img1 = GetImageStructured();
+   
+   inputImgs = new Array(img1);
+
+   chroma = new ActiveXObject("DXImageTransform.Microsoft.DropShadow");
+
+   // set the width of the transition band,
+   // which is a custom property on the transform
+   //chroma.Color = "#ffffff";
+
+   function myInterp(duration) {
+       forward = m.Interpolate(0, 1, duration);
+       back = m.Interpolate(1, 0, duration);
+       return m.Sequence(forward, back).RepeatForever();
+   }
+
+   // cycle through effect in 4 seconds
+   result = m.ApplyDXTransform(chroma, inputImgs, null);
+
+
+  trans = new ActiveXObject("DirectAnimation.DATransform2");
+  trans.Init(m.Until(m.IdentityTransform2, m.LeftButtonDown, 
+                    m.Until(m.Rotate2RateDegrees(60), m.LeftButtonDown, trans)));
+   //finalImage = img1;
+   finalImage = result.OutputBvr.Transform(trans);
+
+   finalImage = m.Overlay(finalImage, m.SolidColorImage(m.White));
+
+   DAControl.Image = finalImage;
+   DAControl.Start();
+
+-->
+</SCRIPT>
+
+<CENTER><FONT face=Verdana,Tahoma,Arial 
+size=4></FONT></CENTER></FONT></BODY></HTML>

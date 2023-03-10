@@ -1,0 +1,17 @@
+;-------------------------------------
+;BROWSEH.DEF module definition file
+;-------------------------------------
+
+LIBRARY         BROWSEH
+
+DESCRIPTION    'OLE Automation TypeLibrary Browse Helper Sample'
+HEAPSIZE       1024
+STACKSIZE      0
+
+EXPORTS	DllGetClassObject @1 PRIVATE
+	DllCanUnloadNow @2 PRIVATE
+	WEP   @3 
+
+
+
+

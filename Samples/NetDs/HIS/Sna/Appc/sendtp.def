@@ -1,0 +1,22 @@
+NAME  SENDTP        ; Application module name
+
+DESCRIPTION  'Sample APPC test application'
+
+EXETYPE  WINDOWS      ; required for all Windows applications
+
+STUB  'WINSTUB.EXE'   ; application must be run with Windows
+
+CODE  PRELOAD MOVEABLE  ; code can be moved in memory
+
+; DATA must be MULTIPLE if the program can be invoked more than once
+
+DATA  MOVEABLE MULTIPLE
+
+HEAPSIZE  1024
+STACKSIZE 5120  ; recommended minimum for Windows applications
+
+; All functions that will be called by any Windows function must
+; be exported
+
+EXPORTS
+    WinMain   @1  ; name of window-processing procedure

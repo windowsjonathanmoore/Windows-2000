@@ -1,0 +1,94 @@
+
+<PUBLIC:EVENT id=finfly name=onFinishedFly />
+<PUBLIC:METHOD name=tick />
+<PUBLIC:METHOD name=startFly />
+<PUBLIC:PROPERTY name=from />
+<PUBLIC:PROPERTY name=fromX />
+<PUBLIC:PROPERTY name=fromY />
+<PUBLIC:PROPERTY name=delay />
+
+<SCRIPT language="VBScript">
+  dim currCount
+  dim flyCount
+  dim flying
+  dim msecs
+  dim oTop, oLeft
+
+  msecs = 50
+  flyCount = 20
+  flying = false
+
+  style.visibility = "hidden"
+
+  window.attachEvent "onload", getRef("onload")
+
+  sub onload()
+    ' stop
+    ' delay commences from the window.onLoad event
+    if (delay <> "none") then
+      window.setTimeout uniqueID & ".tick()", delay
+    end if
+  end sub
+
+
+  sub tick()
+    if (flying = false) then
+      startFly()
+    else
+      doFly()
+    end if
+  end sub
+
+  sub startFly()
+    if (isNull(fromX) AND isNull(fromY))then
+       if (from = "top") then
+         style.posTop = - offsetTop-offsetHeight
+       elseif (from = "bottom") then
+         style.posTop = window.document.body.clientHeight
+       elseif (from = "right" ) then
+         style.posLeft = window.document.body.clientWidth
+       else 
+         style.posLeft = - offsetLeft-offsetWidth
+       end if    
+    else
+       style.posTop = fromY
+       style.posLeft = fromX
+    end if
+
+    style.visibility = "visible"
+    flying = true
+
+    oTop = style.posTop
+    oLeft = style.posLeft
+
+    currCount = 0
+    doFly
+  end sub
+
+
+  sub doFly()
+
+    dim dt, dl
+
+    currCount = currCount + 1
+    dt = oTop / flyCount
+    dl = oLeft / flyCount
+
+    style.posTop = style.posTop - dt
+    style.posLeft = style.posLeft - dl
+
+    if (currCount < flyCount) then
+       window.setTimeout uniqueID & ".tick()", msecs
+    else
+  
+       style.posTop = 0
+       style.posLeft = 0
+       flying = false
+       set evObj = createEventObject
+       evObj.setAttribute "resulty", uniqueID
+       finfly.fire evObj
+    end if
+  end sub
+</SCRIPT>
+
+</HTML>

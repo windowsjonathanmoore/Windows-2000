@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>Array Data Source Control Demo</TITLE>
+<META NAME="FILENAME" CONTENT="array_JS.HTM">
+
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+    function transform()
+    {
+      document.all["DSC1"].transform();
+    }
+
+    function grow()
+    {
+      table1.dataSrc="";                // remove binding
+
+      document.all["DSC1"].moredata();
+    }
+
+    function buildtable()
+    {
+
+      table1.dataSrc="";                // remove binding
+
+      var newtable;
+      
+      newtable ="<table id=table1 border=1 datasrc=#DSC1>\n<tbody>\n<tr>";
+
+      for (i = 0 ; i < DSC1.recordset.Fields.count ; i++)
+      {
+
+        newtable = newtable + "<td width=50><SPAN DATAFLD=\"col" +
+                              //DSC1.recordset.Fields[i].name +
+                              (i + 1) +
+                              "\"></SPAN></td>";
+      }
+
+      newtable = newtable + "</tr>\n</tbody>\n</table>";
+
+      table1.outerHTML=newtable;
+    }
+</SCRIPT>
+
+<STYLE>
+  TD { font-size: 24; font-weight: bold }
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+  
+</HEAD>
+  
+<BODY TOPMARGIN=20 LEFTMARGIN=40 BGCOLOR="#FFFFFF" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H2>Array Data Source Control</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+
+<INPUT type=hidden DATASRC=#DSC1 DATAFLD=col1>
+<OBJECT id="DSC1" classid="clsid:7473DD44-3A50-11D1-9C26-0080C74E5396" align="baseline" border="0" width="0" height="0" codebase="ArrayControl.cab#version1,0,0,0" ondatasetcomplete="buildtable()"></OBJECT>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<TABLE border=0>
+  <TR>
+    <TD><button onclick='transform()'>Transform</button></TD>
+    <TD><button onclick='grow()'>Grow </button></TD>
+  </TR>
+</TABLE>
+
+<HR>
+<P>
+
+<TABLE id=table1 border="1">
+  <TBODY> 
+    <TR>
+      <TD width=50><span datafld=col1></span></TD>
+      <TD width=50><span datafld=col2></span></TD>
+      <TD width=50><span datafld=col3></span></TD>
+      <TD width=50><span datafld=col4></span></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</FONT>
+
+<HR>
+<P>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<a href="demo2_JS.htm">Another example</a> is available to show how
+the control can be used bound to HTML textboxes. This allows the 
+user to modify the data exposed by the control. 
+</FONT>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm"
+TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+
+</BODY>
+</HTML>

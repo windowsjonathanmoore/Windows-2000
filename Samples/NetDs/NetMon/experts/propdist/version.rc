@@ -1,0 +1,77 @@
+//=============================================================================
+//  Microsoft (R) Network Monitor (tm). 
+//  Copyright (C) 1997 - 2000. All rights reserved.
+//
+//  MODULE: version.rc
+//
+//  The resource file for the property distribution expert.
+//=============================================================================
+
+#include <windows.h>
+
+#include "Dialogs.H"
+
+#include "Dialogs.dlg"
+
+#define	VER_FILETYPE	VFT_DLL
+/* possible values:		VFT_UNKNOWN
+				VFT_APP
+				VFT_DLL
+				VFT_DRV
+				VFT_FONT
+				VFT_VXD
+				VFT_STATIC_LIB
+*/
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+/* possible values		VFT2_UNKNOWN
+				VFT2_DRV_PRINTER
+				VFT2_DRV_KEYBOARD
+				VFT2_DRV_LANGUAGE
+				VFT2_DRV_DISPLAY
+				VFT2_DRV_MOUSE
+				VFT2_DRV_NETWORK
+				VFT2_DRV_SYSTEM
+				VFT2_DRV_INSTALLABLE
+				VFT2_DRV_SOUND
+				VFT2_DRV_COMM
+*/
+#define VER_FILEDESCRIPTION_STR     "Network Monitor Expert.  Property Distribution\0"
+#define VER_INTERNALNAME_STR        "PropDist.DLL\0"
+
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROPDISTTITLE       "Property Distribution Configuration"
+    IDS_MUSTSELECTPROTOCOL  "You must select a Protocol and a Property"
+    IDS_MUSTENTERBITNUM     "You must enter a Bit Number"
+    IDS_NAME                "Property Distribution"
+    IDS_COMMENT             "Calculates the distribution of a selected protocol property within the capture"
+    IDS_AUTHOR              "Microsoft Corporation"
+    IDS_INITIALIZING        "Initializing..."
+    IDS_RUNNING             "Running"
+    IDS_ERRORONE            "ExpertIndicateStatus Failed"
+    IDS_ERRORTWO            "GetProtocolFromName failed"
+    IDS_ERRORTHREE          "GetProperty failed"
+    IDS_ERRORFOUR           "CreateFilter failed"
+    IDS_ERRORFIVE           "FilterAddObject failed"
+    IDS_ERRORSIX            "PROPERTYTRACKER::Initialize failed"
+    IDS_ERRORSEVEN          "ExpertIndicateStatus failed"
+    IDS_ERROREIGHT          "FindPropertyInstanceRestart failed"
+    IDS_ERRORNINE           "AddThisInstance failed"
+    IDS_ERRORTEN            "ExpertSubmitEvent failed"
+    IDS_ERRORELEVEN         "ExpertAllocMemory failed"
+    IDS_PROTOCOL_NAME       "Protocol"
+    IDS_PROPERTY_NAME       "Property"
+    IDS_NUMFRAMES_NAME      "# of Frames"
+    IDS_PERFRAMES_NAME      "% of Frames"
+    IDS_MAX_NAME            "Max"
+    IDS_VALUE_NAME          "Value"
+    IDS_BITNUM_NAME         "Bit Number"
+    IDS_MIN_NAME            "Min"
+    IDS_LABEL_NAME          "Label"
+    IDS_MEAN_NAME           "Mean"
+    IDS_PERSET_NAME         "% of Set"
+END
+
+
+

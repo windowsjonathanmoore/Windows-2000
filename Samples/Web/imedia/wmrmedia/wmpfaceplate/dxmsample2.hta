@@ -1,0 +1,718 @@
+<HTML>
+<HEAD>
+	<SCRIPT>
+	  var sampleWidth = 600;
+	  var sampleHeight = 333;
+ 	  window.resizeTo(sampleWidth,sampleHeight);
+
+	  var screenPosX = screen.availWidth/2 - sampleWidth/2;
+	  var screenPosY = screen.availHeight/2 - sampleHeight/2;
+	  window.moveTo(screenPosX, screenPosY);
+	</SCRIPT>
+
+	<TITLE>Faceplate Sample 1</TITLE>
+
+	<HTA:APPLICATION 
+		CAPTION="no"
+		MAXIMIZEBUTTON="no"
+	>
+</HEAD>
+
+<BODY SCROLL="no" bgcolor="#dddddd">
+<script src="button3.js"></script>
+<script src="buttonAnim.js"></script>
+<script src="trackbar.js"></script>
+
+<script>
+
+	var playBtn = new Button3("PlayButton","play", ".GIF");
+	var pauseBtn = new Button3("PauseButton","pause", ".GIF");
+	var stopBtn = new Button3("StopButton","stop", ".GIF");
+	var muteBtn = new Button3("MuteButton","mute", ".GIF");
+	var nextTrackBtn = new Button3("NextTrackButton","frwrd", ".GIF");
+	var prevTrackBtn = new Button3("PrevTrackButton","rwnd", ".GIF");
+	var infoBtn = new Button3("InfoButton","info", ".GIF");
+		
+	var notRunning = true;
+	var theRepeatTime = 250; //ms
+	var numImages = 18;
+
+	var timeoutID;
+
+	var trackbar = new Trackbar("LED","dot",".gif",numImages);
+
+function onPlay()
+{
+	if(playBtn.currentState!=2)
+	{
+		MediaPlayer.Play();
+		playBtn.SelectActive();
+		pauseBtn.SelectNormal();
+		stopBtn.SelectNormal();
+		startTrackbar();
+	}
+}
+function onPlayMouseOver()
+{
+	if(playBtn.currentState==0)
+	{
+		playBtn.SelectHilite();
+	}
+}
+function onPlayMouseOut()
+{
+	if(playBtn.currentState==1)
+	{
+		playBtn.SelectNormal();
+	}
+}
+function onPause()
+{
+	if(playBtn.currentState==2)
+	{
+		MediaPlayer.Pause();
+		pauseBtn.SelectActive();
+		playBtn.SelectNormal();
+		stopBtn.SelectNormal();
+	}
+	else if(pauseBtn.currentState==2)
+	{
+		MediaPlayer.Play();
+		pauseBtn.SelectNormal();
+		playBtn.SelectActive();
+		stopBtn.SelectNormal();
+		startTrackbar();
+	}
+
+}
+function onPauseMouseOver()
+{
+	if(pauseBtn.currentState==0 && playBtn.currentState==2)
+	{
+		pauseBtn.SelectHilite();
+	}
+}
+function onPauseMouseOut()
+{
+	if(pauseBtn.currentState==1 && playBtn.currentState==2)
+	{
+		pauseBtn.SelectNormal();
+	}
+}
+function onStop()
+{
+	if(stopBtn.currentState!=2)
+	{
+		MediaPlayer.Stop();
+		MediaPlayer.CurrentPosition=0;
+		stopBtn.SelectActive();
+		pauseBtn.SelectNormal();
+		playBtn.SelectNormal();
+		stopTrackbar();
+	}
+}
+function onStopMouseOver()
+{
+	if(stopBtn.currentState==0)
+	{
+		stopBtn.SelectHilite();
+	}
+}
+function onStopMouseOut()
+{
+	if(stopBtn.currentState==1)
+	{
+		stopBtn.SelectNormal();
+	}
+}
+
+function onPrevTrack()
+{
+	if(playBtn.currentState!=2)
+	{
+		MediaPlayer.Play();
+		playBtn.SelectActive();
+		pauseBtn.SelectNormal();
+		stopBtn.SelectNormal();
+		startTrackbar();
+	}
+	MediaPlayer.Previous();
+}
+function onPrevTrackMouseOver()
+{
+	if(prevTrackBtn.currentState==0)
+	{
+		prevTrackBtn.SelectHilite();
+	}
+}
+function onPrevTrackMouseOut()
+{
+	if(prevTrackBtn.currentState==1)
+	{
+		prevTrackBtn.SelectNormal();
+	}
+}
+function onNextTrack()
+{
+	if(playBtn.currentState!=2)
+	{
+		MediaPlayer.Play();
+		playBtn.SelectActive();
+		pauseBtn.SelectNormal();
+		stopBtn.SelectNormal();
+		startTrackbar();
+	}
+	MediaPlayer.Next();
+}
+function onNextTrackMouseOver()
+{
+	if(nextTrackBtn.currentState==0)
+	{
+		nextTrackBtn.SelectHilite();
+	}
+}
+function onNextTrackMouseOut()
+{
+	if(nextTrackBtn.currentState==1)
+	{
+		nextTrackBtn.SelectNormal();
+	}
+}
+function onMute()
+{
+	if(muteBtn.currentState==2)
+	{
+		MediaPlayer.Mute = false;
+		muteBtn.SelectNormal();
+	}
+	else	//mute inactive; turn volume to zero.
+	{
+		MediaPlayer.Mute = true;
+		muteBtn.SelectActive();
+	}
+}
+function onMuteMouseOver()
+{
+	if(muteBtn.currentState==0)
+	{
+		muteBtn.SelectHilite();
+	}
+}
+function onMuteMouseOut()
+{
+	if(muteBtn.currentState==1)
+	{
+		muteBtn.SelectNormal();
+	}
+}
+function onInfo()
+{
+	if(infoBtn.currentState==2)
+	{
+		InfoPane.style.visibility = "hidden";
+		infoBtn.SelectNormal();
+	}
+	else	//mute inactive; turn volume to zero.
+	{
+		InfoPane.style.visibility = "visible";
+		infoBtn.SelectActive();
+	}
+}
+function onInfoMouseOver()
+{
+	if(infoBtn.currentState==0)
+	{
+		infoBtn.SelectHilite();
+	}
+}
+function onInfoMouseOut()
+{
+	if(infoBtn.currentState==1)
+	{
+		infoBtn.SelectNormal();
+	}
+}
+function startTrackbar()
+{
+	if(notRunning)
+	{
+		trackbar.LightUpToLED(0);
+		notRunning = false;
+		trackbarTick();
+	}
+	else
+	{
+		stopTrackbar();
+		setTimeout("startTrackbar()", theRepeatTime);
+	}
+}
+function stopTrackbar()
+{
+	notRunning = true;
+	clearTimeout(timeoutID);
+	setTimeout("trackbar.ClearTrackbar();", theRepeatTime);
+	ClearInfoPane();
+	playTimes.innerText = "-:-- / -:--"; 
+}
+function trackbarTick()
+{
+	if(notRunning)
+	{
+		return;
+	}
+	if(MediaPlayer.PlayState ==1 || 	//Paused
+		 MediaPlayer.PlayState ==2 ) //Playing
+	{
+		var mpCurrent = MediaPlayer.CurrentPosition;
+		var mpDuration= MediaPlayer.Duration;
+		var timeFraction = mpCurrent / mpDuration;
+		var theImageNumber = Math.ceil( timeFraction *(numImages-1) );
+		trackbar.LightUpToLED(theImageNumber);
+		
+		//Update the time display
+		playTimes.innerText = convertTime(mpCurrent) + " / " + convertTime(mpDuration);
+
+		//Update the track info
+		UpdateInfoPane();
+
+	}
+	else
+	{
+		playTimes.innerText = "-:-- / -:--"; //CurrentTime not defined if player not playing. 
+		ClearInfoPane();
+	}										
+	
+	timeoutID = setTimeout("trackbarTick();", theRepeatTime);
+}
+function UpdateInfoPane()
+{
+	if(infoBtn.currentState==2)
+	{
+		var tempInfo = MediaPlayer.GetMediaInfoString(8);
+		TitleField.innerText = tempInfo.substring(0,tempInfo.length -1);
+
+		var tempInfo = MediaPlayer.GetMediaInfoString(9);
+		ByField.innerText = tempInfo.substring(0,tempInfo.length -1);
+
+		var tempInfo = MediaPlayer.GetMediaInfoString(10);
+		CopyrightField.innerText = tempInfo.substring(0,tempInfo.length -1);
+
+		var tempInfo = MediaPlayer.GetMediaInfoString(1);
+		ShowField.innerText = tempInfo.substring(0,tempInfo.length -1);
+	}
+	else
+	{
+		TitleField.innerText = "";
+	}
+}
+function ClearInfoPane()
+{
+	TitleField.innerText = "";
+	ByField.innerText = "";
+	CopyrightField.innerText = "";
+	ShowField.innerText = "";
+}
+function convertTime(dwTime){
+   var szTime;
+   var retVal;
+
+   szTime = Math.floor( dwTime / 60 );
+
+   	if (szTime < 0)	szTime = 0;
+ 
+	retVal = szTime + ':';
+
+	szTime= Math.round( dwTime % 60 );
+
+	if (szTime < 10)
+	{
+		if (szTime >=0)
+		{
+			szTime = "0" + szTime;
+		}
+		else
+		{
+			szTime = "0" + "0";
+		}
+   }
+   retVal = retVal + szTime;
+
+   return retVal;
+}
+</script>
+</script>
+<SCRIPT FOR="MediaPlayer" EVENT="EndOfStream(bResult)" LANGUAGE="Javascript">
+	if (bResult == 0)
+	{
+		playBtn.SelectNormal();
+		stopBtn.SelectActive();
+		pauseBtn.SelectNormal();
+		MediaPlayer.Stop();
+		stopTrackbar();
+	}
+</SCRIPT>
+<map name="PrevTrackMap" border=0>
+	<AREA SHAPE="POLY" COORDS="16,0,36,18,36,48,16,66,7,56,1,39,1,27,4,16,9,7,16,0"
+		onClick="onPrevTrack()"
+		onMouseOver="onPrevTrackMouseOver()"
+		onMouseOut="onPrevTrackMouseOut()"
+	>
+</map>
+<map name="NextTrackMap">
+	<AREA SHAPE="POLY" COORDS="20,0,29,10,35,27,35,39,32,50,27,59,20,66,0,49,0,18,20,0"
+		onClick="onNextTrack()"
+		onMouseOver="onNextTrackMouseOver()"
+		onMouseOut="onNextTrackMouseOut()"
+	>
+</map>
+<map name="PauseMap">
+	<AREA SHAPE="POLY" COORDS="30,0,44,0,54,2,74,12,74,14,55,30,18,30,0,14,1,11,14,4,30,0"
+		onClick="onPause()"
+		onMouseOver="onPauseMouseOver()"
+		onMouseOut="onPauseMouseOut()"
+	>
+</map>
+<map name="StopMap">
+	<AREA SHAPE="POLY" COORDS="19,0,55,0,74,16,73,19,60,26,44,30,30,30,20,28,0,18,8,9,19,0"
+		onClick="onStop()"
+		onMouseOver="onStopMouseOver()"
+		onMouseOut="onStopMouseOut()"
+	>
+</map>
+<!--@ ==========================================================================-->
+<!--@ ==========           Begin the HTML part of the page             =========-->
+<!--@ ==========================================================================-->
+
+<!--@ ===== Begin layout of the background graphics, Media Player, and buttons.=====-->
+
+<div style="position:absolute;
+	left:0px;
+	top:0px;
+	width:600px;
+	height:333px;"
+><img width=600 height=333 src="faceplate.jpg"
+><OBJECT ID="MediaPlayer"
+	CLASSID="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95"
+		width="152" 
+		height="101"
+	style="position:absolute; 
+		left:266px;
+		top:96px;" 
+>
+	<PARAM NAME="FileName" VALUE="demo1.asx">
+	<PARAM NAME="AutoStart" VALUE="0">
+	<PARAM NAME="AutoRewind" VALUE="1">
+	<PARAM NAME="ShowControls" VALUE="0">
+	<PARAM NAME="ShowStatusBar" VALUE="0">
+	<PARAM NAME="ClickToPlay" VALUE="0">
+</OBJECT>
+<!--@  =======================  Begin layout of control buttons  ========================== -->
+<span name="PrevTrackButtonSpan"
+	style="position:absolute;
+		left:455px;
+		top:198px;
+		width:37px;
+		height:67px;"
+	><img name="PrevTrackButton" width=37 height=67 src="rwnd_N.GIF" useMap=#PrevTrackMap border=0></span>
+<span name="NextTrackButtonSpan"
+	style="position:absolute;
+		left:529px;
+		top:198px;
+		width:37px;
+		height:67px;"
+	><img name="NextTrackButton" width=37 height=67 src="frwrd_N.GIF" useMap=#NextTrackMap border=0></span>
+<span name="PauseButtonSpan"
+	style="position:absolute;
+		left:473px;
+		top:183px;
+		width:75px;
+		height:31px;"
+	><img name="PauseButton" width=75 height=31 src="pause_N.GIF" useMap=#PauseMap border=0></span>
+<span name="StopButtonSpan"
+	style="position:absolute;
+		left:473px;
+		top:248px;
+		width:75px;
+		height:31px;"
+	><img name="StopButton" width=75 height=31 
+	onLoad="stopBtn.currentState=2;" src="stop_A.GIF" useMap=#StopMap border=0></span>
+<span name="MuteButtonSpan"
+	style="position:absolute;
+		width:41;
+		left:342px;
+		top:28px;"
+	onClick="onMute()"
+	onMouseOver="onMuteMouseOver()"
+	onMouseOut="onMuteMouseOut()"
+	><img name="MuteButton" width=41 height=27 src="mute_N.GIF"></span>
+<span ID="PlayButtonSpan"
+	style="position:absolute;
+		left:493px;
+		top:216px;
+		width:35px;
+		height:31px;"
+	onClick="onPlay()"
+	onMouseOver="onPlayMouseOver()"
+	onMouseOut="onPlayMouseOut()"
+	><img name="PlayButton" width=35 height=31 src="play_N.GIF"></span>
+<span ID="InfoButtonSpan"
+	style="position:absolute;
+		left:408px;
+		top:45px;
+		width:53px;
+		height:27px;"
+	onClick="onInfo()"
+	onMouseOver="onInfoMouseOver()"
+	onMouseOut="onInfoMouseOut()"
+	><img name="InfoButton" width=53 height=27 src="info_N.GIF"></span>
+
+
+<!--@  =======================     Begin LED String Layout    ========================== -->
+<span ID="LED0Span"
+	style="position:absolute;
+		left:472px;
+		top:185px;
+		width:5px;"
+	><img name="LED0" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED1Span"
+	style="position:absolute;
+		left:488px;
+		top:177px;
+		width:5px;"
+	><img name="LED1" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED2Span"
+	style="position:absolute;
+		left:508px;
+		top:175px;
+		width:5px;"
+	><img name="LED2" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED3Span"
+	style="position:absolute;
+		left:527px;
+		top:177px;
+		width:5px;"
+	><img name="LED3" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED4Span"
+	style="position:absolute;
+		left:545px;
+		top:185px;
+		width:5px;"
+	><img name="LED4" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED5Span"
+	style="position:absolute;
+		left:559px;
+		top:197px;
+		width:5px;"
+	><img name="LED5" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED6Span"
+	style="position:absolute;
+		left:568px;
+		top:212px;
+		width:5px;"
+	><img name="LED6" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED7Span"
+	style="position:absolute;
+		left:571px;
+		top:228px;
+		width:5px;"
+	><img name="LED7" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED8Span"
+	style="position:absolute;
+		left:568px;
+		top:246px;
+		width:5px;"
+	><img name="LED8" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED9Span"
+	style="position:absolute;
+		left:558px;
+		top:262px;
+		width:5px;"
+	><img name="LED9" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED10Span"
+	style="position:absolute;
+		left:544px;
+		top:274px;
+		width:5px;"
+	><img name="LED10" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED11Span"
+	style="position:absolute;
+		left:528px;
+		top:281px;
+		width:5px;"
+	><img name="LED11" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED12Span"
+	style="position:absolute;
+		left:509px;
+		top:284px;
+		width:5px;"
+	><img name="LED12" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED13Span"
+	style="position:absolute;
+		left:489px;
+		top:282px;
+		width:5px;"
+	><img name="LED13" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED14Span"
+	style="position:absolute;
+		left:471px;
+		top:274px;
+		width:5px;"
+	><img name="LED14" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED15Span"
+	style="position:absolute;
+		left:457px;
+		top:262px;
+		width:5px;"
+	><img name="LED15" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED16Span"
+	style="position:absolute;
+		left:447px;
+		top:246px;
+		width:5px;"
+	><img name="LED16" width=5 height=5 src="dot_OFF.gif"></span>
+<span ID="LED17Span"
+	style="position:absolute;
+		left:444px;
+		top:228px;
+		width:5px;"
+	><img name="LED17" width=5 height=5 src="dot_OFF.gif"></span>
+<!--@  =======================     End LED String      ========================== -->
+
+
+<!--@  =======================     Begin Info Window layout      ========================== -->
+<span ID="playTimes"
+	style="position:absolute;
+		left:449px;
+		top:119px;
+		width:75px;
+		height:16px;
+		font-size:9px;
+		color:ffffff;
+		text-align:center;"
+	>-:-- / -:--</span>
+<div ID="InfoPane"
+	style="position:absolute;
+		left:24px;
+		top:55px;
+		width:212px;
+		height:182px;
+		visibility: hidden;  //Window is opened by toggling visibility
+		z-order: -20;
+	    background-image: url(panel.jpg);"
+><span ID="title"
+	style="position:absolute;
+		left:44px;
+		top:36px;
+		width:50px;
+		height:16px;
+		font-size:9px;
+		color:6699cc;
+		text-align:left;"
+	>Title</span>
+<span ID="by"
+	style="position:absolute;
+		left:44px;
+		top:65px;
+		width:50px;
+		height:16px;
+		font-size:9px;
+		color:6699cc;
+		text-align:left;"
+	>By</span>
+<span ID="copyright"
+	style="position:absolute;
+		left:44px;
+		top:90px;
+		width:50px;
+		height:16px;
+		font-size:9px;
+		color:6699cc;
+		text-align:left;"
+	>Copyright</span>
+<span ID="show"
+	style="position:absolute;
+		left:44px;
+		top:119px;
+		width:50px;
+		height:16px;
+		font-size:9px;
+		color:6699cc;
+		text-align:left;"
+	>Show</span>
+<span ID="TitleField"
+	style="position:absolute;
+		left:34px;
+		top:50px;
+		width:170px;
+		height:16px;
+		font-size: 11px;
+		color:ffffff;
+		font-weight:bold; 
+		text-align:left;"
+	></span>
+<span ID="ByField"
+	style="position:absolute;
+		left:34px;
+		top:77px;
+		width:170px;
+		height:16px;
+		font:10px Arial;
+		color:ffffff;
+		text-align:left;"
+	></span>
+<span ID="CopyrightField"
+	style="position:absolute;
+		left:34px;
+		top:102px;
+		width:170px;
+		height:16px;
+		font:10px Arial;
+		color:ffffff;
+		text-align:left;"
+	></span>
+<span ID="ShowField"
+	style="position:absolute;
+		left:34px;
+		top:129px;
+		width:170px;
+		height:16px;
+		font:10px Arial;
+		color:ffffff;
+		text-align:left;"
+	></span>
+</div>
+<div align="left"
+	style="position:absolute;
+		font:14pt Arial;
+		font-weight:bold;
+		font-style:italic;
+		left:30px;
+		top:7px;
+		width:230px;
+		height:100px;"
+>Windows Media Player<br>
+Sample Faceplate
+</div>
+<span ID="ExitButton"
+	style="position:absolute;
+		font:18pt Arial;
+		font-weight:bold;
+		font-style:italic;
+		color:526a86;
+		left:530px;
+		top:10px;
+		width:50px;
+		height:30px;
+		cursor:default;"
+	onClick="window.close();return true;"
+	onMouseover="ExitButton.style.color='3f7acf';"
+	onMouseout="ExitButton.style.color='526a86';"
+>Exit</span>
+
+
+
+</div>
+<!--@  ====================== End Media Player Layout ========================= -->
+
+</BODY>
+</HTML>

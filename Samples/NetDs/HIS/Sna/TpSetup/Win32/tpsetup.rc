@@ -1,0 +1,14 @@
+#include "..\shared\install.rc"
+
+#include	<winver.h>
+#include	<version.h>
+
+#define	SNA_VER_FILE_TYPE	VFT_APP
+#define	SNA_VER_FILE_SUBTYPE	VFT2_UNKNOWN
+
+#define	SNA_VER_INTERNALNAME	"TPSETUP\0"
+#define	SNA_VER_FILEDESC 	"Host Integration Server SDK TPSETUP Sample"
+#define	SNA_VER_ORIGINALNAME	"TPSETUP.EXE\0"
+
+#include "..\..\..\snaver.rc"
+

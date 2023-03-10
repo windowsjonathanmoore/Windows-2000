@@ -1,0 +1,32 @@
+PGM          /* PARM(&QNAME &QLIB &ENTRY) */
+             DCLF       FILE(TESTUSR/CHAT)
+
+             DCL        VAR(&ENTRY) TYPE(*CHAR) LEN(80)
+             DCL        VAR(&RQNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SQNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&QLIB)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ENTRYLEN) TYPE(*DEC) LEN(5)
+             DCL        VAR(&WAITTIME) TYPE(*DEC) LEN(5)
+             DCL        VAR(&CNT) TYPE(*DEC) LEN(5) VALUE(0)
+
+/* TEST PROGRAM */
+
+             CHGVAR     VAR(&RQNAME) VALUE('DQFIFOSND')
+             CHGVAR     VAR(&SQNAME) VALUE('DQFIFORCV')
+             CHGVAR     VAR(&QLIB)  VALUE('TESTUSR')
+             CHGVAR     VAR(&ENTRYLEN) VALUE(76)
+LOOP:
+             CHGVAR     VAR(&FLD001) VALUE(' ')
+             CHGVAR     VAR(&FLD002) VALUE(' ')
+             CALL       PGM(QRCVDTAQ) PARM(&RQNAME &QLIB &ENTRYLEN +
+                        &FLD001 &WAITTIME)
+
+             SNDRCVF    DEV(*FILE)
+
+             IF         COND(&IN03) THEN(RETURN)
+             IF         (%SST(&FLD002 1 1) = ' ') GOTO LOOP
+SEND:
+             CHGVAR     VAR(&ENTRYLEN) VALUE(80)
+             CALL PGM(QSNDDTAQ) PARM(&SQNAME &QLIB &ENTRYLEN &FLD002)
+GOTO      LOOP
+ENDPGM

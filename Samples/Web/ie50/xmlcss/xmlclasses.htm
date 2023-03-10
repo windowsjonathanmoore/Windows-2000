@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Using CSS with XML Demo</TITLE>
+
+<XML:namespace prefix="IE5"/>
+
+<STYLE>
+  .myClass {font-family: verdana; color: white; background-color: black}
+  @namespace IE5 { getsclass {font-family: courier; color: blue; font-weight: bold; border-style: solid; background-color: yellow; border-color: black; border-width: 3; width: 200; height: 100} }
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR=#ffffff TEXT=#000000 LINK=#000066 VLINK=#666666>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>Using CSS with XML</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<BR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+
+<H2 style="font-family: verdana">Application of CSS to XML</H2>
+<BR>
+This is just HTML content<BR><BR>
+<IE5:simple style="color: blue">This is XML with inline styles</IE5:simple><BR><BR>
+<IE5:simple style="background-color: green; color: blue;">This is XML with more inline styles</IE5:simple><BR><BR>
+<IE5:simple style="font-family: verdana; font-weight: bold">This is XML with more inline styles</IE5:simple><BR><BR>
+This is just HTML content<BR><BR>
+<SPAN class=myClass>I'm a SPAN with class=myClass.</SPAN><BR><BR>
+<IE5:aclass class=myClass>I'm an XML tag with class=myClass.</IE5:aclass><BR><BR>
+<IE5:getsclass onclick="this.style.position = 'static';" style="position: absolute; top: 200; left: 200">I'm positioned XML. Click me, I'm XML, and I'll morph to be position:static</IE5:getsclass>
+
+</FONT>
+
+<P>&nbsp;</P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

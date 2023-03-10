@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Script Commands</TITLE>
+<STYLE>
+  #content {font:12pt Arial; font-weight:bold}
+  .content{position:absolute; top:20; left:190; font:12pt Arial; width:240; font-weight:bold} 
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" onload="loader()">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<H3>Script Commands</H3>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close() CLASS="clsDemo">Close This Sample</A> 
+</FONT><HR>
+
+<CENTER>
+<OBJECT ID="MediaPlayer1" width=176 height=144 
+	classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+	codebase=
+	"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
+        standby="Loading Microsoft® Windows® Media Player components..." 
+        type="application/x-oleobject">
+  <PARAM NAME="AutoStart" VALUE="False">
+  <PARAM NAME="FileName" VALUE="demo.asx">
+  <PARAM NAME="ShowControls" VALUE="False">
+  <PARAM NAME="ShowStatusBar" VALUE="False">
+  <EMBED type="application/x-mplayer2" 
+	pluginspage="http://www.microsoft.com/Windows/MediaPlayer/"
+	SRC="demo.asx"
+	name="MediaPlayer1"
+	width=176
+	height=144
+	autostart=0
+	showcontrols=0>
+  </EMBED>
+</OBJECT>
+<script language="JavaScript">
+<!--
+    if ( navigator.appName == "Netscape" ) 
+    {
+         //-- This next line ensures that any plugins just installed are updated in the Browser
+         //-- without quitting the browser.
+        navigator.plugins.refresh();
+         // We don't need the APPLET within IE, and APPLET is treated as an implied
+         // end to the OBJECT tag by the IE HTML parser.
+         // ***Please note that if you do not need to script events, you can safely remove the next two lines
+        document.write("\x3C" + "applet MAYSCRIPT Code=NPDS.npDSEvtObsProxy.class" )
+        document.writeln(" width=5 height=5 name=appObs\x3E \x3C/applet\x3E")
+     }
+//-->
+</script>
+
+<CENTER>
+<SCRIPT LANGUAGE="JavaScript">
+  if ( navigator.appName == "Netscape" )
+  {
+    document.write("<font size=2 face=verdana,arial>Click inside the Windows Media Player to start the streaming file.</font>");
+  }
+</SCRIPT>
+</CENTER>
+
+<BR>
+<IMG name="dynImage" id="dynImage" VSPACE=20 HSPACE=50 SRC="white.gif">
+<LAYER id="contentNav" TOP=20 LEFT=190 WIDTH=240><NOLAYER><DIV id="contentIE" CLASS="content"></DIV></NOLAYER></LAYER>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+var bControl;
+var imgArr = new Array();
+imgArr[0] = new Image();
+imgArr[1] = new Image();
+imgArr[2] = new Image();
+
+imgArr[0].src = "white.gif";
+imgArr[1].src = "image1.gif";
+imgArr[2].src = "image2.gif";
+
+function OnDSScriptCommandEvt (bstrType, bstrParam){
+	if (bstrType.toLowerCase() == "caption") {
+		var sCommand;
+		sCommand = "document.contentNav.document.writeln(\"<SPAN ID=content>"
+		sCommand = sCommand + bstrParam;
+		sCommand = sCommand + "\");document.contentNav.document.close(); ";
+		timerID = setTimeout(sCommand,0);
+	} else if (bstrType.toLowerCase() == "swapimage") {
+		timerID = setTimeout("document.dynImage.src = imgArr[" + bstrParam + "].src",0);
+	}
+}
+
+function loader(){
+	if ((navigator.userAgent.indexOf('IE') > -1) && (navigator.platform == "Win32")) {
+		bControl = true;
+	} else {
+		var plugIn = document.MediaPlayer1;
+		bControl = false;
+		document.appObs.setByProxyDSScriptCommandObserver(plugIn,true); // listen for ScriptCommand Event	
+	}
+	document.MediaPlayer1.Play(); 
+}
+
+</SCRIPT>
+
+<SCRIPT FOR="MediaPlayer1" EVENT="ScriptCommand(bstrType, bstrParam)" LANGUAGE="Jscript">
+	if (bstrType.toLowerCase() == "caption") {
+		document.all.contentIE.innerHTML = bstrParam;
+	} else if (bstrType.toLowerCase() == "swapimage") {
+		document.dynImage.src = imgArr[bstrParam].src;
+	}
+</SCRIPT>
+</CENTER>
+
+<P>&nbsp;</P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

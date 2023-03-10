@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Dynamic Expressions Demo</TITLE>
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR=#ffffff TEXT=#000000 LINK=#000066 VLINK=#666666>
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>Updating Contents with Dynamic Expressions</H2>
+
+
+<FONT FACE="verdana,arial,helvetica" SIZE="1">
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT>
+<HR>
+<BR>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+<H1 id=H1>Dynamic Expressions</H1>
+<BR>
+Enter New Title Here<BR>
+<INPUT style="width: 400px" type=text id=NewValue value="Dynamic Expressions"><BR>
+It appears here<BR>
+</FONT>
+
+<INPUT style="width: 400px" type=text id=TargetID>
+
+<SCRIPT LANGUAGE="JavaScript">
+  TargetID.setExpression("value","NewValue.value","");
+  H1.setExpression("innerHTML","NewValue.value","");
+</SCRIPT>
+
+<P>&nbsp;</P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

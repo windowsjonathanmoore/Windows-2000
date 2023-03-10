@@ -1,0 +1,35 @@
+<%@ Language=JavaScript %>
+<%
+
+// Generate the correct HTTP headers to signify that this is an XML stream 
+Response.ContentType = "text/xml";
+Response.Expires = 0;
+%>
+<?xml version="1.0"?>
+<%
+// Create an instance of the XML Parser object
+var objXMLParser = new ActiveXObject( "Microsoft.XMLDOM" );
+
+// Retrieve the body of the HTTP Post request
+objXMLParser.load( Request );
+
+// Retrieve the parameters passed from the client
+var strComputer = objXMLParser.selectSingleNode( "//computer" ).text;
+var strDatabase = objXMLParser.selectSingleNode( "//database" ).text;
+var strSQL = objXMLParser.selectSingleNode( "//sql" ).text;
+
+// Generate the OLE DB connection string
+var strConn = "Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=";
+strConn += strDatabase + ";Data Source=" + strComputer;
+
+// Create an ADO recordset object
+var objRS = new ActiveXObject( "ADODB.Recordset" );
+
+// NOTE: usage of .valueOf() is essential to ensure that value is converted to 
+// the appropriate type (string) that ADO is expecting. The type that it was 
+// going in was an IDispatch objref.
+objRS.Open( strSQL.valueOf(), strConn );
+
+// Save the ADO recordset to the HTTP response stream
+objRS.Save( Response, adPersistXML );
+%>

@@ -1,0 +1,23 @@
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  The FRAME Tag</TITLE>
+<META NAME="FILENAME" CONTENT="frame_VBS.HTM">
+
+<OBJECT id="StockList" classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" width="0" height="0">
+  <PARAM name="TextQualifier" value="&quot;">
+  <PARAM name="FieldDelim" value=",">
+  <PARAM name="UseHeader" value="True">
+  <PARAM name="DataURL" value="quotes.txt">
+</OBJECT>
+
+</HEAD>
+
+<FRAMESET cols=250,*>
+  <FRAME src="frame2_VBS.htm">
+  <FRAME datasrc="#StockList" datafld="url" name="right">
+</FRAMESET>
+
+</HTML>

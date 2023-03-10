@@ -1,0 +1,30 @@
+:Base odbcsmpl.hlp
+:Title ODBC Samples Help
+:Index ODBC Samples Help=odbcsmpl.hlp
+1 Admin Demo
+2 What Admin Demo Demonstrates=what.admin.demo.demonstrates>ref
+2 Admin Demo Files=admin.demo.files>ref
+2 How to Build Admin Demo=how.to.build.admin.demo>ref
+2 How to Run Admin Demo=how.to.run.admin.demo>ref
+2 Admin Demo Menus=admin.demo.menus>ref
+2 Pipes=pipes>ref
+2 SQL Batch Files=sql.batch.files>ref
+1 Cursor Demo
+2 What Cursor Demo Demonstrates=what.cursor.demo.demonstrates>ref
+2 Cursor Demo Files=cursor.demo.files>ref
+2 How to Build Cursor Demo=how.to.build.cursor.demo>ref
+2 How to Run Cursor Demo=how.to.run.cursor.demo>ref
+2 Cursor Demo Menus=cursor.demo.menus>ref
+2 How to Use Cursor Demo=how.to.use.cursor.demo>ref
+1 Query Demo
+2 What Query Demo Demonstrates=what.query.demo.demonstrates>ref
+2 Query Demo Files=query.demo.files>ref
+2 How to Build Query Demo=how.to.build.query.demo>ref
+2 How to Run Query Demo=how.to.run.query.demo>ref
+2 Query Demo Menus and Toolbar=query.demo.menus.and.toolbar>ref
+2 Making a Query with Query Demo=making.a.query.with.query.demo>ref
+1 Convert DSN Demo
+2 What Convert DSN Demo Demonstrates=what.ConvertDSN.demo.demonstrates>ref
+2 Convert DSN Demo Files=ConvertDSN.demo.files>ref
+2 How to Build Convert DSN Demo=how.to.build.ConvertDSN.demo>ref
+2 How to Run Convert DSN Demo=how.to.run.ConvertDSN.demo>ref

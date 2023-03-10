@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>MSDN Online Samples:  Version Control</TITLE>
+<META NAME="FILENAME" CONTENT="version_VBS.HTM">
+
+<STYLE>
+  A:link { color:#003399; text-decoration:none; }
+  A:visited { color:#6699CC; text-decoration:none; }
+  A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY TOPMARGIN=20 LEFTMARGIN=40 bgcolor="#ffffff" LINK="#000066" VLINK="#666666" TEXT="#000000">
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+<H2>Version Control</H2>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+
+<P>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=2>
+
+<FORM name=Form1>
+<INPUT name=iebutton onclick="iebutton_click(this)" type=button value="Are you running IE?"> 
+</FORM>
+
+<SCRIPT LANGUAGE="VBScript">
+sub iebutton_click(b) 
+   if (window.RunningIE5 = true) then 
+       b.value = "IE 5 is running"
+   else 
+        if (window.RunningIE4 = true) then 
+            b.value = "IE 4 is running"
+        else 
+             if (window.IEVersion <= 0) then 
+                 b.value = "Not running IE"    
+                 else 
+                       b.value = "Running IE 3" 
+             end if
+        end if
+   end if
+end sub
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE="VBScript">
+
+' return Microsoft Internet Explorer (major) version number, or 0 for others
+' This function works by finding the "MSIE " string and extracting the version number
+' following the space, up to the decimal point for the minor version which is ignored.
+
+dim IEVersion, RunningIE4, RunningIE5
+
+function msieversion()
+	dim ua, pr
+	ua = window.navigator.userAgent
+	msie = Instr(ua , "MSIE")  
+	if ( msie > 0 ) then ' The browser is MSIE, return the version number.
+		pr = mid ( ua , (msie + 5)) 
+ 		msieversion = CInt (left ( pr , (Instr (pr , ".") - 1)))
+	else
+		msieversion = 0
+	end if
+end function
+
+window.IEVersion = msieversion()
+if (window.IEVersion = 4) then 
+	window.RunningIE4 = true
+end if
+if (window.IEVersion = 5) then 
+	window.RunningIE5 = true
+end if
+
+</SCRIPT>
+<HR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0>
+  <TBODY>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2"><B>Description</B></FONT></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">The script on this page performs tests to determine whether the browser is running Internet Explorer. It creates a Boolean &quot;Expando&quot; property on the window object &quot;RunningIE4&quot; and &quot;RunningIE5&quot;  that allows for easy checking in any scripts included later in the page.</FONT></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2"><P><BR><B>Browser compatibility</B></FONT></P></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">This function will work on any browser that supports VBScript.</FONT></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2"><P><BR><B>Usage</B></FONT></P></TD>
+  </TR>
+
+  <TR>
+    <TD ALIGN=left VALIGN=top COLSPAN=2><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">Use version control functionality in your code if you want to write conditional code based on the user's browser.</FONT></TD>
+  </TR>
+
+<P>
+<BR>
+  <P></P></P></TBODY></TABLE>
+<BR>
+</FONT>
+
+<P>
+<P>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="black">
+&copy; <A href="/misc/cpyright.htm" target=_top>1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT></P>
+
+</BODY>
+</HTML>

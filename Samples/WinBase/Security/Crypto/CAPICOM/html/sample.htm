@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<title>CAPICOM Form Signing and Submission</title>
+</head>
+
+<body>
+<script language="VBScript">
+
+Function SignForm()
+Dim SignedData
+
+On Error Resume Next
+
+Set SignedData = CreateObject("CAPICOM.SignedData")
+
+'We fill the Content with the data from the form
+SignedData.Content = UserInfo.FirstName.Value & UserInfo.LastName.Value & _
+						UserInfo.Password.Value & UserInfo.CreditCardNumber.Value
+
+'Calling the sign method to generate and return the signature. We pass "Nothing" so that the user will get the
+'option of choosing the certificate to be used if they have more than one. True specifies a detached 
+'signature, the prefered way to sign data for use on the web. The 0 mean use Base64 encoding, 1 would be
+'pure binary.
+UserInfo.Signature.Value = SignedData.Sign (Nothing, True, 0)
+
+If Err.Number <> 0 then
+	SignForm = 1
+End If
+
+End Function
+
+Function VerifySigning()
+Dim SignedData
+
+Set SignedData = CreateObject("CAPICOM.SignedData")
+
+'Fill the content property with the info from the form
+SignedData.Content = UserInfo.FirstName.Value & UserInfo.LastName.Value & _
+						UserInfo.Password.Value & UserInfo.CreditCardNumber.Value
+
+'Call Verify with the signature returned from the Sign method. True means using a detached signature
+SignedData.Verify Userinfo.Signature.Value, True
+
+If Err.Number <> 0 then
+	VerifySigning = 1
+End If
+
+End Function
+
+Sub SubmitForm
+
+If SignForm() = 0 Then 'Call the data signing function to make a signature for submiting
+	If VerifySigning() = 0 Then 'Verify the signature created before we submit the data
+		'We use the scripting method for submiting so we can verify the data 
+		'before we submit it to the server
+		UserInfo.Submit
+	Else
+		MsgBox "There was an Error Verifying the signing process"
+	End If
+Else
+	MsgBox "There was an error during the signing process"
+End If
+
+
+End Sub
+
+</script>
+
+<form Name="UserInfo" action="http://webserver/submit.asp" method="post">
+First Name:<br>
+<input type="text" name="FirstName" size="40" maxlength="80" value=""><br>
+Last Name:<br>
+<input type="text" name="LastName" size="40" maxlength="80" value=""><br>
+Password:<br>
+<input type="text" name="Password" size="40" maxlength="80" value=""><br>
+Credit Card Number:<br>
+<input type="text" name="CreditCardNumber" size="16" maxlength="16" value=""><br>
+<input type="Hidden" name="Signature" value="">
+<input type="reset" value="Reset Form">
+<input type="Button" value="Sign Data and Submit" OnClick="SubmitForm">
+</form>
+
+
+</body>
+
+</html>

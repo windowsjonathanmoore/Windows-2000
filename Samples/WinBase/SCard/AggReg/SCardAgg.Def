@@ -1,0 +1,16 @@
+; THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+; ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+; TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+; PARTICULAR PURPOSE.
+;
+; Copyright (C) 1996-1999.  Microsoft Corporation.  All rights reserved.
+;
+; ScardAgg.def : Declares the module parameters.
+
+LIBRARY      SCARDAGG.DLL
+
+EXPORTS
+        DllCanUnloadNow     @1 PRIVATE
+        DllGetClassObject   @2 PRIVATE
+        DllRegisterServer   @3 PRIVATE
+        DllUnregisterServer     @4 PRIVATE

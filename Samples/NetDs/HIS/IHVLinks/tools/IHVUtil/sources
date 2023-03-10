@@ -1,0 +1,40 @@
+TARGETNAME=IHVUtil
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+USE_MFC=1
+MFC_VER=42
+USE_MSVCRT=1
+USE_NATIVE_EH=1
+UMTYPE=windows
+UMENTRY=winmain
+USE_IOSTREAM=1
+
+INCLUDES=.;.\res;$(BASEDIR)\public\sdk\inc\atl30
+
+C_DEFINES=-DNLSENABLE
+!IF  "$(DBCSENABLE)" == "YES"
+C_DEFINES=$(C_DEFINES) -DDBCSENABLE
+!ENDIF
+!IF  "$(ASYNCTRACE)" == "YES"
+C_DEFINES=$(C_DEFINES) -DASYNCTRACE
+!ENDIF
+LINKER_FLAGS=-MAP
+
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+SOURCES=  \
+   IHVUtil.cpp     \
+   IHVUtilDlg.cpp  \
+   IHVUtil.rc
+
+TARGETLIBS=  \
+   $(BASEDIR)\public\sdk\lib\*\comctl32.lib     \
+   $(BASEDIR)\public\sdk\lib\*\oldnames.lib	\
+   $(BASEDIR)\public\sdk\lib\*\ole32.lib	\
+   $(BASEDIR)\public\sdk\lib\*\oleaut32.lib	\
+   $(BASEDIR)\public\sdk\lib\*\olepro32.lib	\
+   $(BASEDIR)\public\sdk\lib\*\uuid.lib		\
+   $(BASEDIR)\public\sdk\lib\*\shell32.lib      \
+   $(BASEDIR)\public\sdk\lib\*\msi.lib          \
+   $(BASEDIR)\public\sdk\lib\*\version.lib
